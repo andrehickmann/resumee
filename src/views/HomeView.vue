@@ -4,7 +4,7 @@
     <div class="bg-blur"></div>
     <div class="availability-badge">{{ copy.availability }}</div>
 
-    <SiteHeader :copy="copy" :current-lang="currentLang" @set-lang="setLang" />
+    <SiteHeader :copy="copy" :current-lang="locale" @set-lang="setLang" />
 
     <main id="main">
       <HeroSection :copy="copy" :stats-display="statsDisplay" />
@@ -18,6 +18,10 @@
       />
 
       <StackSection :copy="copy" />
+
+      <!--<TerminalWidget :copy="copy" :project-count="projectCount" :industry-count="industryCount" />-->
+
+      <!--<BugFixSprint :copy="copy" />-->
 
       <IndustriesSection :copy="copy" :industry-count="industryCount" />
 
@@ -65,12 +69,20 @@
       @run="runPalette"
       @update:query="(value) => (paletteQuery = value)"
     />
+
+    <KonamiOverlay
+      :open="konamiOpen"
+      :facts="konamiFacts"
+      :copy="copy"
+      @close="konamiOpen = false"
+      @refresh="pickFacts"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
-import { content } from '../content';
+import { useI18n } from 'vue-i18n';
 import { type ProjectItem, type ContentShape, useProjectFilters } from '../composables/useProjectFilters';
 import { useServicesSlider } from '../composables/useServicesSlider';
 import { useUiEffects } from '../composables/useUiEffects';
@@ -83,12 +95,16 @@ import IndustriesSection from '../components/IndustriesSection.vue';
 import ProjectsSection from '../components/ProjectsSection.vue';
 import TimelineSection from '../components/TimelineSection.vue';
 import ContactSection from '../components/ContactSection.vue';
+import TerminalWidget from '../components/TerminalWidget.vue';
+import BugFixSprint from '../components/BugFixSprint.vue';
 import SiteFooter from '../components/SiteFooter.vue';
 import ContactModal from '../components/ContactModal.vue';
 import ProjectModal from '../components/ProjectModal.vue';
 import CommandPalette from '../components/CommandPalette.vue';
+import KonamiOverlay from '../components/KonamiOverlay.vue';
+import { techFacts } from '../data/techFacts.js';
 
-const currentLang = ref<'de' | 'en'>('de');
+const { locale, tm } = useI18n({ useScope: 'global' });
 const paletteOpen = ref(false);
 const paletteQuery = ref('');
 const contactModalOpen = ref(false);
@@ -100,8 +116,10 @@ const contactForm = ref({
   role: '',
   message: ''
 });
+const konamiOpen = ref(false);
+const konamiFacts = ref<string[]>([]);
 
-const copy = computed<ContentShape>(() => content[currentLang.value]);
+const copy = computed<ContentShape>(() => tm('app') as ContentShape);
 const industryCount = computed(() => copy.value.industries.length);
 const projectCount = computed(() => copy.value.projects.length);
 const statsDisplay = computed(() =>
@@ -172,9 +190,9 @@ const paletteItems = computed(() => {
   return items.filter((item) => item.label.toLowerCase().includes(term));
 });
 
-watch(currentLang, () => {
+watch(locale, () => {
   resetOnLangChange();
-  document.documentElement.lang = currentLang.value;
+  document.documentElement.lang = locale.value;
   document.title = copy.value.pageTitle;
   nextTick(() => {
     initReveal();
@@ -185,7 +203,7 @@ watch(currentLang, () => {
 });
 
 function setLang(lang: 'de' | 'en') {
-  currentLang.value = lang;
+  locale.value = lang;
 }
 
 function scrollTo(selector: string) {
@@ -245,11 +263,46 @@ function handleKeydown(event: KeyboardEvent) {
     if (contactModalOpen.value) closeContactModal();
     if (projectModalOpen.value) closeProjectModal();
     if (paletteOpen.value) closePalette();
+    if (konamiOpen.value) konamiOpen.value = false;
+  }
+}
+
+const konamiSequence = [
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a'
+];
+let konamiIndex = 0;
+
+function pickFacts() {
+  const shuffled = [...techFacts].sort(() => Math.random() - 0.5);
+  konamiFacts.value = shuffled.slice(0, 4);
+}
+
+function handleKonami(event: KeyboardEvent) {
+  const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+  const target = konamiSequence[konamiIndex];
+  if (key === target || event.key === target) {
+    konamiIndex += 1;
+    if (konamiIndex === konamiSequence.length) {
+      konamiIndex = 0;
+      pickFacts();
+      konamiOpen.value = true;
+    }
+  } else {
+    konamiIndex = 0;
   }
 }
 
 onMounted(() => {
-  document.documentElement.lang = currentLang.value;
+  document.documentElement.lang = locale.value;
   document.title = copy.value.pageTitle;
   initScroll();
   initNavHighlight();
@@ -259,9 +312,11 @@ onMounted(() => {
   initMagnet();
   initTilt();
   window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keydown', handleKonami);
 });
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keydown', handleKonami);
 });
 </script>

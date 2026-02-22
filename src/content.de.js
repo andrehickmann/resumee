@@ -64,7 +64,7 @@
   educationNote: string
 }} */
 export const contentDe = {
-  brand: 'AH / Senior Softwareentwickler',
+  brand: 'Andre Hickmann Kuschnereit',
   pageTitle: 'Senior Softwareentwickler aus Berlin | Profil',
   nav: [
     { id: 'profil', label: 'Profil' },
@@ -132,6 +132,18 @@ export const contentDe = {
   ],
   stackTitle: 'Techstack',
   stackIntro: 'Ein klarer Stack für Produktteams, die Tempo und Stabilität brauchen.',
+  terminalTitle: 'Terminal',
+  terminalIntro: 'Mini-CLI für schnelle Fakten zu Profil, Projekten und Stack.',
+  terminalPlaceholder: 'help, projects, stack, contact, clear',
+  terminalHelp: ['help', 'projects', 'industries', 'stack', 'contact', 'clear'],
+  sprintTitle: 'Bug‑Fix Sprint',
+  sprintIntro: '10 Sekunden – klick so viele Bugs wie möglich.',
+  sprintScore: 'Score',
+  sprintHighscore: 'Highscore',
+  sprintCombo: 'Combo',
+  sprintTime: 'Zeit',
+  sprintStart: 'Start',
+  sprintRunning: 'Läuft…',
   radar: [
     { label: 'Frontend', tone: 't1' },
     { label: 'Backend', tone: 't2' },
@@ -170,6 +182,10 @@ export const contentDe = {
   footer: '© 2026 · Senior Softwarearchitekt aus Berlin',
   footerImprint: 'Impressum',
   footerPrivacy: 'Datenschutz',
+  footerNote: 'Built with ❤ and 🤖 AI',
+  konamiTitle: 'Hidden Mode: Debug',
+  konamiSubtitle: 'Debug-Overlay aktiv',
+  konamiRefresh: 'Neue Fakten',
   cvLabel: 'Lebenslauf als PDF',
   cvButton: 'PDF öffnen',
   filtersAll: 'Alle',

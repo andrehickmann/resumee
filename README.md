@@ -63,6 +63,7 @@ Translations live in:
 ## Tech Stack
 
 - Vue 3 + Vue Router
+- Vue I18n
 - TypeScript
 - Vite
 - ESLint + Prettier
