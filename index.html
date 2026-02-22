@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Senior Softwareentwickler aus Berlin | Profil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#profil">Zum Inhalt springen</a>
+    <div id="app">
+      <div class="bg-blur"></div>
+      <div class="availability-badge">{{ copy.availability }}</div>
+      <header class="site-header">
+        <div class="brand">{{ copy.brand }}</div>
+        <nav class="nav">
+          <a v-for="item in copy.nav" :key="item.id" :href="`#${item.id}`">
+            {{ item.label }}
+          </a>
+        </nav>
+        <div class="header-actions">
+          <div class="lang-switch">
+            <button
+              class="lang"
+              :class="{ active: currentLang === 'de' }"
+              data-lang="de"
+              @click="setLang('de')"
+            >
+              DE
+            </button>
+            <button
+              class="lang"
+              :class="{ active: currentLang === 'en' }"
+              data-lang="en"
+              @click="setLang('en')"
+            >
+              EN
+            </button>
+          </div>
+          <button class="cta" data-scroll="#kontakt" data-magnet>
+            {{ copy.ctaLabel }}
+          </button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section id="profil" class="hero">
+          <div class="hero-text">
+            <p class="eyebrow">{{ copy.eyebrow }}</p>
+            <h1>{{ copy.heroTitle }}</h1>
+            <p class="lead">{{ copy.heroLead }}</p>
+            <div class="hero-actions">
+              <button class="primary" data-scroll="#projekte" data-magnet>
+                {{ copy.heroPrimary }}
+              </button>
+              <button class="ghost" data-scroll="#stack" data-magnet>
+                {{ copy.heroGhost }}
+              </button>
+            </div>
+            <div class="stats-row">
+              <div class="stats">
+                <div v-for="stat in statsDisplay" :key="stat.label">
+                  <span class="stat-number" :data-count="stat.value">0</span>
+                  <span class="stat-label">{{ stat.label }}</span>
+                </div>
+              </div>
+              <div class="radar compact">
+                <div class="radar-chart" aria-hidden="true"></div>
+                <div class="radar-labels">
+                  <span v-for="item in copy.radar" :key="item.label">
+                    <i class="radar-dot" :class="item.tone" aria-hidden="true"></i>
+                    {{ item.label }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-media">
+            <div class="portrait-wrap">
+              <div class="portrait-frame reveal tilt">
+                <img
+                  class="portrait"
+                  src="portrait.jpg"
+                  :alt="copy.heroImageAlt"
+                  loading="lazy"
+                  width="640"
+                  height="640"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="leistungen" class="section">
+          <div class="section-header">
+            <h2>{{ copy.servicesTitle }}</h2>
+            <p>{{ copy.servicesIntro }}</p>
+          </div>
+          <div class="services-slider">
+            <button
+              class="slider-btn"
+              @click="scrollServices(-1)"
+              aria-label="Zurück"
+              :disabled="!showServiceArrows"
+            >
+              ‹
+            </button>
+            <div class="services-track" ref="servicesTrack" @scroll="updateServiceControls">
+              <article v-for="item in copy.services" :key="item.title" class="service-card reveal">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+              </article>
+            </div>
+            <button
+              class="slider-btn"
+              @click="scrollServices(1)"
+              aria-label="Weiter"
+              :disabled="!showServiceArrows"
+            >
+              ›
+            </button>
+          </div>
+        </section>
+
+        <section id="stack" class="section">
+          <div class="section-header">
+            <h2>{{ copy.stackTitle }}</h2>
+            <p>{{ copy.stackIntro }}</p>
+          </div>
+          <div class="stack-grid">
+            <article v-for="item in copy.stackItems" :key="item.title" class="stack-card reveal">
+              <h3>{{ item.title }}</h3>
+              <span>{{ item.tools }}</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="branchen">
+          <div class="section-header">
+            <h2>{{ copy.industriesTitle }}</h2>
+            <p>{{ copy.industriesIntro }}</p>
+            <span class="count-pill">{{ industryCount }} {{ copy.industriesCountLabel }}</span>
+          </div>
+          <div class="tag-cloud">
+            <span v-for="industry in copy.industries" :key="industry" class="tag reveal">
+              {{ industry }}
+            </span>
+          </div>
+        </section>
+
+        <section id="projekte" class="section">
+          <div class="section-header">
+            <h2>{{ copy.projectsTitle }}</h2>
+            <p>{{ copy.projectsIntro }}</p>
+            <span class="count-pill">{{ filteredCount }} {{ copy.projectsCountLabel }}</span>
+          </div>
+          <details class="filters-panel">
+            <summary class="filters-summary">
+              {{ copy.filterToggleLabel }}
+              <span class="filter-count">{{ activeFiltersCount }}</span>
+            </summary>
+            <div class="filters-block">
+              <div class="filters">
+                <span class="filter-label">{{ copy.filterTechLabel }}</span>
+                <button
+                  v-for="tag in projectTags"
+                  :key="tag"
+                  class="filter"
+                  :class="{ active: isTagActive(tag) }"
+                  @click="toggleFilter(tag)"
+                >
+                  {{ tag }}
+                </button>
+              </div>
+              <div class="filters">
+                <span class="filter-label">{{ copy.filterYearLabel }}</span>
+                <button
+                  v-for="year in projectYears"
+                  :key="year"
+                  class="filter"
+                  :class="{ active: isYearActive(year) }"
+                  @click="toggleYear(year)"
+                >
+                  {{ year }}
+                </button>
+              </div>
+              <button class="filter reset" @click="resetFilters">
+                {{ copy.filterResetLabel }}
+              </button>
+            </div>
+          </details>
+          <div class="project-grid">
+            <article
+              v-for="project in filteredProjects"
+              :key="project.title"
+              class="project-card reveal tilt"
+              @click="openProject(project)"
+              role="button"
+              tabindex="0"
+              @keydown.enter="openProject(project)"
+              @keydown.space.prevent="openProject(project)"
+            >
+              <span class="project-year">{{ project.period }}</span>
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.description }}</p>
+              <div class="project-meta">
+                <span v-for="tag in project.tags" :key="tag">#{{ tag }}</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="lebenslauf">
+          <div class="section-header">
+            <h2>{{ copy.timelineTitle }}</h2>
+            <p>{{ copy.timelineIntro }}</p>
+          </div>
+          <div class="cv">
+            <h3>{{ copy.cvLabel }}</h3>
+            <a class="primary" href="Lebenslauf.pdf" target="_blank" rel="noreferrer" data-magnet>
+              {{ copy.cvButton }}
+            </a>
+          </div>
+          <p class="education-note">{{ copy.educationNote }}</p>
+          <div class="timeline">
+            <div v-for="item in copy.careerTimeline" :key="item.period" class="timeline-item reveal">
+              <span>{{ item.period }}</span>
+              <h3>{{ item.role }}</h3>
+              <p>{{ item.summary }}</p>
+            </div>
+          </div>
+        </section>
+
+      <section id="kontakt" class="section contact">
+        <div class="section-header">
+          <h2>{{ copy.contactTitle }}</h2>
+          <p>{{ copy.contactIntro }}</p>
+        </div>
+          <div class="contact-card">
+            <div>
+              <p>{{ copy.contactCardCopy }}</p>
+              <div class="contact-details">
+                <a class="contact-link" href="mailto:andre@hickmann-kuschnereit.de">
+                  {{ copy.contactEmail }}
+                </a>
+              <span>{{ copy.contactLocation }}</span>
+              <div class="contact-links">
+                <a
+                  class="contact-link"
+                  href="https://www.linkedin.com/in/andr%C3%A9-hickmann-425b97182/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {{ copy.contactLinkedIn }}
+                </a>
+                <a
+                  class="contact-link"
+                  href="https://github.com/andrehickmann"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {{ copy.contactGithub }}
+                </a>
+                </div>
+              </div>
+            </div>
+            <button class="primary" data-magnet @click="openContactModal">
+              {{ copy.contactButton }}
+            </button>
+          </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>{{ copy.footer }}</span>
+      <span class="footer-links">
+        <a href="legal.html#impressum">{{ copy.footerImprint }}</a>
+        <a href="legal.html#datenschutz">{{ copy.footerPrivacy }}</a>
+      </span>
+    </footer>
+
+    <div class="modal" :class="{ open: contactModalOpen }">
+      <div class="modal-backdrop" @click="closeContactModal"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h3>{{ copy.modalTitle }}</h3>
+          <button class="modal-close" @click="closeContactModal" aria-label="Schließen">×</button>
+        </div>
+        <form class="contact-form" @submit.prevent="submitContact">
+          <input type="text" v-model="contactForm.name" :placeholder="copy.formName" required />
+          <input type="email" v-model="contactForm.email" :placeholder="copy.formEmail" required />
+          <input type="text" v-model="contactForm.role" :placeholder="copy.formRole" />
+          <textarea v-model="contactForm.message" :placeholder="copy.formMessage" rows="4" required></textarea>
+          <button class="primary" data-magnet type="submit">
+            {{ copy.contactButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" :class="{ open: projectModalOpen }">
+      <div class="modal-backdrop" @click="closeProjectModal"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h3>{{ activeProject?.title }}</h3>
+          <button class="modal-close" @click="closeProjectModal" aria-label="Schließen">×</button>
+        </div>
+        <p class="modal-period">{{ activeProject?.period }}</p>
+        <p>{{ activeProject?.description }}</p>
+        <div class="project-meta" v-if="activeProject">
+          <span v-for="tag in activeProject.tags" :key="tag">#{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+
+      <div class="palette" :class="{ open: paletteOpen }" aria-hidden="true">
+        <div class="palette-backdrop" @click="closePalette"></div>
+        <div class="palette-panel" role="dialog" aria-modal="true">
+          <div class="palette-header">
+            <span>Command Palette</span>
+            <kbd>ESC</kbd>
+          </div>
+          <input
+            ref="paletteInput"
+            class="palette-input"
+            v-model="paletteQuery"
+            type="text"
+            placeholder="Search sections or filters..."
+          />
+          <div class="palette-list">
+            <button
+              v-for="item in paletteItems"
+              :key="item.key"
+              class="palette-item"
+              @click="runPalette(item)"
+            >
+              <span>{{ item.label }}</span>
+              <small>{{ item.type }}</small>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
