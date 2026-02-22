@@ -1,6 +1,6 @@
-# Resumee Landing Page for me
+# Resumee Landing Page
 
-Modern single‑page Vue app for a senior developer portfolio, plus a separate legal page.
+Modern Vue 3 + TypeScript portfolio with Vue Router and a dedicated legal route.
 
 ## Local Dev (Node)
 
@@ -35,6 +35,13 @@ npm run build
 
 The production build is in `dist/`.
 
+## Lint & Format
+
+```bash
+npm run lint
+npm run format
+```
+
 ## Content
 
 Main content lives in `src/content.js`.
@@ -52,3 +59,10 @@ Translations live in:
 
 - `/` (main portfolio)
 - `/legal` (Impressum & Datenschutz)
+
+## Tech Stack
+
+- Vue 3 + Vue Router
+- TypeScript
+- Vite
+- ESLint + Prettier
