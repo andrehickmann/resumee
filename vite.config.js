@@ -9,5 +9,13 @@ export default defineConfig({
         main: 'index.html'
       }
     }
+  },
+  server: {
+    allowedHosts: [
+      'localhost',
+      'resumee.localhost',
+      'https://resumee-lu1n.onrender.com',
+      'https://www.hickmann-kuschnereit.de'
+    ]
   }
 });
