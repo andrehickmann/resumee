@@ -14,8 +14,8 @@ export default defineConfig({
     allowedHosts: [
       'localhost',
       'resumee.localhost',
-      'https://resumee-lu1n.onrender.com',
-      'https://www.hickmann-kuschnereit.de'
+      'resumee-lu1n.onrender.com',
+      'www.hickmann-kuschnereit.de'
     ]
   }
 });
