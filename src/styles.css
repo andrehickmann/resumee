@@ -145,10 +145,12 @@ main {
   padding: 0.5rem 0.9rem;
   background: rgba(31, 31, 31, 0.08);
   border-radius: 999px;
+  border: none;
   text-decoration: none;
   color: var(--ink);
   font-weight: 600;
   font-size: 0.85rem;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 

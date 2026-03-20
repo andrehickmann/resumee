@@ -7,9 +7,8 @@
       </a>
     </nav>
     <div class="header-actions">
-      <a 
-        :href="pdfUrl" 
-        :download="pdfFilename"
+      <button
+        @click="downloadPDF"
         class="cv-download"
         :title="currentLang === 'de' ? 'Lebenslauf herunterladen' : 'Download resume'"
       >
@@ -19,7 +18,7 @@
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         <span>{{ currentLang === 'de' ? 'CV' : 'CV' }}</span>
-      </a>
+      </button>
       <div class="lang-switch">
         <button
           class="lang"
@@ -62,4 +61,23 @@ const pdfFilename = computed(() => {
     ? 'Lebenslauf-Andre-Hickmann-Kuschnereit.pdf'
     : 'Resume-Andre-Hickmann-Kuschnereit.pdf';
 });
+
+async function downloadPDF() {
+  try {
+    const response = await fetch(pdfUrl.value);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = pdfFilename.value;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Download failed:', error);
+    // Fallback: open in new tab
+    window.open(pdfUrl.value, '_blank');
+  }
+}
 </script>
