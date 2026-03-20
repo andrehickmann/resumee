@@ -116,7 +116,7 @@ export const contentEn = {
   cvLabel: 'Resume as PDF',
   cvButton: 'Download PDF',
   nextUpLabel: 'Next up',
-  nextUpText: 'Looking for a new challenge in an innovative team. Focus: fullstack development (JS/TS, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
+  nextUpText: 'Looking for a new challenge in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
   filtersAll: 'All',
   stackItems: [
     {

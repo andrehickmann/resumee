@@ -2,7 +2,6 @@
   <a class="skip-link" href="#profil">Zum Inhalt springen</a>
   <div>
     <div class="bg-blur"></div>
-    <div class="availability-badge">{{ copy.availability }}</div>
 
     <SiteHeader :copy="copy" :current-lang="locale" @set-lang="setLang" />
 
