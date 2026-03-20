@@ -189,7 +189,7 @@ export const contentDe = {
   cvLabel: 'Lebenslauf als PDF',
   cvButton: 'PDF herunterladen',
   nextUpLabel: 'Next up',
-  nextUpText: 'Suche nach neuer Herausforderung in einem innovativen Team. Schwerpunkt: JavaScript/TypeScript, Cloud-Native Development, Produktentwicklung, Architektur, Mentoring.',
+  nextUpText: 'Suche nach neuer Herausforderung in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (JS/TS, Backend, Cloud), Requirements Engineering, Produktarchitektur, End-to-End Delivery.',
   filtersAll: 'Alle',
   stackItems: [
     {
