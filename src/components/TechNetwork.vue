@@ -21,23 +21,67 @@ interface Node {
   color: string;
 }
 
-const techs = [
-  { label: 'Docker', color: '#2496ED' },
-  { label: 'PHP', color: '#777BB4' },
-  { label: 'Java', color: '#f89820' },
-  { label: 'TypeScript', color: '#3178C6' },
-  { label: 'Vue', color: '#42B883' },
-  { label: 'PostgreSQL', color: '#4169E1' },
-  { label: 'Redis', color: '#DC382D' },
-  { label: 'Kubernetes', color: '#326CE5' },
-  { label: 'AWS', color: '#FF9900' },
-  { label: 'Node.js', color: '#339933' },
-  { label: 'React', color: '#61DAFB' },
-  { label: 'MySQL', color: '#4479A1' },
-  { label: 'Git', color: '#F05032' },
-  { label: 'Linux', color: '#FCC624' },
-  { label: 'Go', color: '#00ADD8' },
+const techLabels = [
+  'Docker',
+  'PHP',
+  'Java',
+  'TypeScript',
+  'Vue.JS',
+  'PostgreSQL',
+  'Redis',
+  'Kubernetes',
+  'AWS',
+  'Node.js',
+  'React',
+  'MySQL',
+  'Git',
+  'Linux',
+  'Scala',
+  'PostGis',
+  'GIS',
+  'Requirements Engineering',
+  'AI Driven Development',
+  'SCRUM',
+  'OpenAPI',
+  'REST',
+  'GraphQL',
+  'Testdriven Development',
+  'Angular',
+  'Zend Framework',
+  'Doctrine',
+  'iOS',
+  'Flutter',
+  'Play Framework',
+  'Symfony',
+  'FastAPI',
+  'Python',
+  'Codex',
+  'Copilot CLI',
+  'Claude CLI',
+  'Playwright',
+  'Cypress',
+  'Jira/Confluence',
+  'Agile',
 ];
+
+// Generate color from string hash
+function stringToColor(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const h = Math.abs(hash % 360);
+  const s = 65 + (Math.abs(hash) % 20); // 65-85% saturation
+  const l = 55 + (Math.abs(hash >> 8) % 15); // 55-70% lightness
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+const techs = techLabels.map((label) => ({
+  label,
+  color: stringToColor(label),
+}));
 
 const props = defineProps<{
   avatarCenter?: { x: number; y: number };
@@ -100,18 +144,18 @@ function drawNetwork() {
     ctx!.shadowBlur = 0;
 
     // Label with crisp shadow
-    ctx!.font = 'bold 12px Space Grotesk, sans-serif';
+    ctx!.font = 'bold 13px Space Grotesk, sans-serif';
     ctx!.textAlign = 'center';
     ctx!.textBaseline = 'middle';
 
     // Shadow for readability
-    ctx!.shadowBlur = 2;
+    ctx!.shadowBlur = 3;
     ctx!.shadowColor = 'rgba(0, 0, 0, 1)';
     ctx!.shadowOffsetX = 1;
     ctx!.shadowOffsetY = 1;
 
     ctx!.fillStyle = node.color;
-    ctx!.fillText(node.label, node.x, node.y - 12);
+    ctx!.fillText(node.label, node.x, node.y - 14);
 
     ctx!.shadowBlur = 0;
     ctx!.shadowOffsetX = 0;
@@ -229,13 +273,14 @@ onUnmounted(() => {
 <style scoped>
 .tech-network {
   position: absolute;
-  top: -50px;
-  left: -100px;
-  right: -150px;
-  bottom: -50px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
   z-index: 0;
   overflow: visible;
-  opacity: 0.6;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 canvas {

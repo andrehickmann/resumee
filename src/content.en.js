@@ -78,8 +78,9 @@ export const contentEn = {
     { label: 'Frontend', tone: 't1' },
     { label: 'Backend', tone: 't2' },
     { label: 'Cloud/DevOps', tone: 't3' },
-    { label: 'Data', tone: 't4' },
-    { label: 'AI', tone: 't5' }
+    { label: 'Requirements', tone: 't4' },
+    { label: 'Data', tone: 't5' },
+    { label: 'AI', tone: 't6' }
   ],
   industriesTitle: 'Industry & domain experience',
   industriesIntro: 'Experience in critical domains with complex workflows.',
@@ -121,7 +122,7 @@ export const contentEn = {
   stackItems: [
     {
       title: 'Backend & Architecture',
-      tools: 'Node.js, Java, Go, API design, domain-driven design'
+      tools: 'Node.js, Java, Scala, PHP, Go, API design, domain-driven design'
     },
     {
       title: 'Frontend & Experience',
@@ -293,7 +294,7 @@ export const contentEn = {
       period: '2021 – 2026',
       start: 2021,
       end: 2026,
-      title: 'desto.report (tax advisory)',
+      title: 'Tax advisory software',
       description: 'Booking and annual financial statements for enterprise clients.',
       tags: ['Finance', 'B2B', 'Vue', 'Scala']
     },

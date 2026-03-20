@@ -5,17 +5,20 @@
       <p>{{ copy.timelineIntro }}</p>
     </div>
     <div class="cv">
-      <h3>{{ copy.cvLabel }}</h3>
-      <a class="primary" href="/Lebenslauf.pdf" target="_blank" rel="noreferrer" data-magnet>
+      <a href="/Lebenslauf.pdf" target="_blank" rel="noreferrer" download="Lebenslauf-Andre-Hickmann.pdf">
         {{ copy.cvButton }}
       </a>
     </div>
-    <p class="education-note">{{ copy.educationNote }}</p>
     <div class="timeline">
-      <div v-for="item in copy.careerTimeline" :key="item.period" class="timeline-item reveal">
+      <p class="education-note">{{ copy.educationNote }}</p>
+      <div v-for="item in copy.careerTimeline" :key="item.period" class="timeline-item reveal" :class="{ current: item.period.includes('heute') || item.period.includes('present') }">
         <span>{{ item.period }}</span>
         <h3>{{ item.role }}</h3>
         <p>{{ item.summary }}</p>
+      </div>
+      <div class="timeline-item timeline-next reveal">
+        <span>{{ copy.nextUpLabel }}</span>
+        <p>{{ copy.nextUpText }}</p>
       </div>
     </div>
   </section>

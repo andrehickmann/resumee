@@ -148,8 +148,9 @@ export const contentDe = {
     { label: 'Frontend', tone: 't1' },
     { label: 'Backend', tone: 't2' },
     { label: 'Cloud/DevOps', tone: 't3' },
-    { label: 'Data', tone: 't4' },
-    { label: 'AI', tone: 't5' }
+    { label: 'Requirements', tone: 't4' },
+    { label: 'Data', tone: 't5' },
+    { label: 'AI', tone: 't6' }
   ],
   industriesTitle: 'Branchen- und Domänenerfahrung',
   industriesIntro: 'Erfahrung in kritischen Domains mit komplexen Abläufen.',
@@ -194,7 +195,7 @@ export const contentDe = {
   stackItems: [
     {
       title: 'Backend & Architektur',
-      tools: 'Node.js, Java, Go, API Design, Domain Driven Design'
+      tools: 'Node.js, Java, Scala, PHP, Go, API Design, Domain Driven Design'
     },
     {
       title: 'Frontend & Experience',
@@ -378,7 +379,7 @@ export const contentDe = {
       period: '2021 – 2026',
       start: 2021,
       end: 2026,
-      title: 'desto.report (Steuerberatung)',
+      title: 'Steuerberatungs-Software',
       description: 'Buchungs- und Jahresabschluss-Software für Großunternehmen.',
       tags: ['Finance', 'B2B', 'Vue', 'Scala']
     },

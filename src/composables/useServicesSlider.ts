@@ -3,12 +3,33 @@ import { nextTick, onUnmounted, ref } from 'vue';
 export function useServicesSlider() {
   const showServiceArrows = ref(false);
   const servicesTrack = ref<HTMLElement | null>(null);
+  const currentServiceIndex = ref(0);
   let serviceAutoTimer: ReturnType<typeof setInterval> | null = null;
 
   function updateServiceControls() {
     const track = servicesTrack.value;
     if (!track) return;
     showServiceArrows.value = track.scrollWidth > track.clientWidth + 4;
+
+    // Calculate current index based on scroll position
+    const cards = track.querySelectorAll('.service-card');
+    if (cards.length === 0) return;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const cardEl = card as HTMLElement;
+      const cardLeft = cardEl.offsetLeft - track.offsetLeft;
+      const distance = Math.abs(track.scrollLeft - cardLeft);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    currentServiceIndex.value = closestIndex;
   }
 
   function scrollServices(direction) {
@@ -16,6 +37,26 @@ export function useServicesSlider() {
     if (!track) return;
     const step = Math.max(track.clientWidth * 0.7, 240);
     track.scrollBy({ left: direction * step, behavior: 'smooth' });
+  }
+
+  function gotoService(index: number) {
+    const track = servicesTrack.value;
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.service-card'));
+    const card = cards[index] as HTMLElement;
+    if (!card) return;
+
+    // Get all cards before this one to calculate total scroll distance
+    let scrollPosition = 0;
+    for (let i = 0; i < index; i++) {
+      const prevCard = cards[i] as HTMLElement;
+      scrollPosition += prevCard.offsetWidth;
+      // Add gap between cards (1.5rem = 24px from styles)
+      const gap = parseFloat(getComputedStyle(track).gap) || 24;
+      scrollPosition += gap;
+    }
+
+    track.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   }
 
   function startAuto() {
@@ -88,8 +129,10 @@ export function useServicesSlider() {
   return {
     showServiceArrows,
     servicesTrack,
+    currentServiceIndex,
     updateServiceControls,
     scrollServices,
+    gotoService,
     initServiceSlider,
     startAuto,
     stopAuto
