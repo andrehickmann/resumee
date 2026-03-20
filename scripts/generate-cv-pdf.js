@@ -70,7 +70,7 @@ function generatePDF(content, lang = 'de') {
   
   const introLines = doc.splitTextToSize(intro, contentWidth);
   doc.text(introLines, margin, y);
-  y += introLines.length * 5 + 5;
+  y += introLines.length * 5 + 3;
 
   // Highlight Box
   doc.setFillColor(255, 245, 240);
@@ -90,7 +90,7 @@ function generatePDF(content, lang = 'de') {
     : 'Fullstack Development • Requirements Engineering • Testing & Quality Assurance';
   const skillLines = doc.splitTextToSize(skills, contentWidth - 6);
   doc.text(skillLines, margin + 3, y + 10);
-  y += 20;
+  y += 18;
 
   // Technologie-Stack Section
   addSection(doc, lang === 'de' ? 'Technologie-Stack' : 'Technology Stack', y);
@@ -225,14 +225,14 @@ function generatePDF(content, lang = 'de') {
     doc.setFont('helvetica', 'bold');
     const titleLines = doc.splitTextToSize(project.title, contentWidth);
     doc.text(titleLines, margin, y);
-    y += titleLines.length * 4 + 2;
+    y += titleLines.length * 5 + 1;
 
     doc.setFontSize(9);
     doc.setTextColor(MUTED);
     doc.setFont('helvetica', 'normal');
     const descLines = doc.splitTextToSize(project.description, contentWidth);
     doc.text(descLines, margin, y);
-    y += descLines.length * 4 + 6;
+    y += descLines.length * 4 + 5;
   });
 
   // Footer
