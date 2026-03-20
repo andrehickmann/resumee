@@ -138,6 +138,31 @@ main {
   gap: 1rem;
 }
 
+.cv-download {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  background: rgba(31, 31, 31, 0.08);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.cv-download:hover {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.cv-download svg {
+  width: 16px;
+  height: 16px;
+}
+
 .lang-switch {
   display: flex;
   background: rgba(31, 31, 31, 0.08);
@@ -1412,6 +1437,14 @@ a:focus-visible {
     grid-area: actions;
     justify-self: end;
     gap: 0.6rem;
+  }
+
+  .cv-download span {
+    display: none;
+  }
+
+  .cv-download {
+    padding: 0.5rem;
   }
 
   .header-actions .cta {

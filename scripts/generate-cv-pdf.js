@@ -261,14 +261,14 @@ console.log('🔄 Generiere PDFs...');
 
 try {
   const pdfDe = generatePDF(contentDe, 'de');
-  const outputPathDe = join(__dirname, '..', 'public', 'Lebenslauf.pdf');
+  const outputPathDe = join(__dirname, '..', 'public', 'Lebenslauf-Andre-Hickmann-Kuschnereit.pdf');
   writeFileSync(outputPathDe, Buffer.from(pdfDe.output('arraybuffer')));
-  console.log('✅ Deutsch: public/Lebenslauf.pdf');
+  console.log('✅ Deutsch: public/Lebenslauf-Andre-Hickmann-Kuschnereit.pdf');
 
   const pdfEn = generatePDF(contentEn, 'en');
-  const outputPathEn = join(__dirname, '..', 'public', 'Resume.pdf');
+  const outputPathEn = join(__dirname, '..', 'public', 'Resume-Andre-Hickmann-Kuschnereit.pdf');
   writeFileSync(outputPathEn, Buffer.from(pdfEn.output('arraybuffer')));
-  console.log('✅ English: public/Resume.pdf');
+  console.log('✅ English: public/Resume-Andre-Hickmann-Kuschnereit.pdf');
 
   console.log('\n🎉 PDFs erfolgreich erstellt!');
 } catch (error) {
