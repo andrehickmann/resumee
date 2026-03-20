@@ -8,7 +8,7 @@
     </nav>
     <div class="header-actions">
       <button
-        @click="downloadPDF"
+        @click="handleDownload"
         class="cv-download"
         :title="currentLang === 'de' ? 'Lebenslauf herunterladen' : 'Download resume'"
       >
@@ -44,17 +44,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { usePdfGenerator } from '../composables/usePdfGenerator';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   copy: Record<string, unknown>;
   currentLang: string;
 }>();
 
-const pdfUrl = computed(() => {
-  return props.currentLang === 'de' 
-    ? '/Lebenslauf-Andre-Hickmann-Kuschnereit.pdf'
-    : '/Resume-Andre-Hickmann-Kuschnereit.pdf';
-});
+const { tm } = useI18n({ useScope: 'global' });
+const { downloadPDF } = usePdfGenerator();
 
 const pdfFilename = computed(() => {
   return props.currentLang === 'de'
@@ -62,22 +61,8 @@ const pdfFilename = computed(() => {
     : 'Resume-Andre-Hickmann-Kuschnereit.pdf';
 });
 
-async function downloadPDF() {
-  try {
-    const response = await fetch(pdfUrl.value);
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = pdfFilename.value;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error('Download failed:', error);
-    // Fallback: open in new tab
-    window.open(pdfUrl.value, '_blank');
-  }
+function handleDownload() {
+  const content = tm('app');
+  downloadPDF(content, props.currentLang as 'de' | 'en', pdfFilename.value);
 }
 </script>
