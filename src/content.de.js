@@ -74,16 +74,16 @@ export const contentDe = {
     { id: 'kontakt', label: 'Kontakt' }
   ],
   ctaLabel: 'Anfrage starten',
-  eyebrow: 'Berlin · 20+ Jahre Erfahrung · Senior',
+  eyebrow: 'Berlin · 23+ Jahre Erfahrung · Senior Fullstack · JS/TS · Cloud · Architecture',
   heroTitle:
-    'Senior Fullstack Engineer mit Fokus auf komplexe Plattformen und messbaren Impact.',
+    'Senior Fullstack Engineer mit Expertise in JavaScript/TypeScript, Cloud-Architektur und modernen Produktplattformen.',
   heroLead:
     'Ich suche eine Festanstellung in Berlin, bevorzugt remote. Keine Freelance-/Selbstständigkeitsprojekte.',
   heroPrimary: 'Projekte ansehen',
   heroGhost: 'Techstack entdecken',
   stats: [
-    { key: 'experience', value: '20+', label: 'Jahre Praxis' },
-    { key: 'teams', value: '23+', label: 'Teams begleitet' },
+    { key: 'experience', value: '23', label: 'Jahre Praxis' },
+    { key: 'teams', value: '15', label: 'Teams begleitet' },
     { key: 'projects', value: '', label: 'Projekte' },
     { key: 'industries', value: '', label: 'Branchen' }
   ],
@@ -179,7 +179,7 @@ export const contentDe = {
   contactLocation: 'Standort: Berlin · Remote möglich',
   contactLinkedIn: 'LinkedIn Profil',
   contactGithub: 'GitHub Profil',
-  footer: '© 2026 · Senior Softwarearchitekt aus Berlin',
+  footer: '© 2026 · André Hickmann Kuschnereit · Senior Softwarearchitekt aus Berlin',
   footerImprint: 'Impressum',
   footerPrivacy: 'Datenschutz',
   footerNote: 'Built with ❤ and 🤖 AI',
@@ -187,7 +187,9 @@ export const contentDe = {
   konamiSubtitle: 'Debug-Overlay aktiv',
   konamiRefresh: 'Neue Fakten',
   cvLabel: 'Lebenslauf als PDF',
-  cvButton: 'PDF öffnen',
+  cvButton: 'PDF herunterladen',
+  nextUpLabel: 'Next up',
+  nextUpText: 'Suche nach neuer Herausforderung in einem innovativen Team. Schwerpunkt: JavaScript/TypeScript, Cloud-Native Development, Produktentwicklung, Architektur, Mentoring.',
   filtersAll: 'Alle',
   stackItems: [
     {
@@ -490,11 +492,11 @@ export const contentDe = {
     },
     {
       period: '01/2018 – heute',
-      role: 'Fullstack Entwickler (Front-/Backend) · brayn.io',
+      role: 'Senior Fullstack Engineer · brayn.io',
       summary:
-        'Produktentwicklung in Vue/Scala/PHP, Requirements Engineering, Codeanalyse, Wartung & Modernisierung.'
+        'End-to-End Produktentwicklung mit JavaScript/TypeScript (Vue, React, Node.js), Backend (Scala, PHP, Java, Go), Cloud-Infrastruktur (AWS, Docker, K8s), Requirements Engineering, technische Spezifikation, Code-Reviews, Softwareanalyse, Wartung & Modernisierung bestehender Systeme, Mentoring.'
     }
   ],
   educationNote:
-    'Ausbildung: Realschulabschluss · Allgemeine Hochschulreife · Medieninformatik (Grundstudium, ohne Abschluss) · Staatlich geprüfter technischer Assistent für Informatik.'
+    'Ausbildung: Realschulabschluss · Allgemeine Hochschulreife · Medieninformatik (Grundstudium) · Staatlich geprüfter technischer Assistent für Informatik.'
 };

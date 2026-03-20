@@ -1,6 +1,6 @@
 /** @type {import('./content.de.js').contentDe} */
 export const contentEn = {
-  brand: 'AH / Senior Software Engineer',
+  brand: 'André Hickmann Kuschnereit',
   pageTitle: 'Senior Software Engineer in Berlin | Profile',
   nav: [
     { id: 'profil', label: 'Profile' },
@@ -10,16 +10,16 @@ export const contentEn = {
     { id: 'kontakt', label: 'Contact' }
   ],
   ctaLabel: 'Start inquiry',
-  eyebrow: 'Berlin · 20+ years experience · Senior',
+  eyebrow: 'Berlin · 23+ years experience · Senior fullstack · JS/TS · Cloud · Architecture',
   heroTitle:
-    'Senior fullstack engineer focused on complex platforms and measurable impact.',
+    'Senior fullstack engineer with expertise in JavaScript/TypeScript, cloud architecture, and modern product platforms.',
   heroLead:
     'Seeking a full-time role in Berlin, preferably remote. Not available for freelance engagements.',
   heroPrimary: 'View projects',
   heroGhost: 'Explore stack',
   stats: [
-    { key: 'experience', value: '20+', label: 'Years in practice' },
-    { key: 'teams', value: '40+', label: 'Teams supported' },
+    { key: 'experience', value: '23', label: 'Years in practice' },
+    { key: 'teams', value: '40', label: 'Teams supported' },
     { key: 'projects', value: '', label: 'Projects' },
     { key: 'industries', value: '', label: 'Industries' }
   ],
@@ -106,7 +106,7 @@ export const contentEn = {
   contactLocation: 'Location: Berlin · Remote possible',
   contactLinkedIn: 'LinkedIn profile',
   contactGithub: 'GitHub profile',
-  footer: '© 2026 · Senior Software Engineer based in Berlin',
+  footer: '© 2026 · André Hickmann Kuschnereit · Senior Software Engineer based in Berlin',
   footerImprint: 'Imprint',
   footerPrivacy: 'Privacy',
   footerNote: 'Built with ❤ and 🤖 AI',
@@ -114,7 +114,9 @@ export const contentEn = {
   konamiSubtitle: 'Debug overlay active',
   konamiRefresh: 'New facts',
   cvLabel: 'Resume as PDF',
-  cvButton: 'Open PDF',
+  cvButton: 'Download PDF',
+  nextUpLabel: 'Next up',
+  nextUpText: 'Looking for a new challenge in an innovative team. Focus: JavaScript/TypeScript, cloud-native development, product development, architecture, mentoring.',
   filtersAll: 'All',
   stackItems: [
     {
@@ -397,8 +399,8 @@ export const contentEn = {
     },
     {
       period: '01/2018 – present',
-      role: 'Fullstack Engineer (Frontend/Backend) · brayn.io',
-      summary: 'Product delivery in Vue/Scala/PHP, requirements engineering, code analysis, maintenance.'
+      role: 'Senior Fullstack Engineer · brayn.io',
+      summary: 'End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), backend (Scala, PHP, Java, Go), cloud infrastructure (AWS, Docker, K8s), requirements engineering, technical specification, code reviews, software analysis, maintenance & modernization of existing systems, mentoring.'
     }
   ],
   educationNote:
