@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - André Hickmann Kuschnereit</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 10pt;
+      line-height: 1.4;
+      color: #1f1f1f;
+      background: #fff;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 20mm;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    @media print {
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      body {
+        background: white;
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ff6b3d;
+    }
+
+    .header-left h1 {
+      font-size: 24pt;
+      font-weight: 700;
+      color: #1f1f1f;
+      margin-bottom: 4px;
+    }
+
+    .header-left .subtitle {
+      font-size: 12pt;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 9pt;
+      color: #666;
+    }
+
+    .header-right div {
+      margin-bottom: 2px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #ff6b3d;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .intro {
+      font-size: 10pt;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      color: #333;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .skill-item {
+      font-size: 9pt;
+    }
+
+    .skill-item strong {
+      color: #1f1f1f;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .skill-item span {
+      color: #666;
+    }
+
+    .timeline-item {
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    .timeline-period {
+      font-size: 9pt;
+      color: #ff6b3d;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-role {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #1f1f1f;
+      margin-bottom: 3px;
+    }
+
+    .timeline-description {
+      font-size: 9pt;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      font-size: 8pt;
+      color: #666;
+    }
+
+    .industries {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .industry {
+      padding: 3px 10px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      font-size: 8pt;
+      color: #666;
+    }
+
+    .education {
+      font-size: 9pt;
+      color: #666;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e5e5;
+      text-align: center;
+      font-size: 8pt;
+      color: #999;
+    }
+
+    .highlight-box {
+      background: #fff5f0;
+      border-left: 3px solid #ff6b3d;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 9pt;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <h1>André Hickmann Kuschnereit</h1>
+        <div class="subtitle">Senior Fullstack Engineer</div>
+      </div>
+      <div class="header-right">
+        <div>📍 Berlin, Germany</div>
+        <div>📧 andre@hickmann-kuschnereit.de</div>
+        <div>🔗 linkedin.com/in/ahickmann</div>
+        <div>💻 github.com/ahickmann</div>
+      </div>
+    </div>
+
+    <!-- Intro -->
+    <div class="intro">
+      Senior Fullstack Engineer with 23+ years of experience developing complex, scalable software solutions. 
+      Specialized in modern technologies, cloud architecture, and end-to-end product development. 
+      Seeking a full-time role in Berlin or remote (hybrid with remote component also works).
+    </div>
+
+    <!-- Highlight -->
+    <div class="highlight-box">
+      <strong>Core Competencies:</strong> Fullstack Development (Frontend, Backend, Cloud) • Requirements Engineering • 
+      Testing & Quality Assurance • Product Architecture • End-to-End Delivery • Technical Specification • Code Reviews • Mentoring
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section">
+      <div class="section-title">Technology Stack</div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <strong>Backend & Architecture</strong>
+          <span>Node.js, Java, Scala, PHP, Go, API design, domain-driven design</span>
+        </div>
+        <div class="skill-item">
+          <strong>Frontend & Experience</strong>
+          <span>Vue.js, React, TypeScript, Angular, design systems, micro-frontends</span>
+        </div>
+        <div class="skill-item">
+          <strong>Cloud & Infrastructure</strong>
+          <span>AWS, Docker, Kubernetes, Helm, ArgoCD</span>
+        </div>
+        <div class="skill-item">
+          <strong>Delivery & Quality</strong>
+          <span>CI/CD, observability, test automation, E2E testing, SRE practices</span>
+        </div>
+        <div class="skill-item">
+          <strong>Data & Integration</strong>
+          <span>PostgreSQL, MySQL, Postgis, MSSQL, Redis, Kafka, event streaming</span>
+        </div>
+        <div class="skill-item">
+          <strong>AI & Automation</strong>
+          <span>LLM integration, RAG, document analysis, workflow automation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="section">
+      <div class="section-title">Work Experience</div>
+      
+      <div class="timeline-item">
+        <div class="timeline-period">01/2018 – present</div>
+        <div class="timeline-role">Senior Fullstack Engineer · brayn.io</div>
+        <div class="timeline-description">
+          End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), backend (Scala, PHP, Java, Go), 
+          cloud infrastructure (AWS, Docker, K8s), requirements engineering, technical specification, code reviews, 
+          software analysis, maintenance & modernization of existing systems, mentoring.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">08/2008 – 12/2017</div>
+        <div class="timeline-role">Co-founder / Partner · swepp GmbH</div>
+        <div class="timeline-description">
+          Legal portals, GDV/insurance integrations, DMS rollout, trainings & documentation.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">01/2003 – 07/2008</div>
+        <div class="timeline-role">Self-employed / Sole proprietor</div>
+        <div class="timeline-description">
+          Websites, online shop, CMS development, and computer courses.
+        </div>
+      </div>
+    </div>
+
+    <!-- Industries -->
+    <div class="section">
+      <div class="section-title">Industry & Domain Experience</div>
+      <div class="industries">
+        <span class="industry">FinTech & banking</span>
+        <span class="industry">Mobility & logistics</span>
+        <span class="industry">HealthTech</span>
+        <span class="industry">E-commerce</span>
+        <span class="industry">SaaS & B2B platforms</span>
+        <span class="industry">Energy & sustainability</span>
+        <span class="industry">Media & publishing</span>
+        <span class="industry">Public sector</span>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="education">
+        Secondary school certificate · General university entrance qualification · Media Informatics (undergraduate, no degree) · 
+        State-certified technical assistant for IT
+      </div>
+    </div>
+
+    <!-- Selected Projects -->
+    <div class="section">
+      <div class="section-title">Selected Projects (Excerpt)</div>
+      
+      <div class="timeline-item">
+        <div class="timeline-period">2025 – present</div>
+        <div class="timeline-role">Sustainability Research Center (Multiple projects)</div>
+        <div class="timeline-description">
+          Vue2→Vue3 migration, time-series visualization, water/air quality (Grafana).
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2021 – 2026</div>
+        <div class="timeline-role">Tax advisory software</div>
+        <div class="timeline-description">
+          Booking and annual financial statements for enterprise clients (Vue, Scala).
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2018 – present</div>
+        <div class="timeline-role">FinTech invoicing platform</div>
+        <div class="timeline-description">
+          Invoicing, customer management, dunning, bank integration, delivery (Vue, Scala, PHP).
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2024</div>
+        <div class="timeline-role">Biodiversity compliance platform</div>
+        <div class="timeline-description">
+          GIS heatmaps, action items, frontend (React) and backend (Python).
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Resume · André Hickmann Kuschnereit · March 2026
+    </div>
+  </div>
+</body>
+</html>
