@@ -1,15 +1,34 @@
 # CV PDF Generator
 
-Diese Dateien generieren ein professionelles PDF deines Lebenslaufs.
+Diese Dateien generieren professionelle PDFs deines Lebenslaufs automatisch aus den Content-Dateien.
+
+## 🚀 Automatische PDF-Generierung (Empfohlen!)
+
+Die einfachste Methode - PDFs werden automatisch aus den Content-Dateien erstellt:
+
+```bash
+npm run generate-pdf
+```
+
+Das erstellt:
+- `public/Lebenslauf.pdf` (Deutsch)
+- `public/Resume.pdf` (Englisch)
+
+✨ **Vorteile:**
+- Immer aktuell mit den Content-Dateien
+- Konsistentes Design
+- Ein Befehl für beide Sprachen
+- Keine manuelle Arbeit nötig
 
 ## Dateien
 
-- `cv-generator.html` - Deutsche Version
-- `cv-generator-en.html` - Englische Version
+- `scripts/generate-cv-pdf.js` - Automatischer PDF-Generator (Node.js)
+- `cv-generator.html` - Deutsche Version (manuell)
+- `cv-generator-en.html` - Englische Version (manuell)
 
-## So erstellst du das PDF:
+## Alternative: Browser Print
 
-### Methode 1: Browser Print (einfachste Methode)
+Falls du das PDF manuell erstellen möchtest:
 
 1. Öffne die HTML-Datei in deinem Browser:
    - Doppelklick auf `cv-generator.html` (Deutsch)
@@ -26,21 +45,6 @@ Diese Dateien generieren ein professionelles PDF deines Lebenslaufs.
 
 5. Speichere als `Lebenslauf-Andre-Hickmann.pdf`
 
-### Methode 2: Kommandozeile (für Entwickler)
-
-Mit Chrome/Chromium:
-```bash
-# Deutsch
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-  --headless --disable-gpu --print-to-pdf=Lebenslauf.pdf \
-  cv-generator.html
-
-# Englisch
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-  --headless --disable-gpu --print-to-pdf=Resume.pdf \
-  cv-generator-en.html
-```
-
 ## Inhalte
 
 Das PDF enthält:
@@ -54,10 +58,18 @@ Das PDF enthält:
 
 ## Anpassungen
 
-Die HTML-Dateien können direkt bearbeitet werden:
-- Farben ändern: Suche nach `#ff6b3d` (Accent-Farbe)
-- Layout anpassen: CSS im `<style>` Block
-- Inhalte aktualisieren: Direkter Text-Edit im HTML
+### Content ändern
+Bearbeite die Content-Dateien und generiere neu:
+```bash
+# Inhalte in src/content.de.js oder src/content.en.js ändern
+npm run generate-pdf
+```
+
+### Design anpassen
+Bearbeite `scripts/generate-cv-pdf.js`:
+- Farben ändern: Suche nach `const ACCENT = '#ff6b3d'`
+- Layout anpassen: Ändere `margin`, `contentWidth`, etc.
+- Schriftgrößen: Ändere `setFontSize()`-Werte
 
 ## Design
 
@@ -65,4 +77,11 @@ Die HTML-Dateien können direkt bearbeitet werden:
 - 🎨 Professionelles, modernes Design
 - 📱 Print-optimiert
 - ✨ Highlight-Boxen für wichtige Infos
-- 🎯 Orange Accent-Farbe (#ff6b3d)
+- 🧡 Orange Accent-Farbe (#ff6b3d)
+- 🤖 Automatisch aus Content generiert
+
+## Technologie
+
+- **jsPDF**: PDF-Generierung
+- **Node.js**: Automatisierung
+- **ES Modules**: Moderne JavaScript-Module
