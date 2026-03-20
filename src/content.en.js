@@ -12,9 +12,9 @@ export const contentEn = {
   ctaLabel: 'Start inquiry',
   eyebrow: 'Berlin · 23+ years experience · Senior fullstack · JS/TS · Cloud · Architecture',
   heroTitle:
-    'Senior fullstack engineer with expertise in JavaScript/TypeScript, cloud architecture, and modern product platforms.',
+    'Senior fullstack engineer focused on modern technologies, cloud architecture, and end-to-end product development.',
   heroLead:
-    'Seeking a full-time role in Berlin, preferably remote. Not available for freelance engagements.',
+    'Seeking a full-time role in Berlin or remote. Hybrid with remote component also works. Not available for freelance.',
   heroPrimary: 'View projects',
   heroGhost: 'Explore stack',
   stats: [
@@ -24,7 +24,7 @@ export const contentEn = {
     { key: 'industries', value: '', label: 'Industries' }
   ],
   heroImageAlt: 'Portrait photo',
-  availability: 'Full-time role sought · Berlin · Remote preferred',
+  availability: 'Available for full-time role',
   servicesTitle: 'Services & Responsibilities',
   servicesIntro:
     'End-to-end delivery with a focus on clarity, quality, and sustainable operations.',
@@ -116,7 +116,7 @@ export const contentEn = {
   cvLabel: 'Resume as PDF',
   cvButton: 'Download PDF',
   nextUpLabel: 'Next up',
-  nextUpText: 'Looking for a new challenge in an innovative team. Focus: fullstack development (JS/TS, backend, cloud), requirements engineering, product architecture, end-to-end delivery.',
+  nextUpText: 'Looking for a new challenge in an innovative team. Focus: fullstack development (JS/TS, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
   filtersAll: 'All',
   stackItems: [
     {
