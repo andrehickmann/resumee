@@ -10,7 +10,7 @@ export const contentEn = {
     { id: 'kontakt', label: 'Contact' }
   ],
   ctaLabel: 'Start inquiry',
-  eyebrow: 'Berlin · 23+ years experience · Senior fullstack · JS/TS · Cloud · Architecture',
+  eyebrow: 'Berlin · 23+ years experience · Senior fullstack · Cloud · Architecture',
   heroTitle:
     'Senior fullstack engineer focused on modern technologies, cloud architecture, and end-to-end product development.',
   heroLead:

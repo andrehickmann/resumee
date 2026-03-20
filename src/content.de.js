@@ -74,7 +74,7 @@ export const contentDe = {
     { id: 'kontakt', label: 'Kontakt' }
   ],
   ctaLabel: 'Anfrage starten',
-  eyebrow: 'Berlin · 23+ Jahre Erfahrung · Senior Fullstack · JS/TS · Cloud · Architecture',
+  eyebrow: 'Berlin · 23+ Jahre Erfahrung · Senior Fullstack · Cloud · Architecture',
   heroTitle:
     'Senior Fullstack Engineer mit Fokus auf moderne Technologien, Cloud-Architektur und durchgängige Produktentwicklung.',
   heroLead:
