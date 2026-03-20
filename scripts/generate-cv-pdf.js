@@ -180,6 +180,11 @@ function generatePDF(content, lang = 'de') {
   y += industryLines.length * 4 + 8;
 
   // Ausbildung
+  if (y > 220) {
+    doc.addPage();
+    y = 20;
+  }
+
   addSection(doc, lang === 'de' ? 'Ausbildung' : 'Education', y);
   y += 8;
 
@@ -187,7 +192,48 @@ function generatePDF(content, lang = 'de') {
   doc.setTextColor(MUTED);
   const eduLines = doc.splitTextToSize(content.educationNote, contentWidth);
   doc.text(eduLines, margin, y);
-  y += eduLines.length * 4 + 8;
+  y += eduLines.length * 4 + 10;
+
+  // Projekte (ausgewählte Highlights)
+  if (y > 200) {
+    doc.addPage();
+    y = 20;
+  }
+
+  addSection(doc, lang === 'de' ? 'Ausgewählte Projekte (Auszug)' : 'Selected Projects (Excerpt)', y);
+  y += 8;
+
+  // Filter die CTA-Karte raus und nimm die ersten 8 Projekte
+  const selectedProjects = content.projects
+    .filter(p => !p.tags.includes('Opportunity'))
+    .slice(0, 8);
+
+  selectedProjects.forEach((project, index) => {
+    if (y > 260) {
+      doc.addPage();
+      y = 20;
+    }
+
+    doc.setFontSize(9);
+    doc.setTextColor(ACCENT);
+    doc.setFont('helvetica', 'bold');
+    doc.text(project.period, margin, y);
+    y += 5;
+
+    doc.setFontSize(10);
+    doc.setTextColor(TEXT);
+    doc.setFont('helvetica', 'bold');
+    const titleLines = doc.splitTextToSize(project.title, contentWidth);
+    doc.text(titleLines, margin, y);
+    y += titleLines.length * 4 + 2;
+
+    doc.setFontSize(9);
+    doc.setTextColor(MUTED);
+    doc.setFont('helvetica', 'normal');
+    const descLines = doc.splitTextToSize(project.description, contentWidth);
+    doc.text(descLines, margin, y);
+    y += descLines.length * 4 + 6;
+  });
 
   // Footer
   doc.setFontSize(8);
