@@ -12,9 +12,11 @@
       <ServicesSection
         :copy="copy"
         :show-arrows="showServiceArrows"
+        :current-index="currentServiceIndex"
         @scroll="scrollServices"
         @update-controls="updateServiceControls"
         @track-ready="initServiceSlider"
+        @goto="gotoService"
       />
 
       <StackSection :copy="copy" />
@@ -95,14 +97,12 @@ import IndustriesSection from '../components/IndustriesSection.vue';
 import ProjectsSection from '../components/ProjectsSection.vue';
 import TimelineSection from '../components/TimelineSection.vue';
 import ContactSection from '../components/ContactSection.vue';
-import TerminalWidget from '../components/TerminalWidget.vue';
-import BugFixSprint from '../components/BugFixSprint.vue';
 import SiteFooter from '../components/SiteFooter.vue';
 import ContactModal from '../components/ContactModal.vue';
 import ProjectModal from '../components/ProjectModal.vue';
 import CommandPalette from '../components/CommandPalette.vue';
 import KonamiOverlay from '../components/KonamiOverlay.vue';
-import { techFacts } from '../data/techFacts.js';
+import { techFacts } from '../data/techFacts';
 
 const { locale, tm } = useI18n({ useScope: 'global' });
 const paletteOpen = ref(false);
@@ -150,8 +150,10 @@ const {
 
 const {
   showServiceArrows,
+  currentServiceIndex,
   updateServiceControls,
   scrollServices,
+  gotoService,
   initServiceSlider
 } = useServicesSlider();
 
@@ -199,6 +201,13 @@ watch(locale, () => {
     initScrollEffects();
     initCounters();
     updateServiceControls();
+  });
+});
+
+watch(filteredProjects, () => {
+  nextTick(() => {
+    initReveal();
+    initTilt();
   });
 });
 

@@ -289,7 +289,7 @@ main {
 }
 
 .portrait-frame {
-  width: min(320px, 80vw);
+  width: min(240px, 60vw);
   aspect-ratio: 1;
   border-radius: 50%;
   padding: 10px;

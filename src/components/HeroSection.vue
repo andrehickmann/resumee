@@ -32,6 +32,7 @@
     </div>
     <div class="hero-media">
       <div class="portrait-wrap">
+        <TechNetwork />
         <div class="portrait-frame reveal tilt">
           <img
             class="portrait"
@@ -48,6 +49,8 @@
 </template>
 
 <script setup lang="ts">
+import TechNetwork from './TechNetwork.vue';
+
 defineProps<{
   copy: Record<string, unknown>;
   statsDisplay: { label: string; value: string }[];

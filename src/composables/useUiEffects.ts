@@ -33,7 +33,7 @@ export function useUiEffects() {
   }
 
   function initReveal() {
-    const revealItems = document.querySelectorAll<HTMLElement>('.reveal');
+    const revealItems = document.querySelectorAll<HTMLElement>('.reveal:not(.visible)');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

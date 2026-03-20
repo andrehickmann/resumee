@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: resumee
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerBuildTarget: production
+    autoDeploy: true
+    branch: master
+    envVars:
+      - key: NODE_ENV
+        value: production
