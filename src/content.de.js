@@ -234,6 +234,15 @@ export const contentDe = {
   ],
   projects: [
     {
+      period: '2026 – ?',
+      start: 2026,
+      end: 2026,
+      title: 'Hier könnte dein Projekt stehen',
+      description:
+        'Ich suche eine neue Festanstellung in Berlin oder remote. Du hast spannende Herausforderungen? Lass uns sprechen!',
+      tags: ['Next', 'Opportunity', 'Fullstack']
+    },
+    {
       period: '2025 – heute',
       start: 2025,
       end: 2026,

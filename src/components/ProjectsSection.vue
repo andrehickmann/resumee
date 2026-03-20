@@ -45,6 +45,7 @@
         v-for="project in filteredProjects"
         :key="project.title"
         class="project-card reveal tilt"
+        :class="{ 'project-cta': project.tags && project.tags.includes('Opportunity') }"
         @click="$emit('open-project', project)"
         role="button"
         tabindex="0"

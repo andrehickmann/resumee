@@ -161,6 +161,15 @@ export const contentEn = {
   ],
   projects: [
     {
+      period: '2026 – ?',
+      start: 2026,
+      end: 2026,
+      title: 'Your project could be here',
+      description:
+        'Looking for a new full-time role in Berlin or remote. Got exciting challenges? Let\'s talk!',
+      tags: ['Next', 'Opportunity', 'Fullstack']
+    },
+    {
       period: '2025 – present',
       start: 2025,
       end: 2026,
