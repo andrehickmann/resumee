@@ -31,9 +31,18 @@ Perfekt für eine Bewerbungsseite!
    Node version:         22
    ```
 
-4. **Deploy** → Fertig! 🎉
+4. **Environment Variables** (WICHTIG für Under Construction):
+   - Gehe zu `Settings` → `Environment variables`
+   - Füge hinzu:
+     - Name: `VITE_UNDER_CONSTRUCTION`
+     - Value: `true`
+     - Environment: Production
+
+5. **Deploy** → Fertig! 🎉
 
 Deine Site ist live unter: `https://resumee-xxx.pages.dev`
+
+**Wichtig:** Ohne die Environment Variable `VITE_UNDER_CONSTRUCTION=true` wird die normale Seite angezeigt statt der Under Construction Seite!
 
 ### Option 2: GitHub Actions (Automatisch)
 
@@ -93,6 +102,46 @@ Nach jedem Push zum `master` Branch:
 - **Deployment History**: Cloudflare Dashboard → Dein Project → Deployments
 - **Rollback**: Einfach auf früheres Deployment klicken → "Rollback"
 - **Analytics**: Kostenlos im Dashboard verfügbar
+
+---
+
+## Troubleshooting
+
+### Build schlägt fehl mit "command not found" oder ähnlichem
+
+**Lösung:**
+1. Stelle sicher, dass die Build-Konfiguration korrekt ist:
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+   - Node version: `22`
+
+2. Falls der Build wegen TypeScript-Fehlern abbricht, überprüfe `package.json`:
+   - `vite` muss in `devDependencies` sein
+   - Alle Vue-Pakete müssen installiert sein
+
+### Under Construction wird nicht angezeigt
+
+**Ursache:** Die Environment Variable `VITE_UNDER_CONSTRUCTION` fehlt.
+
+**Lösung:**
+1. Cloudflare Dashboard → Dein Project
+2. Settings → Environment variables
+3. Production: `VITE_UNDER_CONSTRUCTION` = `true`
+4. Redeploy (neuen Commit pushen oder "Retry deployment")
+
+### Build ist erfolgreich, aber Seite zeigt 404
+
+**Lösung:**
+- Die `_redirects` Datei sollte im `public/` Ordner sein
+- Nach dem Build sollte sie in `dist/_redirects` landen
+- Inhalt: `/*    /index.html   200`
+
+### Build dauert zu lange oder timeout
+
+**Lösung:**
+- Cloudflare Pages hat ein 20-Minuten Limit
+- Dein Build sollte ~2 Minuten dauern
+- Falls länger: Checke Dependencies oder Build-Prozess
 
 ---
 
