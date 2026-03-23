@@ -84,12 +84,20 @@ const setLang = (lang: string) => {
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .construction-page {
   min-height: 100vh;
+  max-height: 100vh;
   font-family: 'Space Grotesk', system-ui, sans-serif;
   background: linear-gradient(135deg, #f6f4f0 0%, #f2ede3 45%, #efe7d8 100%);
   color: #1f1f1f;
   line-height: 1.6;
+  overflow: hidden;
 }
 
 .bg-blur {
