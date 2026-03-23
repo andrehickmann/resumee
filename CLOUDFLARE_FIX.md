@@ -1,12 +1,48 @@
-# 🚨 SOFORT-HILFE: Under Construction Seite ausschalten
+# 🚨 Cloudflare Pages - Domain-Probleme lösen
 
-## Problem
-Die Under Construction Seite wird angezeigt, obwohl `.env.production` auf `false` steht.
+## Problem 1: "This domain is already in use"
 
-## Ursache
-Die Environment Variable in Cloudflare Dashboard überschreibt `.env.production`!
+### Fehlermeldung
+```
+This domain is already in use. Please delete the corresponding 
+record in DNS settings or enter another domain and try again.
+```
 
-## Lösung (2 Minuten)
+### Ursache
+Du hast die Domain bereits als **Zone** zu Cloudflare hinzugefügt. Cloudflare hat die **alten DNS-Records von domain-offensive übernommen** (A-Records auf `89.116.29.208`), die jetzt mit Cloudflare Pages kollidieren.
+
+### Lösung (5 Minuten)
+
+#### Schritt 1: Cloudflare DNS öffnen
+1. https://dash.cloudflare.com → **Websites**
+2. Klicke auf **hickmann-kuschnereit.de**
+3. **DNS** → **Records** (linke Sidebar)
+
+#### Schritt 2: Alte Website-Records löschen
+
+**❌ LÖSCHE diese Records:**
+- A Record `@` (oder hickmann-kuschnereit.de) → `89.116.29.208`
+- A Record `www` → `89.116.29.208`
+- AAAA Record `@` → `2a02:c206:3013:0101::1`
+- AAAA Record `www` → `2a02:c206:3013:0101::1`
+
+**✅ BEHALTE diese Records:**
+- MX Record (E-Mail!)
+- A Record `mail` → `89.116.29.208` (E-Mail!)
+- Alle anderen E-Mail-bezogenen Records
+
+#### Schritt 3: Domain zu Pages hinzufügen
+1. **Workers & Pages** → **resumee**
+2. **Custom domains** → **Set up a custom domain**
+3. Gib ein: `hickmann-kuschnereit.de`
+4. **Continue** → ✅ Funktioniert jetzt!
+5. Wiederhole für `www.hickmann-kuschnereit.de`
+
+Cloudflare Pages erstellt automatisch CNAME-Records zu `.pages.dev`
+
+---
+
+## Problem 2: Under Construction Seite ausschalten
 
 ### Schritt 1: Cloudflare Dashboard öffnen
 1. Gehe zu: **https://dash.cloudflare.com**
