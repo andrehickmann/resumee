@@ -37,7 +37,6 @@
         @toggle-filter="toggleFilter"
         @toggle-year="toggleYear"
         @reset-filters="resetFilters"
-        @open-project="openProject"
       />
 
       <TimelineSection :copy="copy" />
@@ -339,7 +338,6 @@ function handleKeydown(event: KeyboardEvent) {
   }
   if (event.key === 'Escape') {
     if (contactModalOpen.value) closeContactModal();
-    if (projectModalOpen.value) closeProjectModal();
     if (paletteOpen.value) closePalette();
     if (konamiOpen.value) konamiOpen.value = false;
   }
