@@ -75,11 +75,11 @@ import { computed } from 'vue';
 import { contentDe } from '../content.de.js';
 import { contentEn } from '../content.en.js';
 
-const { locale, setLocale } = useI18n();
+const { locale } = useI18n();
 const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
 
 const setLang = (lang: string) => {
-  setLocale(lang);
+  locale.value = lang;
 };
 </script>
 
@@ -171,7 +171,7 @@ const setLang = (lang: string) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7.5rem 6vw 4rem;
+  padding: 5rem 6vw;
 }
 
 .construction-container {
@@ -287,7 +287,7 @@ const setLang = (lang: string) => {
 
 @media (max-width: 768px) {
   .construction-main {
-    padding: 5rem 5vw 5rem;
+    padding: 4rem 5vw;
   }
   
   .site-header {
@@ -331,6 +331,10 @@ const setLang = (lang: string) => {
   .social-link {
     width: 100%;
     justify-content: center;
+  }
+
+  .construction-footer {
+    padding: 1.2rem 5vw;
   }
 }
 </style>
