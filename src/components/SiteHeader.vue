@@ -9,9 +9,9 @@
     <div class="header-actions">
       <button
         class="theme-toggle"
-        @click="toggle"
         :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        @click="toggle"
       >
         {{ isDark ? '☀️' : '🌙' }}
       </button>

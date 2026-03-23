@@ -98,7 +98,6 @@ import TimelineSection from '../components/TimelineSection.vue';
 import ContactSection from '../components/ContactSection.vue';
 import SiteFooter from '../components/SiteFooter.vue';
 import ContactModal from '../components/ContactModal.vue';
-import ProjectModal from '../components/ProjectModal.vue';
 import CommandPalette from '../components/CommandPalette.vue';
 import KonamiOverlay from '../components/KonamiOverlay.vue';
 import { techFacts } from '../data/techFacts';
@@ -231,15 +230,6 @@ function closeContactModal() {
   contactModalOpen.value = false;
 }
 
-function openProject(project: ProjectItem) {
-  activeProject.value = project;
-  projectModalOpen.value = true;
-}
-
-function closeProjectModal() {
-  projectModalOpen.value = false;
-  activeProject.value = null;
-}
 
 async function submitContact() {
   contactSubmitting.value = true;
