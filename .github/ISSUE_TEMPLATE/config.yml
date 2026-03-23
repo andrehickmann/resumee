@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 General Questions
+    url: https://github.com/andrehickmann/resumee/discussions
+    about: Ask questions or start a discussion
+  - name: 📧 Contact Me Directly
+    url: https://hickmann-kuschnereit.de
+    about: Use the contact form on the website
