@@ -52,6 +52,10 @@
       :copy="copy"
       :open="contactModalOpen"
       :model="contactForm"
+      :submitting="contactSubmitting"
+      :error="contactError"
+      :success="contactSuccess"
+      :success-message="copy.contactSuccessMessage || 'Vielen Dank! Ich melde mich bald.'"
       @close="closeContactModal"
       @submit="submitContact"
     />
@@ -113,8 +117,12 @@ const contactForm = ref({
   name: '',
   email: '',
   role: '',
-  message: ''
+  message: '',
+  honeypot: '' // Spam protection
 });
+const contactSubmitting = ref(false);
+const contactError = ref('');
+const contactSuccess = ref(false);
 const konamiOpen = ref(false);
 const konamiFacts = ref<string[]>([]);
 
@@ -239,13 +247,48 @@ function closeProjectModal() {
   activeProject.value = null;
 }
 
-function submitContact() {
-  const { name, email, role, message } = contactForm.value;
-  const subject = encodeURIComponent('Festanstellung · Kontaktaufnahme');
-  const body = encodeURIComponent(
-    `Name: ${name}\nE-Mail: ${email}\nRolle: ${role}\n\nNachricht:\n${message}`
-  );
-  window.location.href = `mailto:andre@hickmann-kuschnereit.de?subject=${subject}&body=${body}`;
+async function submitContact() {
+  contactSubmitting.value = true;
+  contactError.value = '';
+  contactSuccess.value = false;
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactForm.value),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      contactError.value = data.error || 'Ein Fehler ist aufgetreten.';
+      return;
+    }
+
+    // Success!
+    contactSuccess.value = true;
+    contactForm.value = {
+      name: '',
+      email: '',
+      role: '',
+      message: '',
+      honeypot: ''
+    };
+
+    // Close modal after 2 seconds
+    setTimeout(() => {
+      closeContactModal();
+      contactSuccess.value = false;
+    }, 2000);
+  } catch (error) {
+    console.error('Contact form error:', error);
+    contactError.value = 'Verbindungsfehler. Bitte versuchen Sie es später erneut.';
+  } finally {
+    contactSubmitting.value = false;
+  }
 }
 
 function openPalette() {
