@@ -1,89 +1,247 @@
-# Resumee Landing Page
+# Portfolio Website - André Hickmann Kuschnereit
 
-Modern Vue 3 + TypeScript portfolio with Vue Router and a dedicated legal route.
+> Modern, minimalist portfolio website for a Senior Software Engineer. Built with Vue 3, TypeScript, and deployed on Cloudflare Pages.
 
-## Local Dev (Node)
+🌐 **Live:** [hickmann-kuschnereit.de](https://hickmann-kuschnereit.de)
+
+## ✨ Features
+
+- 🎨 **Modern Design** - Clean, professional UI with smooth animations
+- 🌍 **Bilingual** - Full German/English support (Vue I18n)
+- 📱 **Responsive** - Works perfectly on all devices
+- 🎯 **Interactive Timeline** - Visual career journey with project highlights
+- 📧 **Contact Form** - Web3Forms integration with hCaptcha spam protection
+- 📄 **CV Download** - German & English PDF resumes
+- ⚡ **Lightning Fast** - Deployed on Cloudflare Pages
+- 🔒 **Privacy-Focused** - DSGVO-compliant with Impressum & Datenschutz
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or pnpm
+
+### Local Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Start dev server
 npm run dev
 ```
 
-Open: `http://localhost:5173`
+Open [http://localhost:5173](http://localhost:5173)
 
-### Under Construction Mode
-
-To test the under construction page locally:
+### Docker Development (with Traefik)
 
 ```bash
-VITE_UNDER_CONSTRUCTION=true npm run dev
-```
-
-See [UNDER_CONSTRUCTION.md](./UNDER_CONSTRUCTION.md) for details.
-
-## Local Dev (Docker + Traefik)
-
-```bash
+# Start with Docker Compose
 docker compose up --build
 ```
 
-Open: `http://resumee.localhost`
+Open [http://resumee.localhost](http://resumee.localhost)
 
-Traefik dashboard: `http://localhost:8080`
+Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 
-If `resumee.localhost` does not resolve, add it to your hosts file:
-
+**Note:** If `resumee.localhost` doesn't resolve, add to `/etc/hosts`:
 ```
 127.0.0.1 resumee.localhost
 ```
 
-## Build
+## 🏗️ Project Structure
+
+```
+.
+├── public/
+│   ├── portrait.jpg                    # Profile photo
+│   ├── Lebenslauf - *.pdf             # German CV
+│   ├── Resume - *.pdf                 # English CV
+│   ├── cv-generator.html              # German CV template
+│   ├── cv-generator-en.html           # English CV template
+│   └── sitemap.xml                    # SEO sitemap
+├── src/
+│   ├── components/
+│   │   ├── SiteHeader.vue             # Navigation header
+│   │   ├── ContactModal.vue           # Contact form modal
+│   │   ├── TimelineSection.vue        # Career timeline
+│   │   └── ...
+│   ├── views/
+│   │   ├── HomeView.vue               # Main portfolio page
+│   │   ├── UnderConstruction.vue      # Launch placeholder
+│   │   └── LegalView.vue              # Impressum & Datenschutz
+│   ├── content.de.js                  # German content
+│   ├── content.en.js                  # English content
+│   └── router/index.ts                # Vue Router config
+├── .env.production                    # Production env vars
+├── wrangler.jsonc                     # Cloudflare config
+└── docker-compose.yml                 # Docker setup
+
+```
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Vue 3** - Progressive JavaScript framework
+- **TypeScript** - Type-safe development
+- **Vue Router** - Client-side routing
+- **Vue I18n** - Internationalization
+
+### Build & Development
+- **Vite** - Lightning-fast build tool
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+
+### Deployment & Services
+- **Cloudflare Pages** - Edge deployment
+- **Web3Forms** - Contact form backend (free tier)
+- **hCaptcha** - Spam protection
+
+## 📝 Content Management
+
+### Updating Content
+
+Edit content in language-specific files:
+- **German:** `src/content.de.js`
+- **English:** `src/content.en.js`
+
+### Updating CV
+
+1. Edit HTML templates: `public/cv-generator.html` or `public/cv-generator-en.html`
+2. Open in browser
+3. Print to PDF (Cmd/Ctrl + P)
+4. Save as `Lebenslauf - André Hickmann Kuschnereit.pdf` or `Resume - André Hickmann Kuschnereit.pdf`
+5. Replace files in `public/` directory
+
+## 🌐 Deployment
+
+### Cloudflare Pages
+
+The site automatically deploys on push to `master` branch.
+
+**Environment Variables:**
+- `VITE_UNDER_CONSTRUCTION` - Set to `false` in production (configured in `.env.production`)
+
+### Under Construction Mode
+
+To enable maintenance/under-construction page:
 
 ```bash
+# .env.production
+VITE_UNDER_CONSTRUCTION=true
+```
+
+Then commit and push:
+```bash
+git add .env.production
+git commit -m "Enable under construction mode"
+git push
+```
+
+## 📧 Contact Form Setup
+
+The contact form uses **Web3Forms** (free tier: 250 submissions/month).
+
+### Setup:
+1. Get access key from [web3forms.com](https://web3forms.com)
+2. Update `src/views/HomeView.vue` (line ~258):
+   ```javascript
+   formData.append('access_key', 'YOUR_ACCESS_KEY');
+   ```
+3. Enable **hCaptcha** in Web3Forms dashboard
+
+See [WEB3FORMS_SETUP.md](./WEB3FORMS_SETUP.md) for detailed instructions.
+
+## 🧪 Development Commands
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
 npm run build
-```
 
-The production build is in `dist/`.
+# Preview production build
+npm run preview
 
-**Note:** Production builds show the "Under Construction" page by default (via `.env.production`). To build the full site locally, use:
-
-```bash
-VITE_UNDER_CONSTRUCTION=false npm run build
-```
-
-## Lint & Format
-
-```bash
+# Lint code
 npm run lint
+
+# Format code
 npm run format
+
+# Deploy to Cloudflare (requires wrangler auth)
+npm run deploy
 ```
 
-## Content
+## 🐳 Docker Commands
 
-Main content lives in `src/content.js`.
+```bash
+# Build and start
+docker compose up --build
 
-Translations live in:
-- `src/content.de.js`
-- `src/content.en.js`
+# Start in background
+docker compose up -d
 
-## Files to Provide
+# Stop
+docker compose down
 
-- `public/portrait.jpg`
-- `public/Lebenslauf.pdf`
+# View logs
+docker compose logs -f app
+```
 
-## Routes
+## 🔒 Privacy & Legal
 
-- `/` (main portfolio)
-- `/legal` (Impressum & Datenschutz)
+- **Impressum:** `/legal#impressum`
+- **Datenschutz:** `/legal#datenschutz`
+- Fully DSGVO-compliant
+- No tracking, no cookies, no analytics
 
-## Deployment
+## 📄 Routes
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare Pages setup.
+| Route | Description |
+|-------|-------------|
+| `/` | Main portfolio page |
+| `/legal` | Impressum & Datenschutz |
 
-## Tech Stack
+## 🎨 Customization
 
-- Vue 3 + Vue Router
-- Vue I18n
-- TypeScript
-- Vite
-- ESLint + Prettier
+### Colors & Theme
+
+Main colors are defined in `src/style.css`:
+- Primary: `#64ffda` (cyan)
+- Background: `#0a192f` (dark blue)
+- Text: `#ccd6f6` (light blue-gray)
+
+### Fonts
+
+- **Headings:** Space Grotesk
+- **Body:** Space Grotesk
+- **Code:** JetBrains Mono
+
+Loaded from Google Fonts in `index.html`.
+
+## 📊 SEO
+
+- Semantic HTML5
+- Open Graph meta tags
+- Twitter Card meta tags
+- Structured data (JSON-LD)
+- Sitemap.xml
+- Robots.txt (allows all)
+
+## 🤝 Contributing
+
+This is a personal portfolio project, but feel free to fork it for your own use!
+
+## 📝 License
+
+Private project - All rights reserved.
+
+---
+
+**Built with ❤️ by André Hickmann Kuschnereit**
