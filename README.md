@@ -251,7 +251,7 @@ This is a personal portfolio project, but feel free to fork it for your own use!
 
 ## 📝 License
 
-Private project - All rights reserved.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
