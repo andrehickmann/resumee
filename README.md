@@ -60,6 +60,10 @@ Translations live in:
 - `/` (main portfolio)
 - `/legal` (Impressum & Datenschutz)
 
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare Pages setup.
+
 ## Tech Stack
 
 - Vue 3 + Vue Router
