@@ -781,10 +781,11 @@ main {
 .tag {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  background: #fff;
-  border: 1px solid rgba(31, 31, 31, 0.1);
+  background: var(--card);
+  border: 1px solid var(--button-bg);
   font-size: 0.85rem;
   font-weight: 500;
+  color: var(--ink);
 }
 
 .filters {
@@ -850,11 +851,13 @@ main {
   background: transparent;
   font-weight: 500;
   cursor: pointer;
+  color: var(--ink);
+  transition: all 0.2s ease;
 }
 
 .filter.active {
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
 }
 
 .filter.reset {
