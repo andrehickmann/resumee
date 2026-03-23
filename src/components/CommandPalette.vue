@@ -1,9 +1,9 @@
 <template>
-  <div class="palette" :class="{ open: open }" aria-hidden="true">
+  <div v-if="open" class="palette" :class="{ open: open }">
     <div class="palette-backdrop" @click="$emit('close')"></div>
-    <div class="palette-panel" role="dialog" aria-modal="true">
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-labelledby="palette-title">
       <div class="palette-header">
-        <span>Command Palette</span>
+        <span id="palette-title">Command Palette</span>
         <kbd>ESC</kbd>
       </div>
       <input
