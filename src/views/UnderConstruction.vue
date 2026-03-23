@@ -142,7 +142,7 @@ const setLang = (lang: string) => {
 }
 
 .lang-btn {
-  background: transparent;
+  background: #ffffff;
   border: 1px solid rgba(31, 31, 31, 0.2);
   color: #5c5a54;
   padding: 0.4rem 0.8rem;
@@ -152,6 +152,9 @@ const setLang = (lang: string) => {
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Space Grotesk', sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .lang-btn:hover {
@@ -167,11 +170,16 @@ const setLang = (lang: string) => {
 
 
 .construction-main {
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5rem 6vw;
+  padding: 0;
+  overflow: hidden;
 }
 
 .construction-container {
