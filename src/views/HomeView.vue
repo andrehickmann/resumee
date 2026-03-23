@@ -60,11 +60,7 @@
       @submit="submitContact"
     />
 
-    <ProjectModal
-      :open="projectModalOpen"
-      :project="activeProject"
-      @close="closeProjectModal"
-    />
+    <ProjectModal :open="projectModalOpen" :project="activeProject" @close="closeProjectModal" />
 
     <CommandPalette
       :open="paletteOpen"
@@ -88,7 +84,11 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { type ProjectItem, type ContentShape, useProjectFilters } from '../composables/useProjectFilters';
+import {
+  type ProjectItem,
+  type ContentShape,
+  useProjectFilters
+} from '../composables/useProjectFilters';
 import { useServicesSlider } from '../composables/useServicesSlider';
 import { useUiEffects } from '../composables/useUiEffects';
 
@@ -254,8 +254,10 @@ async function submitContact() {
 
   try {
     // Get hCaptcha response token
-    const hCaptchaResponse = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement;
-    
+    const hCaptchaResponse = document.querySelector(
+      'textarea[name="h-captcha-response"]'
+    ) as HTMLTextAreaElement;
+
     if (!hCaptchaResponse || !hCaptchaResponse.value) {
       contactError.value = 'Bitte bestätigen Sie das Captcha.';
       contactSubmitting.value = false;
@@ -268,17 +270,20 @@ async function submitContact() {
     formData.append('name', contactForm.value.name);
     formData.append('email', contactForm.value.email);
     formData.append('subject', `Kontaktanfrage von ${contactForm.value.name}`);
-    formData.append('message', `
+    formData.append(
+      'message',
+      `
 Name: ${contactForm.value.name}
 E-Mail: ${contactForm.value.email}
 ${contactForm.value.role ? `Rolle/Position: ${contactForm.value.role}\n` : ''}
 Nachricht:
 ${contactForm.value.message}
-    `.trim());
-    
+    `.trim()
+    );
+
     // Add hCaptcha token
     formData.append('h-captcha-response', hCaptchaResponse.value);
-    
+
     if (contactForm.value.honeypot) {
       formData.append('botcheck', contactForm.value.honeypot);
     }

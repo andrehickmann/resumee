@@ -18,10 +18,7 @@ export function useUiEffects() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             navLinks.forEach((link) => {
-              link.classList.toggle(
-                'active',
-                link.getAttribute('href') === `#${entry.target.id}`
-              );
+              link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
             });
           }
         });

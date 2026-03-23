@@ -61,7 +61,7 @@ const techLabels = [
   'Playwright',
   'Cypress',
   'Jira/Confluence',
-  'Agile',
+  'Agile'
 ];
 
 // Generate color from string hash
@@ -80,7 +80,7 @@ function stringToColor(str: string): string {
 
 const techs = techLabels.map((label) => ({
   label,
-  color: stringToColor(label),
+  color: stringToColor(label)
 }));
 
 const props = defineProps<{
@@ -100,7 +100,7 @@ function initNodes() {
     vx: (Math.random() - 0.5) * 0.5,
     vy: (Math.random() - 0.5) * 0.5,
     label: tech.label,
-    color: tech.color,
+    color: tech.color
   }));
 }
 

@@ -31,7 +31,8 @@
       </div>
       <div class="stats">
         <div v-for="stat in statsDisplay" :key="stat.label">
-          <span class="stat-number" :data-count="stat.value">0</span><span class="stat-plus">+</span>
+          <span class="stat-number" :data-count="stat.value">0</span
+          ><span class="stat-plus">+</span>
           <span class="stat-label">{{ stat.label }}</span>
         </div>
       </div>

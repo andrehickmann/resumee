@@ -195,7 +195,9 @@ main {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .cta,
@@ -222,8 +224,8 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "text media"
-    "stats stats";
+    'text media'
+    'stats stats';
   gap: 3rem;
   padding: 2rem 0 4rem;
   align-items: start;
@@ -603,14 +605,13 @@ main {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background:
-    conic-gradient(
-      #ff6b3d 0deg 72deg,
-      #3a86ff 72deg 144deg,
-      #06d6a0 144deg 216deg,
-      #ffd166 216deg 288deg,
-      #8338ec 288deg 360deg
-    );
+  background: conic-gradient(
+    #ff6b3d 0deg 72deg,
+    #3a86ff 72deg 144deg,
+    #06d6a0 144deg 216deg,
+    #ffd166 216deg 288deg,
+    #8338ec 288deg 360deg
+  );
   position: relative;
   animation: radar-spin 18s linear infinite;
 }
@@ -814,7 +815,9 @@ main {
   gap: 0.8rem;
   min-height: 240px;
   align-content: start;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .project-card:focus-visible {
@@ -1059,7 +1062,6 @@ main {
   box-shadow: 0 0 0 3px rgba(31, 31, 31, 0.15);
 }
 
-
 .timeline-item {
   display: grid;
   gap: 0.5rem;
@@ -1091,7 +1093,8 @@ main {
 }
 
 @keyframes pulse-dot {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 3px rgba(255, 107, 61, 0.2);
     background: var(--accent);
   }
@@ -1538,7 +1541,7 @@ a:focus-visible {
     padding: 0.7rem 4vw;
   }
 
-  .nav a:nth-child(n+4) {
+  .nav a:nth-child(n + 4) {
     display: none;
   }
 
@@ -1561,9 +1564,9 @@ a:focus-visible {
   .hero {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "text"
-      "media"
-      "stats";
+      'text'
+      'media'
+      'stats';
   }
 
   .stats-row {
@@ -1662,7 +1665,9 @@ a:focus-visible {
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .reveal.visible {

@@ -1,570 +1,578 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume - André Hickmann Kuschnereit</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    @page {
-      size: A4;
-      margin: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      font-size: 9.5pt;
-      line-height: 1.35;
-      color: #1f1f1f;
-      background: #fff;
-    }
-
-    .page {
-      width: 210mm;
-      min-height: 297mm;
-      padding: 18mm 20mm;
-      margin: 0 auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    @media print {
-      .page {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume - André Hickmann Kuschnereit</title>
+    <style>
+      * {
         margin: 0;
-        box-shadow: none;
-        page-break-after: always;
+        padding: 0;
+        box-sizing: border-box;
       }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
       body {
-        background: white;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+          sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.35;
+        color: #1f1f1f;
+        background: #fff;
       }
-    }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #ff6b3d;
-    }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 18mm 20mm;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-    .header-left h1 {
-      font-size: 22pt;
-      font-weight: 700;
-      color: #1f1f1f;
-      margin-bottom: 3px;
-    }
+      @media print {
+        .page {
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+        }
+        body {
+          background: white;
+        }
+      }
 
-    .header-left .subtitle {
-      font-size: 11pt;
-      color: #666;
-      font-weight: 500;
-    }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #ff6b3d;
+      }
 
-    .header-right {
-      text-align: right;
-      font-size: 8.5pt;
-      color: #666;
-      line-height: 1.4;
-    }
+      .header-left h1 {
+        font-size: 22pt;
+        font-weight: 700;
+        color: #1f1f1f;
+        margin-bottom: 3px;
+      }
 
-    .header-right div {
-      margin-bottom: 2px;
-    }
+      .header-left .subtitle {
+        font-size: 11pt;
+        color: #666;
+        font-weight: 500;
+      }
 
-    .section {
-      margin-bottom: 14px;
-    }
+      .header-right {
+        text-align: right;
+        font-size: 8.5pt;
+        color: #666;
+        line-height: 1.4;
+      }
 
-    .section-title {
-      font-size: 13pt;
-      font-weight: 700;
-      color: #ff6b3d;
-      margin-bottom: 7px;
-      padding-bottom: 3px;
-      border-bottom: 1px solid #e5e5e5;
-    }
+      .header-right div {
+        margin-bottom: 2px;
+      }
 
-    .intro {
-      font-size: 9.5pt;
-      line-height: 1.45;
-      margin-bottom: 14px;
-      color: #333;
-    }
+      .section {
+        margin-bottom: 14px;
+      }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
+      .section-title {
+        font-size: 13pt;
+        font-weight: 700;
+        color: #ff6b3d;
+        margin-bottom: 7px;
+        padding-bottom: 3px;
+        border-bottom: 1px solid #e5e5e5;
+      }
 
-    .skill-item {
-      font-size: 8.5pt;
-    }
+      .intro {
+        font-size: 9.5pt;
+        line-height: 1.45;
+        margin-bottom: 14px;
+        color: #333;
+      }
 
-    .skill-item strong {
-      color: #1f1f1f;
-      display: block;
-      margin-bottom: 2px;
-    }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 10px;
+      }
 
-    .skill-item span {
-      color: #666;
-      line-height: 1.3;
-    }
+      .skill-item {
+        font-size: 8.5pt;
+      }
 
-    .timeline-item {
-      margin-bottom: 10px;
-      page-break-inside: avoid;
-    }
+      .skill-item strong {
+        color: #1f1f1f;
+        display: block;
+        margin-bottom: 2px;
+      }
 
-    .timeline-period {
-      font-size: 8.5pt;
-      color: #ff6b3d;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
+      .skill-item span {
+        color: #666;
+        line-height: 1.3;
+      }
 
-    .timeline-role {
-      font-size: 10pt;
-      font-weight: 600;
-      color: #1f1f1f;
-      margin-bottom: 2px;
-    }
+      .timeline-item {
+        margin-bottom: 10px;
+        page-break-inside: avoid;
+      }
 
-    .timeline-description {
-      font-size: 8.5pt;
-      color: #666;
-      line-height: 1.35;
-    }
+      .timeline-period {
+        font-size: 8.5pt;
+        color: #ff6b3d;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
 
-    .project-item {
-      margin-bottom: 8px;
-      page-break-inside: avoid;
-    }
+      .timeline-role {
+        font-size: 10pt;
+        font-weight: 600;
+        color: #1f1f1f;
+        margin-bottom: 2px;
+      }
 
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 2px;
-    }
+      .timeline-description {
+        font-size: 8.5pt;
+        color: #666;
+        line-height: 1.35;
+      }
 
-    .project-title {
-      font-size: 9.5pt;
-      font-weight: 600;
-      color: #1f1f1f;
-    }
+      .project-item {
+        margin-bottom: 8px;
+        page-break-inside: avoid;
+      }
 
-    .project-period {
-      font-size: 7.5pt;
-      color: #ff6b3d;
-      font-weight: 600;
-    }
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 2px;
+      }
 
-    .project-description {
-      font-size: 8pt;
-      color: #666;
-      line-height: 1.3;
-      margin-bottom: 3px;
-    }
+      .project-title {
+        font-size: 9.5pt;
+        font-weight: 600;
+        color: #1f1f1f;
+      }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 3px;
-      margin-top: 4px;
-    }
+      .project-period {
+        font-size: 7.5pt;
+        color: #ff6b3d;
+        font-weight: 600;
+      }
 
-    .tag {
-      display: inline-block;
-      padding: 1px 6px;
-      background: #f5f5f5;
-      border-radius: 10px;
-      font-size: 7pt;
-      color: #666;
-    }
+      .project-description {
+        font-size: 8pt;
+        color: #666;
+        line-height: 1.3;
+        margin-bottom: 3px;
+      }
 
-    .industries {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 4px;
+      }
 
-    .industry {
-      padding: 2px 8px;
-      background: #f5f5f5;
-      border-radius: 10px;
-      font-size: 7.5pt;
-      color: #666;
-    }
+      .tag {
+        display: inline-block;
+        padding: 1px 6px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        font-size: 7pt;
+        color: #666;
+      }
 
-    .education {
-      font-size: 8.5pt;
-      color: #666;
-      line-height: 1.4;
-      margin-top: 6px;
-    }
+      .industries {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
 
-    .footer {
-      margin-top: 15px;
-      padding-top: 8px;
-      border-top: 1px solid #e5e5e5;
-      text-align: center;
-      font-size: 7pt;
-      color: #999;
-    }
+      .industry {
+        padding: 2px 8px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        font-size: 7.5pt;
+        color: #666;
+      }
 
-    .highlight-box {
-      background: #fff5f0;
-      border-left: 3px solid #ff6b3d;
-      padding: 8px;
-      margin-bottom: 12px;
-      font-size: 8.5pt;
-      line-height: 1.4;
-    }
+      .education {
+        font-size: 8.5pt;
+        color: #666;
+        line-height: 1.4;
+        margin-top: 6px;
+      }
 
-    .two-column {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-left">
-        <h1>André Hickmann Kuschnereit</h1>
-        <div class="subtitle">Senior Fullstack Engineer</div>
+      .footer {
+        margin-top: 15px;
+        padding-top: 8px;
+        border-top: 1px solid #e5e5e5;
+        text-align: center;
+        font-size: 7pt;
+        color: #999;
+      }
+
+      .highlight-box {
+        background: #fff5f0;
+        border-left: 3px solid #ff6b3d;
+        padding: 8px;
+        margin-bottom: 12px;
+        font-size: 8.5pt;
+        line-height: 1.4;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <h1>André Hickmann Kuschnereit</h1>
+          <div class="subtitle">Senior Fullstack Engineer</div>
+        </div>
+        <div class="header-right">
+          <div>📍 Berlin, Germany</div>
+          <div>📧 andre@hickmann-kuschnereit.de</div>
+          <div>🔗 linkedin.com/in/andré-hickmann-425b97182</div>
+          <div>💻 github.com/andrehickmann</div>
+        </div>
       </div>
-      <div class="header-right">
-        <div>📍 Berlin, Germany</div>
-        <div>📧 andre@hickmann-kuschnereit.de</div>
-        <div>🔗 linkedin.com/in/andré-hickmann-425b97182</div>
-        <div>💻 github.com/andrehickmann</div>
+
+      <!-- Intro -->
+      <div class="intro">
+        Senior Fullstack Engineer with 23+ years of experience developing complex, scalable software
+        solutions. Specialized in modern technologies, cloud architecture, and end-to-end product
+        development. Open to a full-time role in Berlin or remote (Hybrid with remote component also
+        works).
+      </div>
+
+      <!-- Highlight -->
+      <div class="highlight-box">
+        <strong>Core Competencies:</strong> Fullstack Development (Frontend, Backend, Cloud) •
+        Requirements Engineering • Testing & Quality Assurance • Product Architecture • End-to-End
+        Delivery • Technical Specification • Code Reviews • Mentoring
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="section">
+        <div class="section-title">Technology Stack</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <strong>Backend & Architecture</strong>
+            <span>Node.js, Java, Scala, PHP, Go, API Design, Domain Driven Design</span>
+          </div>
+          <div class="skill-item">
+            <strong>Frontend & Experience</strong>
+            <span>Vue.js, React, TypeScript, Angular, Design Systems, Microfrontends</span>
+          </div>
+          <div class="skill-item">
+            <strong>Cloud & Infrastructure</strong>
+            <span>AWS, Docker, Kubernetes, Helm, ArgoCD</span>
+          </div>
+          <div class="skill-item">
+            <strong>Delivery & Quality</strong>
+            <span>CI/CD, Observability, Test Automation, E2E Testing, SRE Practices</span>
+          </div>
+          <div class="skill-item">
+            <strong>Data & Integration</strong>
+            <span>PostgreSQL, MySQL, PostGIS, MSSQL, Redis, Kafka, Event Streaming</span>
+          </div>
+          <div class="skill-item">
+            <strong>AI & Automation</strong>
+            <span>LLM Integration, RAG, Document Analysis, Workflow Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Experience -->
+      <div class="section">
+        <div class="section-title">Professional Experience</div>
+
+        <div class="timeline-item">
+          <div class="timeline-period">01/2018 – present</div>
+          <div class="timeline-role">Senior Fullstack Engineer · brayn.io</div>
+          <div class="timeline-description">
+            End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), Backend
+            (Scala, PHP, Java, Go), Cloud Infrastructure (AWS, Docker, K8s), Requirements
+            Engineering, technical specification, code reviews, software analysis, maintenance &
+            modernization of existing systems, mentoring.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-period">08/2008 – 12/2017</div>
+          <div class="timeline-role">Company Founder / Partner · swepp GmbH</div>
+          <div class="timeline-description">
+            Online portals for law firms, insurance integrations (GDV), DMS implementation, training
+            & documentation.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-period">01/2003 – 07/2008</div>
+          <div class="timeline-role">Self-Employment / Solo Entrepreneur</div>
+          <div class="timeline-description">
+            Development & operation of websites, online shop, CMS system, computer courses.
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected Projects -->
+      <div class="section">
+        <div class="section-title">Selected Projects (Excerpt)</div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Research Center Sustainability (Multiple Projects)</div>
+            <div class="project-period">2025 – present</div>
+          </div>
+          <div class="project-description">
+            Vue2→Vue3 migration, timeseries visualization, water/air quality data (Grafana).
+          </div>
+          <div class="tags">
+            <span class="tag">Research</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Data</span>
+            <span class="tag">Sustainability</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">AI Projects (Anonymized)</div>
+            <div class="project-period">2025</div>
+          </div>
+          <div class="project-description">
+            Receipt recognition, document analysis, automated evaluations and code generation.
+          </div>
+          <div class="tags">
+            <span class="tag">AI</span>
+            <span class="tag">Python</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">AgriTech Machine Control</div>
+            <div class="project-period">2025</div>
+          </div>
+          <div class="project-description">
+            Camera/ML-based control for weed elimination via laser.
+          </div>
+          <div class="tags">
+            <span class="tag">AgriTech</span>
+            <span class="tag">ML</span>
+            <span class="tag">Edge</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Biodiversity Compliance Platform</div>
+            <div class="project-period">2024</div>
+          </div>
+          <div class="project-description">
+            GIS heatmaps, action items, frontend (React) and backend (Python).
+          </div>
+          <div class="tags">
+            <span class="tag">Sustainability</span>
+            <span class="tag">GIS</span>
+            <span class="tag">React</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Ticketing Platform</div>
+            <div class="project-period">2024</div>
+          </div>
+          <div class="project-description">
+            Conception & development for ticket sales, venue/artist management, payment.
+          </div>
+          <div class="tags">
+            <span class="tag">Ticketing</span>
+            <span class="tag">Web</span>
+            <span class="tag">Payments</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Streaming & Competitions</div>
+            <div class="project-period">2024</div>
+          </div>
+          <div class="project-description">
+            Short-video platform with competitions and wallet logic (Web + Ionic).
+          </div>
+          <div class="tags">
+            <span class="tag">Streaming</span>
+            <span class="tag">Ionic</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Mobile</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Bowling Software Suite</div>
+            <div class="project-period">2023</div>
+          </div>
+          <div class="project-description">
+            Lane control, booking, gastronomy, payment (Vue/Scala/Java).
+          </div>
+          <div class="tags">
+            <span class="tag">POS</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Scala</span>
+            <span class="tag">Java</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Telemedicine & Video Consultation</div>
+            <div class="project-period">2023</div>
+          </div>
+          <div class="project-description">
+            Appointment portal with video conferences, TURN/STUN setup, Scala backend.
+          </div>
+          <div class="tags">
+            <span class="tag">Health</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Scala</span>
+            <span class="tag">Realtime</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">E-Bike Benchmarking</div>
+            <div class="project-period">2022</div>
+          </div>
+          <div class="project-description">
+            Digital benchmark room for cost analysis from parts to complete bikes.
+          </div>
+          <div class="tags">
+            <span class="tag">Mobility</span>
+            <span class="tag">Data</span>
+            <span class="tag">Product</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Tax Advisory Software</div>
+            <div class="project-period">2021 – 2026</div>
+          </div>
+          <div class="project-description">
+            Accounting and annual financial statement software for large enterprises.
+          </div>
+          <div class="tags">
+            <span class="tag">Finance</span>
+            <span class="tag">B2B</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Scala</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Fashion Commerce Integration</div>
+            <div class="project-period">2021 – 2025</div>
+          </div>
+          <div class="project-description">
+            Invoice/return portal, monitoring, vouchers, international tax rates.
+          </div>
+          <div class="tags">
+            <span class="tag">Commerce</span>
+            <span class="tag">Integration</span>
+            <span class="tag">Payments</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Insurance Portal (Broker)</div>
+            <div class="project-period">2020 – 2022</div>
+          </div>
+          <div class="project-description">
+            REST/SOAP integration, form generator in Vue/TypeScript, frontend migration.
+          </div>
+          <div class="tags">
+            <span class="tag">InsurTech</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Java</span>
+            <span class="tag">Integration</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">FinTech Invoicing Platform</div>
+            <div class="project-period">2018 – present</div>
+          </div>
+          <div class="project-description">
+            Invoicing, customer management, dunning, bank integration, dispatch.
+          </div>
+          <div class="tags">
+            <span class="tag">FinTech</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Scala</span>
+            <span class="tag">PHP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Industries -->
+      <div class="section">
+        <div class="section-title">Industry & Domain Experience</div>
+        <div class="industries">
+          <span class="industry">FinTech & Banking</span>
+          <span class="industry">Mobility & Logistics</span>
+          <span class="industry">HealthTech</span>
+          <span class="industry">E-Commerce</span>
+          <span class="industry">SaaS & B2B Platforms</span>
+          <span class="industry">Energy & Sustainability</span>
+          <span class="industry">Media & Publishing</span>
+          <span class="industry">Public Sector</span>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section">
+        <div class="section-title">Education & Qualifications</div>
+        <div class="education">
+          <strong>School Education:</strong> 10th Grade (Realschulabschluss / Secondary School
+          Certificate)<br />
+          <strong>Further Education:</strong> Self-taught in software development, cloud
+          architecture and modern web technologies<br />
+          <strong>Languages:</strong> German (Native), English (Fluent spoken and written)
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        Created: March 2026 • hickmann-kuschnereit.de • Available for new challenges
       </div>
     </div>
-
-    <!-- Intro -->
-    <div class="intro">
-      Senior Fullstack Engineer with 23+ years of experience developing complex, scalable software solutions. 
-      Specialized in modern technologies, cloud architecture, and end-to-end product development. 
-      Open to a full-time role in Berlin or remote (Hybrid with remote component also works).
-    </div>
-
-    <!-- Highlight -->
-    <div class="highlight-box">
-      <strong>Core Competencies:</strong> Fullstack Development (Frontend, Backend, Cloud) • Requirements Engineering • 
-      Testing & Quality Assurance • Product Architecture • End-to-End Delivery • Technical Specification • Code Reviews • Mentoring
-    </div>
-
-    <!-- Tech Stack -->
-    <div class="section">
-      <div class="section-title">Technology Stack</div>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <strong>Backend & Architecture</strong>
-          <span>Node.js, Java, Scala, PHP, Go, API Design, Domain Driven Design</span>
-        </div>
-        <div class="skill-item">
-          <strong>Frontend & Experience</strong>
-          <span>Vue.js, React, TypeScript, Angular, Design Systems, Microfrontends</span>
-        </div>
-        <div class="skill-item">
-          <strong>Cloud & Infrastructure</strong>
-          <span>AWS, Docker, Kubernetes, Helm, ArgoCD</span>
-        </div>
-        <div class="skill-item">
-          <strong>Delivery & Quality</strong>
-          <span>CI/CD, Observability, Test Automation, E2E Testing, SRE Practices</span>
-        </div>
-        <div class="skill-item">
-          <strong>Data & Integration</strong>
-          <span>PostgreSQL, MySQL, PostGIS, MSSQL, Redis, Kafka, Event Streaming</span>
-        </div>
-        <div class="skill-item">
-          <strong>AI & Automation</strong>
-          <span>LLM Integration, RAG, Document Analysis, Workflow Automation</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Professional Experience -->
-    <div class="section">
-      <div class="section-title">Professional Experience</div>
-      
-      <div class="timeline-item">
-        <div class="timeline-period">01/2018 – present</div>
-        <div class="timeline-role">Senior Fullstack Engineer · brayn.io</div>
-        <div class="timeline-description">
-          End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), Backend (Scala, PHP, Java, Go), 
-          Cloud Infrastructure (AWS, Docker, K8s), Requirements Engineering, technical specification, code reviews, 
-          software analysis, maintenance & modernization of existing systems, mentoring.
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-period">08/2008 – 12/2017</div>
-        <div class="timeline-role">Company Founder / Partner · swepp GmbH</div>
-        <div class="timeline-description">
-          Online portals for law firms, insurance integrations (GDV), DMS implementation, training & documentation.
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-period">01/2003 – 07/2008</div>
-        <div class="timeline-role">Self-Employment / Solo Entrepreneur</div>
-        <div class="timeline-description">
-          Development & operation of websites, online shop, CMS system, computer courses.
-        </div>
-      </div>
-    </div>
-
-    <!-- Selected Projects -->
-    <div class="section">
-      <div class="section-title">Selected Projects (Excerpt)</div>
-      
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Research Center Sustainability (Multiple Projects)</div>
-          <div class="project-period">2025 – present</div>
-        </div>
-        <div class="project-description">
-          Vue2→Vue3 migration, timeseries visualization, water/air quality data (Grafana).
-        </div>
-        <div class="tags">
-          <span class="tag">Research</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Data</span>
-          <span class="tag">Sustainability</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">AI Projects (Anonymized)</div>
-          <div class="project-period">2025</div>
-        </div>
-        <div class="project-description">
-          Receipt recognition, document analysis, automated evaluations and code generation.
-        </div>
-        <div class="tags">
-          <span class="tag">AI</span>
-          <span class="tag">Python</span>
-          <span class="tag">Automation</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">AgriTech Machine Control</div>
-          <div class="project-period">2025</div>
-        </div>
-        <div class="project-description">
-          Camera/ML-based control for weed elimination via laser.
-        </div>
-        <div class="tags">
-          <span class="tag">AgriTech</span>
-          <span class="tag">ML</span>
-          <span class="tag">Edge</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Biodiversity Compliance Platform</div>
-          <div class="project-period">2024</div>
-        </div>
-        <div class="project-description">
-          GIS heatmaps, action items, frontend (React) and backend (Python).
-        </div>
-        <div class="tags">
-          <span class="tag">Sustainability</span>
-          <span class="tag">GIS</span>
-          <span class="tag">React</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Ticketing Platform</div>
-          <div class="project-period">2024</div>
-        </div>
-        <div class="project-description">
-          Conception & development for ticket sales, venue/artist management, payment.
-        </div>
-        <div class="tags">
-          <span class="tag">Ticketing</span>
-          <span class="tag">Web</span>
-          <span class="tag">Payments</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Streaming & Competitions</div>
-          <div class="project-period">2024</div>
-        </div>
-        <div class="project-description">
-          Short-video platform with competitions and wallet logic (Web + Ionic).
-        </div>
-        <div class="tags">
-          <span class="tag">Streaming</span>
-          <span class="tag">Ionic</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Mobile</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Bowling Software Suite</div>
-          <div class="project-period">2023</div>
-        </div>
-        <div class="project-description">
-          Lane control, booking, gastronomy, payment (Vue/Scala/Java).
-        </div>
-        <div class="tags">
-          <span class="tag">POS</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Scala</span>
-          <span class="tag">Java</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Telemedicine & Video Consultation</div>
-          <div class="project-period">2023</div>
-        </div>
-        <div class="project-description">
-          Appointment portal with video conferences, TURN/STUN setup, Scala backend.
-        </div>
-        <div class="tags">
-          <span class="tag">Health</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Scala</span>
-          <span class="tag">Realtime</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">E-Bike Benchmarking</div>
-          <div class="project-period">2022</div>
-        </div>
-        <div class="project-description">
-          Digital benchmark room for cost analysis from parts to complete bikes.
-        </div>
-        <div class="tags">
-          <span class="tag">Mobility</span>
-          <span class="tag">Data</span>
-          <span class="tag">Product</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Tax Advisory Software</div>
-          <div class="project-period">2021 – 2026</div>
-        </div>
-        <div class="project-description">
-          Accounting and annual financial statement software for large enterprises.
-        </div>
-        <div class="tags">
-          <span class="tag">Finance</span>
-          <span class="tag">B2B</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Scala</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Fashion Commerce Integration</div>
-          <div class="project-period">2021 – 2025</div>
-        </div>
-        <div class="project-description">
-          Invoice/return portal, monitoring, vouchers, international tax rates.
-        </div>
-        <div class="tags">
-          <span class="tag">Commerce</span>
-          <span class="tag">Integration</span>
-          <span class="tag">Payments</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">Insurance Portal (Broker)</div>
-          <div class="project-period">2020 – 2022</div>
-        </div>
-        <div class="project-description">
-          REST/SOAP integration, form generator in Vue/TypeScript, frontend migration.
-        </div>
-        <div class="tags">
-          <span class="tag">InsurTech</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Java</span>
-          <span class="tag">Integration</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">FinTech Invoicing Platform</div>
-          <div class="project-period">2018 – present</div>
-        </div>
-        <div class="project-description">
-          Invoicing, customer management, dunning, bank integration, dispatch.
-        </div>
-        <div class="tags">
-          <span class="tag">FinTech</span>
-          <span class="tag">Vue</span>
-          <span class="tag">Scala</span>
-          <span class="tag">PHP</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Industries -->
-    <div class="section">
-      <div class="section-title">Industry & Domain Experience</div>
-      <div class="industries">
-        <span class="industry">FinTech & Banking</span>
-        <span class="industry">Mobility & Logistics</span>
-        <span class="industry">HealthTech</span>
-        <span class="industry">E-Commerce</span>
-        <span class="industry">SaaS & B2B Platforms</span>
-        <span class="industry">Energy & Sustainability</span>
-        <span class="industry">Media & Publishing</span>
-        <span class="industry">Public Sector</span>
-      </div>
-    </div>
-
-    <!-- Education -->
-    <div class="section">
-      <div class="section-title">Education & Qualifications</div>
-      <div class="education">
-        <strong>School Education:</strong> 10th Grade (Realschulabschluss / Secondary School Certificate)<br>
-        <strong>Further Education:</strong> Self-taught in software development, cloud architecture and modern web technologies<br>
-        <strong>Languages:</strong> German (Native), English (Fluent spoken and written)
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      Created: March 2026 • hickmann-kuschnereit.de • Available for new challenges
-    </div>
-  </div>
-</body>
+  </body>
 </html>

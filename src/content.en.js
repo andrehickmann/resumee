@@ -62,7 +62,8 @@ export const contentEn = {
     },
     {
       title: 'Maintenance & Modernization',
-      description: 'Updating legacy products with stability, performance, and security improvements.'
+      description:
+        'Updating legacy products with stability, performance, and security improvements.'
     }
   ],
   stackTitle: 'Tech stack',
@@ -122,7 +123,8 @@ export const contentEn = {
   cvLabel: 'Resume as PDF',
   cvButton: 'Download PDF',
   nextUpLabel: 'Next up',
-  nextUpText: 'Open to new challenges in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
+  nextUpText:
+    'Open to new challenges in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
   filtersAll: 'All',
   stackItems: [
     {
@@ -171,7 +173,7 @@ export const contentEn = {
       end: 2026,
       title: 'Your project could be here',
       description:
-        'Open to a new full-time role in Berlin or remote. Got exciting challenges? Let\'s talk!',
+        "Open to a new full-time role in Berlin or remote. Got exciting challenges? Let's talk!",
       tags: ['Next', 'Opportunity', 'Fullstack']
     },
     {
@@ -179,8 +181,7 @@ export const contentEn = {
       start: 2025,
       end: 2026,
       title: 'Sustainability Research Center (Multiple projects)',
-      description:
-        'Vue2→Vue3 migration, time-series visualization, water/air quality (Grafana).',
+      description: 'Vue2→Vue3 migration, time-series visualization, water/air quality (Grafana).',
       tags: ['Research', 'Vue', 'Data', 'Sustainability']
     },
     {
@@ -205,7 +206,8 @@ export const contentEn = {
       start: 2025,
       end: 2025,
       title: 'ECG software review',
-      description: 'Review and assessment of an ECG analysis product including risks & improvements.',
+      description:
+        'Review and assessment of an ECG analysis product including risks & improvements.',
       tags: ['Health', 'Audit', 'Quality']
     },
     {
@@ -415,7 +417,8 @@ export const contentEn = {
     {
       period: '01/2018 – present',
       role: 'Senior Fullstack Engineer · brayn.io',
-      summary: 'End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), backend (Scala, PHP, Java, Go), cloud infrastructure (AWS, Docker, K8s), requirements engineering, technical specification, code reviews, software analysis, maintenance & modernization of existing systems, mentoring.'
+      summary:
+        'End-to-end product development with JavaScript/TypeScript (Vue, React, Node.js), backend (Scala, PHP, Java, Go), cloud infrastructure (AWS, Docker, K8s), requirements engineering, technical specification, code reviews, software analysis, maintenance & modernization of existing systems, mentoring.'
     }
   ],
   educationNote:
