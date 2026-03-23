@@ -95,7 +95,7 @@ export const contentDe = {
   heroImageAlt: 'Portraitfoto',
   availability: 'Verfügbar für Festanstellung',
   construction: {
-    title: 'In Kürze verfügbar',
+    title: 'Bald Online',
     message: 'Diese Seite wird gerade vorbereitet und ist bald online.',
     contact: 'Interesse? Schreiben Sie mir: andre@hickmann-kuschnereit.de'
   },
