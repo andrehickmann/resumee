@@ -4,8 +4,6 @@
 
 🌐 **Live:** [hickmann-kuschnereit.de](https://hickmann-kuschnereit.de)
 
-[![CI](https://github.com/andrehickmann/resumee/actions/workflows/ci.yml/badge.svg)](https://github.com/andrehickmann/resumee/actions/workflows/ci.yml)
-
 ## ✨ Features
 
 - 🎨 **Modern Design** - Clean, professional UI with smooth animations
