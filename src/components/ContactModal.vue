@@ -31,6 +31,9 @@
         <input type="text" v-model="model.role" :placeholder="copy.formRole" :disabled="submitting" />
         <textarea v-model="model.message" :placeholder="copy.formMessage" rows="4" required :disabled="submitting"></textarea>
         
+        <!-- hCaptcha Widget -->
+        <div class="h-captcha" data-captcha="true" :data-theme="captchaTheme"></div>
+        
         <div v-if="error" class="error-message">
           {{ error }}
         </div>
@@ -44,6 +47,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 type ContactForm = { 
   name: string; 
   email: string; 
@@ -66,6 +71,14 @@ defineEmits<{
   (e: 'close'): void;
   (e: 'submit'): void;
 }>();
+
+// Auto detect theme based on system preference
+const captchaTheme = computed(() => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'light';
+});
 </script>
 
 <style scoped>
@@ -112,5 +125,9 @@ defineEmits<{
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.h-captcha {
+  margin: 1rem 0;
 }
 </style>

@@ -65,10 +65,12 @@ Warte 2-3 Minuten bis Cloudflare deployed hat.
 ### Was funktioniert:
 
 - ✅ E-Mails kommen direkt bei dir an
-- ✅ Spam-Schutz (Honeypot)
+- ✅ **hCaptcha Spam-Schutz** (bereits integriert!)
+- ✅ Honeypot Backup-Schutz
 - ✅ Success/Error Feedback im Modal
 - ✅ Auto-Close nach Erfolg
 - ✅ Alle Formularfelder (Name, E-Mail, Rolle, Nachricht)
+- ✅ Dark/Light Theme für Captcha (automatisch)
 
 ### Web3Forms Dashboard:
 
@@ -76,6 +78,20 @@ Im Dashboard siehst du:
 - Alle eingegangenen Submissions
 - Spam-Filter Stats
 - E-Mail Delivery Status
+
+## hCaptcha Aktivierung
+
+**WICHTIG:** Du hast hCaptcha im Web3Forms Dashboard aktiviert. Das ist bereits integriert!
+
+- ✅ hCaptcha Widget wird automatisch angezeigt
+- ✅ Token wird beim Submit mitgeschickt
+- ✅ Validierung erfolgt automatisch
+- ✅ Theme passt sich dem Dark Mode an
+
+**Im Web3Forms Dashboard:**
+1. Gehe zu deinem Form
+2. Unter **"Block Spam"** → **hCaptcha** sollte aktiviert sein
+3. Verwende den kostenlosen Web3Forms hCaptcha Key (ist bereits im Code)
 
 ## Troubleshooting
 

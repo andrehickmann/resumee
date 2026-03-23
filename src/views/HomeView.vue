@@ -253,9 +253,18 @@ async function submitContact() {
   contactSuccess.value = false;
 
   try {
+    // Get hCaptcha response token
+    const hCaptchaResponse = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement;
+    
+    if (!hCaptchaResponse || !hCaptchaResponse.value) {
+      contactError.value = 'Bitte bestätigen Sie das Captcha.';
+      contactSubmitting.value = false;
+      return;
+    }
+
     // Web3Forms API
     const formData = new FormData();
-    formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY'); // TODO: Replace with your key
+    formData.append('access_key', '9189f54a-81f9-428f-ab76-af89e7a8e3ed');
     formData.append('name', contactForm.value.name);
     formData.append('email', contactForm.value.email);
     formData.append('subject', `Kontaktanfrage von ${contactForm.value.name}`);
@@ -266,6 +275,9 @@ ${contactForm.value.role ? `Rolle/Position: ${contactForm.value.role}\n` : ''}
 Nachricht:
 ${contactForm.value.message}
     `.trim());
+    
+    // Add hCaptcha token
+    formData.append('h-captcha-response', hCaptchaResponse.value);
     
     if (contactForm.value.honeypot) {
       formData.append('botcheck', contactForm.value.honeypot);
