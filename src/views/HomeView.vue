@@ -108,8 +108,6 @@ const { locale, tm } = useI18n({ useScope: 'global' });
 const paletteOpen = ref(false);
 const paletteQuery = ref('');
 const contactModalOpen = ref(false);
-const projectModalOpen = ref(false);
-const activeProject = ref<ProjectItem | null>(null);
 const contactForm = ref({
   name: '',
   email: '',
