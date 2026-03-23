@@ -1,5 +1,4 @@
 <template>
-  <a class="skip-link" href="#profil">Zum Inhalt springen</a>
   <div>
     <div class="bg-blur"></div>
 

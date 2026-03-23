@@ -13,22 +13,24 @@
   --button-bg: rgba(31, 31, 31, 0.08);
   --button-hover-bg: #1f1f1f;
   --button-hover-text: #ffffff;
+  --nav-text: #1f1f1f;
 }
 
 html.dark {
   color-scheme: dark;
   --bg: #0f0f0f;
   --bg-alt: #1a1a1a;
-  --ink: #e8e8e8;
-  --muted: #a0a0a0;
+  --ink: #f5f5f5;
+  --muted: #b0b0b0;
   --accent: #ff6b3d;
   --accent-dark: #ff8c5d;
-  --card: #1a1a1a;
+  --card: #1e1e1e;
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
-  --header-bg: rgba(15, 15, 15, 0.95);
-  --button-bg: rgba(255, 255, 255, 0.1);
-  --button-hover-bg: rgba(255, 255, 255, 0.2);
+  --header-bg: rgba(20, 20, 20, 0.95);
+  --button-bg: rgba(255, 255, 255, 0.15);
+  --button-hover-bg: rgba(255, 255, 255, 0.25);
   --button-hover-text: #ffffff;
+  --nav-text: #f5f5f5;
 }
 
 * {
@@ -129,10 +131,15 @@ main {
 }
 
 .nav a {
-  color: var(--ink);
+  color: var(--nav-text);
   text-decoration: none;
   font-weight: 500;
   position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--accent);
 }
 
 .nav a::after {
@@ -187,9 +194,9 @@ main {
   padding: 0.5rem 0.9rem;
   background: var(--button-bg);
   border-radius: 999px;
-  border: none;
+  border: 1px solid var(--button-bg);
   text-decoration: none;
-  color: var(--ink);
+  color: var(--nav-text);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
@@ -198,6 +205,7 @@ main {
 
 .cv-download:hover {
   background: var(--button-hover-bg);
+  border-color: var(--button-hover-bg);
   color: var(--button-hover-text);
   transform: translateY(-1px);
 }
@@ -209,7 +217,8 @@ main {
 
 .lang-switch {
   display: flex;
-  background: rgba(31, 31, 31, 0.08);
+  background: var(--button-bg);
+  border: 1px solid var(--button-bg);
   border-radius: 999px;
   padding: 0.2rem;
 }
@@ -222,11 +231,20 @@ main {
   border-radius: 999px;
   cursor: pointer;
   font-size: 0.85rem;
+  transition: all 0.2s ease;
+  color: var(--nav-text);
+  opacity: 0.7;
 }
 
 .lang.active {
-  background: var(--ink);
+  background: var(--accent);
   color: #fff;
+  opacity: 1;
+}
+
+.lang:hover:not(.active) {
+  opacity: 1;
+  background: var(--button-hover-bg);
 }
 
 .cta,
