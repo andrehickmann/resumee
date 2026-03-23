@@ -287,7 +287,7 @@ const setLang = (lang: string) => {
 
 @media (max-width: 768px) {
   .construction-main {
-    padding: 4rem 5vw;
+    padding: 0 5vw;
   }
   
   .site-header {
