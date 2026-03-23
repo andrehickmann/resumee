@@ -4,6 +4,22 @@
     
     <header class="site-header">
       <div class="brand">{{ copy.brand }}</div>
+      <div class="lang-switch">
+        <button 
+          @click="setLang('de')" 
+          :class="{ active: locale === 'de' }"
+          class="lang-btn"
+        >
+          DE
+        </button>
+        <button 
+          @click="setLang('en')" 
+          :class="{ active: locale === 'en' }"
+          class="lang-btn"
+        >
+          EN
+        </button>
+      </div>
     </header>
 
     <main class="construction-main">
@@ -44,6 +60,12 @@
         </div>
       </div>
     </main>
+
+    <footer class="construction-footer">
+      <router-link to="/legal" class="legal-link">
+        {{ locale === 'de' ? 'Impressum & Datenschutz' : 'Legal Notice & Privacy' }}
+      </router-link>
+    </footer>
   </div>
 </template>
 
@@ -53,8 +75,12 @@ import { computed } from 'vue';
 import { contentDe } from '../content.de.js';
 import { contentEn } from '../content.en.js';
 
-const { locale } = useI18n();
+const { locale, setLocale } = useI18n();
 const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
+
+const setLang = (lang: string) => {
+  setLocale(lang);
+};
 </script>
 
 <style scoped>
@@ -94,6 +120,7 @@ const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
   right: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 1.6rem 6vw 1.2rem;
   background: rgba(246, 244, 240, 0.85);
   backdrop-filter: blur(14px);
@@ -108,6 +135,36 @@ const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
   text-transform: uppercase;
   color: #1f1f1f;
 }
+
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  color: #5c5a54;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.lang-btn:hover {
+  background: rgba(31, 31, 31, 0.05);
+  border-color: rgba(31, 31, 31, 0.3);
+}
+
+.lang-btn.active {
+  background: #1f1f1f;
+  color: #fff;
+  border-color: #1f1f1f;
+}
+
 
 .construction-main {
   min-height: 100vh;
@@ -203,13 +260,46 @@ const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
   flex-shrink: 0;
 }
 
+.construction-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 6vw;
+  background: rgba(246, 244, 240, 0.85);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(31, 31, 31, 0.08);
+  text-align: center;
+  z-index: 10;
+}
+
+.legal-link {
+  color: #5c5a54;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.legal-link:hover {
+  color: #1f1f1f;
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .construction-main {
-    padding: 5rem 5vw 3rem;
+    padding: 5rem 5vw 5rem;
   }
   
   .site-header {
     padding: 1.2rem 5vw 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .lang-switch {
+    width: 100%;
+    justify-content: flex-start;
   }
   
   .construction-badge {
