@@ -14,7 +14,7 @@ export const contentEn = {
   heroTitle:
     'Senior fullstack engineer focused on modern technologies, cloud architecture, and end-to-end product development.',
   heroLead:
-    'Seeking a full-time role in Berlin or remote. Hybrid with remote component also works. Not available for freelance.',
+    'Open to a full-time role in Berlin or remote. Hybrid with remote component also works. Not available for freelance.',
   heroPrimary: 'View projects',
   heroGhost: 'Explore stack',
   stats: [
@@ -122,7 +122,7 @@ export const contentEn = {
   cvLabel: 'Resume as PDF',
   cvButton: 'Download PDF',
   nextUpLabel: 'Next up',
-  nextUpText: 'Looking for a new challenge in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
+  nextUpText: 'Open to new challenges in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
   filtersAll: 'All',
   stackItems: [
     {
@@ -171,7 +171,7 @@ export const contentEn = {
       end: 2026,
       title: 'Your project could be here',
       description:
-        'Looking for a new full-time role in Berlin or remote. Got exciting challenges? Let\'s talk!',
+        'Open to a new full-time role in Berlin or remote. Got exciting challenges? Let\'s talk!',
       tags: ['Next', 'Opportunity', 'Fullstack']
     },
     {

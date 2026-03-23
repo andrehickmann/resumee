@@ -83,7 +83,7 @@ export const contentDe = {
   heroTitle:
     'Senior Fullstack Engineer mit Fokus auf moderne Technologien, Cloud-Architektur und durchgängige Produktentwicklung.',
   heroLead:
-    'Ich suche eine Festanstellung in Berlin oder remote. Hybrid mit Remote-Anteil ist ebenfalls möglich. Keine Freelance-Projekte.',
+    'Ich bin offen für eine Festanstellung in Berlin oder remote. Hybrid mit Remote-Anteil ist ebenfalls möglich. Keine Freelance-Projekte.',
   heroPrimary: 'Projekte ansehen',
   heroGhost: 'Techstack entdecken',
   stats: [
@@ -93,7 +93,7 @@ export const contentDe = {
     { key: 'industries', value: '', label: 'Branchen' }
   ],
   heroImageAlt: 'Portraitfoto',
-  availability: 'Verfügbar für Festanstellung',
+  availability: 'Offen für neue Möglichkeiten',
   construction: {
     title: 'Bald Online',
     message: 'Diese Seite wird gerade vorbereitet und ist bald online.',
@@ -177,7 +177,7 @@ export const contentDe = {
   timelineIntro: 'Highlights meiner Laufbahn – kompakt, relevant, aktuell.',
   contactTitle: 'Kontakt',
   contactIntro:
-    'Interesse an einer Festanstellung? Ich freue mich auf ein kurzes Gespräch.',
+    'Interesse an einer Zusammenarbeit? Ich freue mich auf ein kurzes Gespräch.',
   contactCardCopy:
     'Bitte schick mir Informationen zur Rolle, Team und Techstack. Remote bevorzugt.',
   contactButton: 'Kennenlernen anfragen',
@@ -200,7 +200,7 @@ export const contentDe = {
   cvLabel: 'Lebenslauf als PDF',
   cvButton: 'PDF herunterladen',
   nextUpLabel: 'Next up',
-  nextUpText: 'Suche nach neuer Herausforderung in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (Frontend, Backend, Cloud), Requirements Engineering, Testing & Qualitätssicherung, Produktarchitektur, End-to-End Delivery.',
+  nextUpText: 'Offen für neue Herausforderungen in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (Frontend, Backend, Cloud), Requirements Engineering, Testing & Qualitätssicherung, Produktarchitektur, End-to-End Delivery.',
   filtersAll: 'Alle',
   stackItems: [
     {
@@ -249,7 +249,7 @@ export const contentDe = {
       end: 2026,
       title: 'Hier könnte dein Projekt stehen',
       description:
-        'Ich suche eine neue Festanstellung in Berlin oder remote. Du hast spannende Herausforderungen? Lass uns sprechen!',
+        'Ich bin offen für eine neue Festanstellung in Berlin oder remote. Du hast spannende Herausforderungen? Lass uns sprechen!',
       tags: ['Next', 'Opportunity', 'Fullstack']
     },
     {
