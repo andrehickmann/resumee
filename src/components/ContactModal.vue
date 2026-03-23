@@ -32,7 +32,11 @@
         <textarea v-model="model.message" :placeholder="copy.formMessage" rows="4" required :disabled="submitting"></textarea>
         
         <!-- hCaptcha Widget -->
-        <div class="h-captcha" data-captcha="true" :data-theme="captchaTheme"></div>
+        <div 
+          class="h-captcha" 
+          data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+          :data-theme="captchaTheme"
+        ></div>
         
         <div v-if="error" class="error-message">
           {{ error }}
