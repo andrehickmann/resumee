@@ -1,5 +1,5 @@
 <template>
-  <div class="construction-page">
+  <div class="construction-page" @wheel.prevent @touchmove.prevent @scroll.prevent>
     <div class="bg-blur"></div>
     
     <header class="site-header">
