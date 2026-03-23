@@ -4,7 +4,7 @@
     
     <header class="site-header">
       <div class="brand">{{ copy.brand }}</div>
-      <div class="lang-switch">
+      <div class="lang-switcher">
         <button 
           @click="setLang('de')" 
           :class="{ active: locale === 'de' }"
@@ -136,9 +136,10 @@ const setLang = (lang: string) => {
   color: #1f1f1f;
 }
 
-.lang-switch {
+.lang-switcher {
   display: flex;
   gap: 0.5rem;
+  background: transparent;
 }
 
 .lang-btn {
