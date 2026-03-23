@@ -169,8 +169,6 @@ export const contentDe = {
   filterToggleLabel: 'Filter anzeigen',
   timelineTitle: 'Lebenslauf',
   timelineIntro: 'Highlights meiner Laufbahn – kompakt, relevant, aktuell.',
-  githubStatsTitle: 'Open Source & GitHub',
-  githubStatsIntro: 'Meine Aktivität auf GitHub - Contributions, Projekte und Code.',
   contactTitle: 'Kontakt',
   contactIntro: 'Interesse an einer Zusammenarbeit? Ich freue mich auf ein kurzes Gespräch.',
   contactCardCopy:

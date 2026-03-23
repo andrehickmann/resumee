@@ -9,18 +9,26 @@
   --card: #ffffff;
   --shadow: 0 30px 80px rgba(34, 34, 34, 0.12);
   --radius: 28px;
+  --header-bg: rgba(246, 244, 240, 0.9);
+  --button-bg: rgba(31, 31, 31, 0.08);
+  --button-hover-bg: #1f1f1f;
+  --button-hover-text: #ffffff;
 }
 
 html.dark {
   color-scheme: dark;
-  --bg: #1a1a1a;
-  --bg-alt: #242424;
+  --bg: #0f0f0f;
+  --bg-alt: #1a1a1a;
   --ink: #e8e8e8;
-  --muted: #9ca3af;
-  --accent: #ff7f50;
-  --accent-dark: #ff6b3d;
-  --card: #2a2a2a;
-  --shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  --muted: #a0a0a0;
+  --accent: #ff6b3d;
+  --accent-dark: #ff8c5d;
+  --card: #1a1a1a;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  --header-bg: rgba(15, 15, 15, 0.95);
+  --button-bg: rgba(255, 255, 255, 0.1);
+  --button-hover-bg: rgba(255, 255, 255, 0.2);
+  --button-hover-text: #ffffff;
 }
 
 * {
@@ -31,12 +39,11 @@ html.dark {
 
 html {
   scroll-behavior: smooth;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  background: var(--bg);
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
   color: var(--ink);
   line-height: 1.6;
   min-height: 100vh;
@@ -156,20 +163,21 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--card);
-  border: none;
-  border-radius: 12px;
-  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-bg);
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  opacity: 0.8;
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  opacity: 1;
+  background: var(--button-hover-bg);
+  transform: translateY(-1px);
 }
 
 .cv-download {
@@ -177,7 +185,7 @@ main {
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 0.9rem;
-  background: rgba(31, 31, 31, 0.08);
+  background: var(--button-bg);
   border-radius: 999px;
   border: none;
   text-decoration: none;
@@ -189,8 +197,8 @@ main {
 }
 
 .cv-download:hover {
-  background: var(--ink);
-  color: #fff;
+  background: var(--button-hover-bg);
+  color: var(--button-hover-text);
   transform: translateY(-1px);
 }
 
@@ -1733,52 +1741,3 @@ a:focus-visible {
   }
 }
 
-/* GitHub Stats Section */
-.github-stats-section {
-  margin: 6rem 0;
-  text-align: center;
-}
-
-.github-stats-section h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-bottom: 1rem;
-  color: var(--ink);
-}
-
-.stats-intro {
-  color: var(--muted);
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.stat-card {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  background: var(--card);
-  padding: 1rem;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 40px 100px rgba(34, 34, 34, 0.18);
-}
-
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-}

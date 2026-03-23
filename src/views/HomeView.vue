@@ -44,26 +44,6 @@
       <TimelineSection :copy="copy" />
 
       <ContactSection :copy="copy" @open-contact="openContactModal" />
-
-      <!-- GitHub Stats Section -->
-      <section id="stats" class="github-stats-section">
-        <h2>🚀 {{ copy.githubStatsTitle }}</h2>
-        <p class="stats-intro">{{ copy.githubStatsIntro }}</p>
-        <div class="stats-grid">
-          <img
-            src="https://github-readme-stats.vercel.app/api?username=andrehickmann&show_icons=true&theme=radical&hide_border=true&bg_color=00000000&title_color=ff6b3d&icon_color=ff6b3d&text_color=5c5a54"
-            alt="GitHub Stats"
-            loading="lazy"
-            class="stat-card"
-          />
-          <img
-            src="https://github-readme-streak-stats.herokuapp.com/?user=andrehickmann&theme=radical&hide_border=true&background=00000000&stroke=ff6b3d&ring=ff6b3d&fire=ff6b3d&currStreakLabel=5c5a54"
-            alt="GitHub Streak"
-            loading="lazy"
-            class="stat-card"
-          />
-        </div>
-      </section>
     </main>
 
     <SiteFooter :copy="copy" />
