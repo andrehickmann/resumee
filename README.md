@@ -11,6 +11,16 @@ npm run dev
 
 Open: `http://localhost:5173`
 
+### Under Construction Mode
+
+To test the under construction page locally:
+
+```bash
+VITE_UNDER_CONSTRUCTION=true npm run dev
+```
+
+See [UNDER_CONSTRUCTION.md](./UNDER_CONSTRUCTION.md) for details.
+
 ## Local Dev (Docker + Traefik)
 
 ```bash
@@ -34,6 +44,12 @@ npm run build
 ```
 
 The production build is in `dist/`.
+
+**Note:** Production builds show the "Under Construction" page by default (via `.env.production`). To build the full site locally, use:
+
+```bash
+VITE_UNDER_CONSTRUCTION=false npm run build
+```
 
 ## Lint & Format
 
