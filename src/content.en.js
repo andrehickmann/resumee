@@ -25,6 +25,11 @@ export const contentEn = {
   ],
   heroImageAlt: 'Portrait photo',
   availability: 'Available for full-time role',
+  construction: {
+    title: 'Under Construction',
+    message: 'This portfolio site is being finalized and will be available shortly.',
+    contact: 'Feel free to reach out directly if interested.'
+  },
   servicesTitle: 'Services & Responsibilities',
   servicesIntro:
     'End-to-end delivery with a focus on clarity, quality, and sustainable operations.',

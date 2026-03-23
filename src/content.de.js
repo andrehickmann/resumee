@@ -19,6 +19,11 @@
   stats: { key: string, value: string, label: string }[],
   heroImageAlt: string,
   availability: string,
+  construction: {
+    title: string,
+    message: string,
+    contact: string
+  },
   servicesTitle: string,
   servicesIntro: string,
   servicesHint: string,
@@ -89,6 +94,11 @@ export const contentDe = {
   ],
   heroImageAlt: 'Portraitfoto',
   availability: 'Verfügbar für Festanstellung',
+  construction: {
+    title: 'Seite in Arbeit',
+    message: 'Diese Portfolio-Seite wird gerade finalisiert und ist in Kürze verfügbar.',
+    contact: 'Bei Interesse kontaktieren Sie mich gerne direkt.'
+  },
   servicesTitle: 'Leistungen & Verantwortung',
   servicesIntro:
     'Ich begleite Projekte durchgängig – mit klarem Fokus auf Verständlichkeit, Qualität und Betrieb.',
