@@ -100,7 +100,7 @@ export const contentEn = {
   timelineTitle: 'Resume',
   timelineIntro: 'Career highlights — concise, relevant, current.',
   contactTitle: 'Contact',
-  contactIntro: 'Interested in a full-time role? Let’s have a short call.',
+  contactIntro: 'Interested in working together? Let’s have a short call.',
   contactCardCopy: 'Please share role details, team context, and tech stack. Remote preferred.',
   contactButton: 'Request intro call',
   modalTitle: 'Contact form',
