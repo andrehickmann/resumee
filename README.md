@@ -19,8 +19,8 @@
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or pnpm
+- Node.js 24+ 
+- npm 10+
 
 ### Local Development
 
