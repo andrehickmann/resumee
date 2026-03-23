@@ -6,7 +6,7 @@
     </div>
     <div class="cv">
       <a href="/Lebenslauf - André Hickmann Kuschnereit.pdf" target="_blank" rel="noreferrer">
-        {{ copy.cvButton }}
+        <span>{{ copy.cvButton }}</span>
       </a>
     </div>
     <div class="timeline">

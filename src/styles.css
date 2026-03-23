@@ -9,6 +9,30 @@
   --card: #ffffff;
   --shadow: 0 30px 80px rgba(34, 34, 34, 0.12);
   --radius: 28px;
+  --header-bg: rgba(246, 244, 240, 0.9);
+  --button-bg: rgba(31, 31, 31, 0.08);
+  --button-text: #1f1f1f;
+  --button-hover-bg: #1f1f1f;
+  --button-hover-text: #ffffff;
+  --nav-text: #1f1f1f;
+}
+
+html.dark {
+  color-scheme: dark;
+  --bg: #0f0f0f;
+  --bg-alt: #1a1a1a;
+  --ink: #f5f5f5;
+  --muted: #b0b0b0;
+  --accent: #ff6b3d;
+  --accent-dark: #ff8c5d;
+  --card: #1e1e1e;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  --header-bg: rgba(20, 20, 20, 0.95);
+  --button-bg: rgba(255, 255, 255, 0.15);
+  --button-text: #0f0f0f;
+  --button-hover-bg: rgba(255, 255, 255, 0.25);
+  --button-hover-text: #0f0f0f;
+  --nav-text: #f5f5f5;
 }
 
 * {
@@ -23,11 +47,12 @@ html {
 
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  background: linear-gradient(135deg, #f6f4f0 0%, #f2ede3 45%, #efe7d8 100%);
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
   color: var(--ink);
   line-height: 1.6;
   min-height: 100vh;
   padding: 7.5rem 6vw 4rem;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .skip-link {
@@ -108,10 +133,15 @@ main {
 }
 
 .nav a {
-  color: var(--ink);
+  color: var(--nav-text);
   text-decoration: none;
   font-weight: 500;
   position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--accent);
 }
 
 .nav a::after {
@@ -121,10 +151,10 @@ main {
   bottom: -0.4rem;
   width: 100%;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav a:hover::after,
@@ -138,26 +168,69 @@ main {
   gap: 1rem;
 }
 
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-bg);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.theme-toggle:hover {
+  opacity: 1;
+  background: var(--button-hover-bg);
+  transform: translateY(-1px);
+}
+
 .cv-download {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.9rem;
-  background: rgba(31, 31, 31, 0.08);
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   border-radius: 999px;
   border: none;
   text-decoration: none;
-  color: var(--ink);
+  color: #fff !important;
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(255, 107, 61, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-download::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cv-download:hover::before {
+  opacity: 1;
 }
 
 .cv-download:hover {
-  background: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 61, 0.4);
+}
+
+.cv-download span,
+.cv-download svg {
+  position: relative;
+  z-index: 1;
   color: #fff;
-  transform: translateY(-1px);
 }
 
 .cv-download svg {
@@ -167,7 +240,8 @@ main {
 
 .lang-switch {
   display: flex;
-  background: rgba(31, 31, 31, 0.08);
+  background: var(--button-bg);
+  border: 1px solid var(--button-bg);
   border-radius: 999px;
   padding: 0.2rem;
 }
@@ -180,11 +254,21 @@ main {
   border-radius: 999px;
   cursor: pointer;
   font-size: 0.85rem;
+  transition: all 0.2s ease;
+  color: var(--button-text);
+  opacity: 0.7;
 }
 
 .lang.active {
-  background: var(--ink);
+  background: var(--accent);
   color: #fff;
+  opacity: 1;
+}
+
+.lang:hover:not(.active) {
+  opacity: 1;
+  background: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
 
 .cta,
@@ -718,10 +802,11 @@ main {
 .tag {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  background: #fff;
-  border: 1px solid rgba(31, 31, 31, 0.1);
+  background: var(--card);
+  border: 1px solid var(--button-bg);
   font-size: 0.85rem;
   font-weight: 500;
+  color: var(--ink);
 }
 
 .filters {
@@ -787,11 +872,13 @@ main {
   background: transparent;
   font-weight: 500;
   cursor: pointer;
+  color: var(--ink);
+  transition: all 0.2s ease;
 }
 
 .filter.active {
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
 }
 
 .filter.reset {
@@ -995,26 +1082,50 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: var(--ink);
-  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff !important;
   padding: 0.75rem 1.4rem;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(31, 31, 31, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(255, 107, 61, 0.25);
+  position: relative;
+  overflow: hidden;
 }
 
 .cv a::before {
   content: '↓';
   font-size: 1.1rem;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.cv a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.cv a:hover::after {
+  opacity: 1;
 }
 
 .cv a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(31, 31, 31, 0.25);
-  background: var(--accent);
+  box-shadow: 0 8px 20px rgba(255, 107, 61, 0.4);
+}
+
+.cv a > span {
+  position: relative;
+  z-index: 2;
+  color: #fff;
 }
 
 .timeline {
@@ -1698,3 +1809,4 @@ a:focus-visible {
     animation: none;
   }
 }
+

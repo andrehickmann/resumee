@@ -8,6 +8,14 @@
     </nav>
     <div class="header-actions">
       <button
+        class="theme-toggle"
+        :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        @click="toggle"
+      >
+        {{ isDark ? '☀️' : '🌙' }}
+      </button>
+      <button
         class="cv-download"
         :title="currentLang === 'de' ? 'Lebenslauf herunterladen' : 'Download resume'"
         @click="handleDownload"
@@ -19,12 +27,14 @@
           fill="none"
           stroke="currentColor"
           stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="7 10 12 15 17 10" />
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
-        <span>{{ currentLang === 'de' ? 'CV' : 'CV' }}</span>
+        <span>{{ currentLang === 'de' ? 'CV' : 'Resume' }}</span>
       </button>
       <div class="lang-switch">
         <button
@@ -50,10 +60,14 @@
 </template>
 
 <script setup lang="ts">
+import { useDarkMode } from '../composables/useDarkMode';
+
 const props = defineProps<{
   copy: Record<string, unknown>;
   currentLang: string;
 }>();
+
+const { isDark, toggle } = useDarkMode();
 
 function handleDownload() {
   const pdfUrl =

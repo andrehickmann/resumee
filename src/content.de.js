@@ -186,6 +186,8 @@ export const contentDe = {
   footer: '© 2026 · André Hickmann Kuschnereit · Senior Softwarearchitekt aus Berlin',
   footerImprint: 'Impressum',
   footerPrivacy: 'Datenschutz',
+  footerReportBug: '🐛 Bug melden',
+  footerGitHub: '⭐ GitHub',
   footerNote: 'Built with ❤ and 🤖 AI',
   konamiTitle: 'Hidden Mode: Debug',
   konamiSubtitle: 'Debug-Overlay aktiv',

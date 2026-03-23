@@ -60,10 +60,7 @@ export default [
       ],
 
       // JavaScript rules
-      'no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
-      ],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 
       // Prettier integration
       'prettier/prettier': 'warn'

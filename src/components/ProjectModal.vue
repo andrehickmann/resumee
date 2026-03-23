@@ -1,17 +1,10 @@
 <template>
   <div class="modal" :class="{ open: open }">
     <div class="modal-backdrop" @click="$emit('close')"></div>
-    <div
-      class="modal-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="project-modal-title"
-    >
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
       <div class="modal-header">
         <h3 id="project-modal-title">{{ project?.title }}</h3>
-        <button class="modal-close" aria-label="Schließen" @click="$emit('close')">
-          ×
-        </button>
+        <button class="modal-close" aria-label="Schließen" @click="$emit('close')">×</button>
       </div>
       <p class="modal-period">{{ project?.period }}</p>
       <p>{{ project?.description }}</p>

@@ -1,5 +1,4 @@
 <template>
-  <a class="skip-link" href="#profil">Zum Inhalt springen</a>
   <div>
     <div class="bg-blur"></div>
 
@@ -38,7 +37,6 @@
         @toggle-filter="toggleFilter"
         @toggle-year="toggleYear"
         @reset-filters="resetFilters"
-        @open-project="openProject"
       />
 
       <TimelineSection :copy="copy" />
@@ -59,8 +57,6 @@
       @close="closeContactModal"
       @submit="submitContact"
     />
-
-    <ProjectModal :open="projectModalOpen" :project="activeProject" @close="closeProjectModal" />
 
     <CommandPalette
       :open="paletteOpen"
@@ -102,7 +98,6 @@ import TimelineSection from '../components/TimelineSection.vue';
 import ContactSection from '../components/ContactSection.vue';
 import SiteFooter from '../components/SiteFooter.vue';
 import ContactModal from '../components/ContactModal.vue';
-import ProjectModal from '../components/ProjectModal.vue';
 import CommandPalette from '../components/CommandPalette.vue';
 import KonamiOverlay from '../components/KonamiOverlay.vue';
 import { techFacts } from '../data/techFacts';
@@ -111,8 +106,6 @@ const { locale, tm } = useI18n({ useScope: 'global' });
 const paletteOpen = ref(false);
 const paletteQuery = ref('');
 const contactModalOpen = ref(false);
-const projectModalOpen = ref(false);
-const activeProject = ref<ProjectItem | null>(null);
 const contactForm = ref({
   name: '',
   email: '',
@@ -237,15 +230,6 @@ function closeContactModal() {
   contactModalOpen.value = false;
 }
 
-function openProject(project: ProjectItem) {
-  activeProject.value = project;
-  projectModalOpen.value = true;
-}
-
-function closeProjectModal() {
-  projectModalOpen.value = false;
-  activeProject.value = null;
-}
 
 async function submitContact() {
   contactSubmitting.value = true;
@@ -344,7 +328,6 @@ function handleKeydown(event: KeyboardEvent) {
   }
   if (event.key === 'Escape') {
     if (contactModalOpen.value) closeContactModal();
-    if (projectModalOpen.value) closeProjectModal();
     if (paletteOpen.value) closePalette();
     if (konamiOpen.value) konamiOpen.value = false;
   }
