@@ -8,9 +8,9 @@
 
     <main class="construction-main">
       <div class="construction-container">
-        <div class="construction-badge">{{ $t('construction.title') }}</div>
-        <h1 class="construction-title">{{ $t('construction.message') }}</h1>
-        <p class="construction-contact">{{ $t('construction.contact') }}</p>
+        <div class="construction-badge">{{ copy.construction.title }}</div>
+        <h1 class="construction-title">{{ copy.construction.message }}</h1>
+        <p class="construction-contact">{{ copy.construction.contact }}</p>
       </div>
     </main>
   </div>
@@ -18,11 +18,12 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
 import { contentDe } from '../content.de.js';
 import { contentEn } from '../content.en.js';
 
 const { locale } = useI18n();
-const copy = locale.value === 'en' ? contentEn : contentDe;
+const copy = computed(() => locale.value === 'en' ? contentEn : contentDe);
 </script>
 
 <style scoped>
