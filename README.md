@@ -21,7 +21,7 @@
 
 ### Prerequisites
 
-- Node.js 24+ 
+- Node.js 24+
 - npm 10+
 
 ### Local Development
@@ -48,6 +48,7 @@ Open [http://resumee.localhost](http://resumee.localhost)
 Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 
 **Note:** If `resumee.localhost` doesn't resolve, add to `/etc/hosts`:
+
 ```
 127.0.0.1 resumee.localhost
 ```
@@ -85,17 +86,20 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Vue 3** - Progressive JavaScript framework
 - **TypeScript** - Type-safe development
 - **Vue Router** - Client-side routing
 - **Vue I18n** - Internationalization
 
 ### Build & Development
+
 - **Vite** - Lightning-fast build tool
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 
 ### Deployment & Services
+
 - **Cloudflare Pages** - Edge deployment
 - **Web3Forms** - Contact form backend (free tier)
 - **hCaptcha** - Spam protection
@@ -105,6 +109,7 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 ### Updating Content
 
 Edit content in language-specific files:
+
 - **German:** `src/content.de.js`
 - **English:** `src/content.en.js`
 
@@ -123,6 +128,7 @@ Edit content in language-specific files:
 The site automatically deploys on push to `master` branch.
 
 **Environment Variables:**
+
 - `VITE_UNDER_CONSTRUCTION` - Set to `false` in production (configured in `.env.production`)
 
 ### Under Construction Mode
@@ -135,6 +141,7 @@ VITE_UNDER_CONSTRUCTION=true
 ```
 
 Then commit and push:
+
 ```bash
 git add .env.production
 git commit -m "Enable under construction mode"
@@ -146,6 +153,7 @@ git push
 The contact form uses **Web3Forms** (free tier: 250 submissions/month).
 
 ### Setup:
+
 1. Get access key from [web3forms.com](https://web3forms.com)
 2. Update `src/views/HomeView.vue` (line ~258):
    ```javascript
@@ -205,9 +213,9 @@ docker compose logs -f app
 
 ## 📄 Routes
 
-| Route | Description |
-|-------|-------------|
-| `/` | Main portfolio page |
+| Route    | Description             |
+| -------- | ----------------------- |
+| `/`      | Main portfolio page     |
 | `/legal` | Impressum & Datenschutz |
 
 ## 🎨 Customization
@@ -215,6 +223,7 @@ docker compose logs -f app
 ### Colors & Theme
 
 Main colors are defined in `src/style.css`:
+
 - Primary: `#64ffda` (cyan)
 - Background: `#0a192f` (dark blue)
 - Text: `#ccd6f6` (light blue-gray)

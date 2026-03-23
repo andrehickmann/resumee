@@ -4,11 +4,18 @@
     <div class="modal-panel" role="dialog" aria-modal="true">
       <div class="modal-header">
         <h3>{{ copy.modalTitle }}</h3>
-        <button class="modal-close" @click="$emit('close')" aria-label="Schließen">×</button>
+        <button class="modal-close" aria-label="Schließen" @click="$emit('close')">×</button>
       </div>
-      
+
       <div v-if="success" class="success-message">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#4caf50"
+          stroke-width="2"
+        >
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
           <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
@@ -17,31 +24,54 @@
 
       <form v-else class="contact-form" @submit.prevent="$emit('submit')">
         <!-- Honeypot field - hidden from users, catches bots -->
-        <input 
-          type="text" 
-          v-model="model.honeypot" 
-          style="position: absolute; left: -9999px; width: 1px; height: 1px;" 
-          tabindex="-1" 
+        <input
+          v-model="model.honeypot"
+          type="text"
+          style="position: absolute; left: -9999px; width: 1px; height: 1px"
+          tabindex="-1"
           autocomplete="off"
           aria-hidden="true"
         />
-        
-        <input type="text" v-model="model.name" :placeholder="copy.formName" required :disabled="submitting" />
-        <input type="email" v-model="model.email" :placeholder="copy.formEmail" required :disabled="submitting" />
-        <input type="text" v-model="model.role" :placeholder="copy.formRole" :disabled="submitting" />
-        <textarea v-model="model.message" :placeholder="copy.formMessage" rows="4" required :disabled="submitting"></textarea>
-        
+
+        <input
+          v-model="model.name"
+          type="text"
+          :placeholder="copy.formName"
+          required
+          :disabled="submitting"
+        />
+        <input
+          v-model="model.email"
+          type="email"
+          :placeholder="copy.formEmail"
+          required
+          :disabled="submitting"
+        />
+        <input
+          v-model="model.role"
+          type="text"
+          :placeholder="copy.formRole"
+          :disabled="submitting"
+        />
+        <textarea
+          v-model="model.message"
+          :placeholder="copy.formMessage"
+          rows="4"
+          required
+          :disabled="submitting"
+        ></textarea>
+
         <!-- hCaptcha Widget -->
-        <div 
-          class="h-captcha" 
+        <div
+          class="h-captcha"
           data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
           :data-theme="captchaTheme"
         ></div>
-        
+
         <div v-if="error" class="error-message">
           {{ error }}
         </div>
-        
+
         <button class="primary" data-magnet type="submit" :disabled="submitting">
           {{ submitting ? 'Wird gesendet...' : copy.contactButton }}
         </button>
@@ -53,10 +83,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-type ContactForm = { 
-  name: string; 
-  email: string; 
-  role: string; 
+type ContactForm = {
+  name: string;
+  email: string;
+  role: string;
   message: string;
   honeypot?: string;
 };

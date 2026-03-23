@@ -58,9 +58,7 @@ export function useProjectFilters(copy: ComputedRef<ContentShape>) {
     });
   });
 
-  const activeFiltersCount = computed(
-    () => selectedTags.value.length + selectedYears.value.length
-  );
+  const activeFiltersCount = computed(() => selectedTags.value.length + selectedYears.value.length);
 
   const filteredCount = computed(() => filteredProjects.value.length);
 

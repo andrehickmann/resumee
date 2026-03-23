@@ -9,44 +9,55 @@ Direkte Pushes zu `master` verhindern - alle Änderungen müssen über Pull Requ
 ## 📋 Setup Schritte:
 
 ### 1. GitHub Repository öffnen
+
 - Gehe zu: https://github.com/andrehickmann/resumee
 
 ### 2. Settings öffnen
+
 - Klicke auf **Settings** (oben rechts im Repo)
 
 ### 3. Branch Protection Rules
+
 - Linke Sidebar: **Branches** (unter "Code and automation")
 - Klicke auf: **Add branch protection rule**
 
 ### 4. Branch Pattern
+
 - **Branch name pattern:** `master`
 - Oder auch: `main` falls du beide schützen willst
 
 ### 5. Empfohlene Einstellungen
 
 #### ✅ Require a pull request before merging
+
 - **Aktivieren** ✓
 - Optional: "Require approvals" (1) - wenn du Self-Review machst
 - Optional: "Dismiss stale pull request approvals when new commits are pushed"
 
 #### ✅ Require status checks to pass before merging
+
 - **Aktivieren** ✓
 - **Require branches to be up to date before merging** ✓
 - Wähle **Status check:** `lint-and-build` (Name deines CI Jobs)
 
 #### ✅ Require conversation resolution before merging
+
 - **Aktivieren** ✓ (alle Kommentare müssen resolved sein)
 
 #### ✅ Do not allow bypassing the above settings
+
 - **Aktivieren** ✓ (auch Admin = du muss sich dran halten!)
 
 #### ❌ Allow force pushes (NICHT aktivieren!)
+
 - Bleibt deaktiviert
 
 #### ❌ Allow deletions (NICHT aktivieren!)
+
 - Bleibt deaktiviert
 
 ### 6. Speichern
+
 - Klicke unten: **Create** oder **Save changes**
 
 ---
@@ -54,6 +65,7 @@ Direkte Pushes zu `master` verhindern - alle Änderungen müssen über Pull Requ
 ## 🔄 Neuer Workflow nach Branch Protection:
 
 ### Alte Art (direkt auf master):
+
 ```bash
 git add .
 git commit -m "Fix something"
@@ -61,6 +73,7 @@ git push origin master  # ❌ ABGELEHNT!
 ```
 
 ### Neue Art (über Feature Branch):
+
 ```bash
 # 1. Feature Branch erstellen
 git checkout -b feature/my-feature
@@ -98,11 +111,13 @@ git push origin --delete feature/my-feature
 **Status:** Gepusht ✅
 
 **Check CI Status:**
+
 1. Gehe zu: https://github.com/andrehickmann/resumee/actions
 2. Du solltest den Workflow **"CI"** laufen sehen
 3. Status: 🟡 Running → 🟢 Passed (hoffentlich!)
 
 **Pull Request erstellen:**
+
 1. Gehe zu: https://github.com/andrehickmann/resumee/pull/new/test/ci-workflow
 2. Erstelle PR
 3. Warte auf CI ✅
@@ -123,6 +138,7 @@ git push origin --delete feature/my-feature
 ## ⚠️ Für Solo-Projekte:
 
 Du kannst dich selbst als Approver setzen, aber es ist optional. Hauptsache:
+
 - ✅ CI muss grün sein
 - ✅ Kein direkter Push auf master
 
@@ -135,6 +151,7 @@ Das reicht für gute Code-Qualität!
 GitHub hat ein neues Feature: **Repository Rulesets** (noch Beta).
 
 **Vorteile:**
+
 - Modernere UI
 - Mehr Optionen
 - Kann mehrere Branches gleichzeitig schützen

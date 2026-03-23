@@ -106,18 +106,15 @@ export const contentDe = {
   services: [
     {
       title: 'Requirements Engineering',
-      description:
-        'Workshops & Kundentermine, strukturierte Anforderungsanalyse und Dokumentation.'
+      description: 'Workshops & Kundentermine, strukturierte Anforderungsanalyse und Dokumentation.'
     },
     {
       title: 'Fullstack-Entwicklung',
-      description:
-        'Konzeption und Umsetzung von Frontend, Backend, APIs und Datenmodellen.'
+      description: 'Konzeption und Umsetzung von Frontend, Backend, APIs und Datenmodellen.'
     },
     {
       title: 'Technische Spezifikation',
-      description:
-        'Schreiben technischer Anforderungen, Architektur- und Integrationskonzepte.'
+      description: 'Schreiben technischer Anforderungen, Architektur- und Integrationskonzepte.'
     },
     {
       title: 'Software- & Codeanalyse',
@@ -126,13 +123,11 @@ export const contentDe = {
     },
     {
       title: 'E2E Frontend-Testing',
-      description:
-        'Stabile Teststrategien mit Fokus auf kritische User Journeys.'
+      description: 'Stabile Teststrategien mit Fokus auf kritische User Journeys.'
     },
     {
       title: 'KI-Driven Delivery',
-      description:
-        'LLM-Integration, Automatisierung und Assistenzsysteme mit Business Value.'
+      description: 'LLM-Integration, Automatisierung und Assistenzsysteme mit Business Value.'
     },
     {
       title: 'Wartung & Modernisierung',
@@ -166,8 +161,7 @@ export const contentDe = {
   industriesIntro: 'Erfahrung in kritischen Domains mit komplexen Abläufen.',
   industriesCountLabel: 'Branchen',
   projectsTitle: 'Projekte & Ergebnisse',
-  projectsIntro:
-    'Auszug aus Projekten mit Fokus auf Wirkung, Skalierung und stabile Delivery.',
+  projectsIntro: 'Auszug aus Projekten mit Fokus auf Wirkung, Skalierung und stabile Delivery.',
   projectsCountLabel: 'Projekte',
   filterTechLabel: 'Tech & Bereich',
   filterYearLabel: 'Jahre',
@@ -176,8 +170,7 @@ export const contentDe = {
   timelineTitle: 'Lebenslauf',
   timelineIntro: 'Highlights meiner Laufbahn – kompakt, relevant, aktuell.',
   contactTitle: 'Kontakt',
-  contactIntro:
-    'Interesse an einer Zusammenarbeit? Ich freue mich auf ein kurzes Gespräch.',
+  contactIntro: 'Interesse an einer Zusammenarbeit? Ich freue mich auf ein kurzes Gespräch.',
   contactCardCopy:
     'Bitte schick mir Informationen zur Rolle, Team und Techstack. Remote bevorzugt.',
   contactButton: 'Kennenlernen anfragen',
@@ -200,7 +193,8 @@ export const contentDe = {
   cvLabel: 'Lebenslauf als PDF',
   cvButton: 'PDF herunterladen',
   nextUpLabel: 'Next up',
-  nextUpText: 'Offen für neue Herausforderungen in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (Frontend, Backend, Cloud), Requirements Engineering, Testing & Qualitätssicherung, Produktarchitektur, End-to-End Delivery.',
+  nextUpText:
+    'Offen für neue Herausforderungen in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (Frontend, Backend, Cloud), Requirements Engineering, Testing & Qualitätssicherung, Produktarchitektur, End-to-End Delivery.',
   filtersAll: 'Alle',
   stackItems: [
     {
@@ -275,8 +269,7 @@ export const contentDe = {
       start: 2025,
       end: 2025,
       title: 'AgriTech Maschinensteuerung',
-      description:
-        'Kamera/ML-gestützte Steuerung zur Unkrautbekämpfung per Laser.',
+      description: 'Kamera/ML-gestützte Steuerung zur Unkrautbekämpfung per Laser.',
       tags: ['AgriTech', 'ML', 'Edge']
     },
     {
@@ -293,8 +286,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Ticketing Plattform',
-      description:
-        'Konzeption & Entwicklung für Ticketverkauf, Venue-/Artist-Management, Payment.',
+      description: 'Konzeption & Entwicklung für Ticketverkauf, Venue-/Artist-Management, Payment.',
       tags: ['Ticketing', 'Web', 'Payments']
     },
     {
@@ -302,8 +294,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Streaming & Wettbewerbe',
-      description:
-        'Kurzvideo-Plattform mit Wettbewerben und Wallet-Logik (Web + Ionic).',
+      description: 'Kurzvideo-Plattform mit Wettbewerben und Wallet-Logik (Web + Ionic).',
       tags: ['Streaming', 'Ionic', 'Vue', 'Mobile']
     },
     {
@@ -311,8 +302,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Biodiversity Compliance Plattform',
-      description:
-        'GIS-Heatmaps, Action Items, Frontend (React) und Backend (Python).',
+      description: 'GIS-Heatmaps, Action Items, Frontend (React) und Backend (Python).',
       tags: ['Sustainability', 'GIS', 'React', 'Python']
     },
     {
@@ -320,8 +310,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Bewerberintegration (Arbeitsmarkt)',
-      description:
-        'Plattform zur Integration internationaler Bewerber (Vue/Scala/MySQL).',
+      description: 'Plattform zur Integration internationaler Bewerber (Vue/Scala/MySQL).',
       tags: ['HR', 'Vue', 'Scala', 'MySQL']
     },
     {
@@ -329,8 +318,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Legacy Modernisierung Ladenbau',
-      description:
-        'Modernisierung von PHP5/Vanilla JS auf PHP 8.x, stabiler Betrieb.',
+      description: 'Modernisierung von PHP5/Vanilla JS auf PHP 8.x, stabiler Betrieb.',
       tags: ['Legacy', 'PHP', 'Modernization']
     },
     {
@@ -338,8 +326,7 @@ export const contentDe = {
       start: 2024,
       end: 2024,
       title: 'Somnofox Schlafanalyse',
-      description:
-        'App zur Erkennung von Schnarchgeräuschen mit Analyse & Diagnosehilfe.',
+      description: 'App zur Erkennung von Schnarchgeräuschen mit Analyse & Diagnosehilfe.',
       tags: ['Health', 'Mobile', 'Analytics']
     },
     {
@@ -347,8 +334,7 @@ export const contentDe = {
       start: 2023,
       end: 2023,
       title: 'Bowling-Software Suite',
-      description:
-        'Steuerung von Bahnen, Buchung, Gastronomie, Payment (Vue/Scala/Java).',
+      description: 'Steuerung von Bahnen, Buchung, Gastronomie, Payment (Vue/Scala/Java).',
       tags: ['POS', 'Vue', 'Scala', 'Java']
     },
     {
@@ -364,8 +350,7 @@ export const contentDe = {
       start: 2023,
       end: 2023,
       title: 'Telemedizin & Video-Sprechstunde',
-      description:
-        'Terminportal mit Videokonferenzen, TURN/STUN-Setup, Scala Backend.',
+      description: 'Terminportal mit Videokonferenzen, TURN/STUN-Setup, Scala Backend.',
       tags: ['Health', 'Vue', 'Scala', 'Realtime']
     },
     {
@@ -390,8 +375,7 @@ export const contentDe = {
       start: 2022,
       end: 2022,
       title: 'Hotel Operations Suite',
-      description:
-        'Software zur Steuerung von Abläufen in Hotels und deren Bereichen.',
+      description: 'Software zur Steuerung von Abläufen in Hotels und deren Bereichen.',
       tags: ['Hospitality', 'Operations', 'Web']
     },
     {
@@ -407,8 +391,7 @@ export const contentDe = {
       start: 2021,
       end: 2025,
       title: 'Fashion Commerce Integration',
-      description:
-        'Rechnungs-/Retourenportal, Monitoring, Gutscheine, internationale Steuersätze.',
+      description: 'Rechnungs-/Retourenportal, Monitoring, Gutscheine, internationale Steuersätze.',
       tags: ['Commerce', 'Integration', 'Payments']
     },
     {
@@ -432,8 +415,7 @@ export const contentDe = {
       start: 2021,
       end: 2021,
       title: 'Food Delivery Plattform',
-      description:
-        'Bestellplattform mit Küchenportal, WaWi und Mollie-Zahlung.',
+      description: 'Bestellplattform mit Küchenportal, WaWi und Mollie-Zahlung.',
       tags: ['Commerce', 'Vue', 'Scala', 'Payments']
     },
     {
@@ -466,8 +448,7 @@ export const contentDe = {
       start: 2018,
       end: 2026,
       title: 'FinTech Invoicing Plattform',
-      description:
-        'Rechnungsstellung, Kundenverwaltung, Mahnwesen, Bankanbindung, Versand.',
+      description: 'Rechnungsstellung, Kundenverwaltung, Mahnwesen, Bankanbindung, Versand.',
       tags: ['FinTech', 'Vue', 'Scala', 'PHP']
     },
     {
@@ -475,8 +456,7 @@ export const contentDe = {
       start: 2008,
       end: 2017,
       title: 'Kanzlei-Kommunikationsportale',
-      description:
-        'Mandantenportale, Integrationen (GDV/Versicherungen), DMS-Einführung.',
+      description: 'Mandantenportale, Integrationen (GDV/Versicherungen), DMS-Einführung.',
       tags: ['LegalTech', 'Integration', 'B2B']
     },
     {
@@ -484,8 +464,7 @@ export const contentDe = {
       start: 2008,
       end: 2017,
       title: 'Schuldnerportal Ratenzahlungen',
-      description:
-        'Onlinevereinbarungen für Ratenzahlungen inkl. Dokumentation & Schulungen.',
+      description: 'Onlinevereinbarungen für Ratenzahlungen inkl. Dokumentation & Schulungen.',
       tags: ['LegalTech', 'Web', 'Payments']
     },
     {
@@ -501,8 +480,7 @@ export const contentDe = {
     {
       period: '01/2003 – 07/2008',
       role: 'Selbstständigkeit / Einzelunternehmer',
-      summary:
-        'Entwicklung & Betrieb von Webseiten, Onlineshop, CMS-System, Computerkurse.'
+      summary: 'Entwicklung & Betrieb von Webseiten, Onlineshop, CMS-System, Computerkurse.'
     },
     {
       period: '08/2008 – 12/2017',

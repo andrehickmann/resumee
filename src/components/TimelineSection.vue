@@ -1,5 +1,5 @@
 <template>
-  <section class="section" id="lebenslauf">
+  <section id="lebenslauf" class="section">
     <div class="section-header">
       <h2>{{ copy.timelineTitle }}</h2>
       <p>{{ copy.timelineIntro }}</p>
@@ -11,7 +11,12 @@
     </div>
     <div class="timeline">
       <p class="education-note">{{ copy.educationNote }}</p>
-      <div v-for="item in copy.careerTimeline" :key="item.period" class="timeline-item reveal" :class="{ current: item.period.includes('heute') || item.period.includes('present') }">
+      <div
+        v-for="item in copy.careerTimeline"
+        :key="item.period"
+        class="timeline-item reveal"
+        :class="{ current: item.period.includes('heute') || item.period.includes('present') }"
+      >
         <span>{{ item.period }}</span>
         <h3>{{ item.role }}</h3>
         <p>{{ item.summary }}</p>

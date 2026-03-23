@@ -4,7 +4,7 @@
     <div class="modal-panel" role="dialog" aria-modal="true">
       <div class="modal-header">
         <h3>{{ copy.konamiTitle }}</h3>
-        <button class="modal-close" @click="$emit('close')" aria-label="Schließen">×</button>
+        <button class="modal-close" aria-label="Schließen" @click="$emit('close')">×</button>
       </div>
       <p class="modal-period">{{ copy.konamiSubtitle }}</p>
       <ul class="konami-list">

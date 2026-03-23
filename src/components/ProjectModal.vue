@@ -4,11 +4,11 @@
     <div class="modal-panel" role="dialog" aria-modal="true">
       <div class="modal-header">
         <h3>{{ project?.title }}</h3>
-        <button class="modal-close" @click="$emit('close')" aria-label="Schließen">×</button>
+        <button class="modal-close" aria-label="Schließen" @click="$emit('close')">×</button>
       </div>
       <p class="modal-period">{{ project?.period }}</p>
       <p>{{ project?.description }}</p>
-      <div class="project-meta" v-if="project">
+      <div v-if="project" class="project-meta">
         <span v-for="tag in project.tags" :key="tag">#{{ tag }}</span>
       </div>
     </div>

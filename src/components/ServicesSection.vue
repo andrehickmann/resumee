@@ -7,23 +7,27 @@
     <div class="services-slider-wrapper">
       <button
         class="slider-btn"
-        @click="$emit('scroll', -1)"
         aria-label="Zurück"
         :disabled="!showArrows"
+        @click="$emit('scroll', -1)"
       >
         ‹
       </button>
-      <div class="services-track" ref="track" @scroll="$emit('update-controls')">
-        <article v-for="(item, index) in copy.services" :key="item.title" class="service-card reveal">
+      <div ref="track" class="services-track" @scroll="$emit('update-controls')">
+        <article
+          v-for="(item, _index) in copy.services"
+          :key="item.title"
+          class="service-card reveal"
+        >
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
         </article>
       </div>
       <button
         class="slider-btn"
-        @click="$emit('scroll', 1)"
         aria-label="Weiter"
         :disabled="!showArrows"
+        @click="$emit('scroll', 1)"
       >
         ›
       </button>
@@ -34,8 +38,8 @@
         :key="`dot-${index}`"
         class="slider-dot"
         :class="{ active: currentIndex === index }"
-        @click="$emit('goto', index)"
         :aria-label="`Zu Slide ${index + 1}`"
+        @click="$emit('goto', index)"
       ></button>
     </div>
   </section>

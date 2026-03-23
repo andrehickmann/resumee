@@ -1,5 +1,5 @@
 <template>
-  <section class="section" id="terminal">
+  <section id="terminal" class="section">
     <div class="section-header">
       <h2>{{ copy.terminalTitle }}</h2>
       <p>{{ copy.terminalIntro }}</p>

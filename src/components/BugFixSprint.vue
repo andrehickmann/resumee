@@ -1,32 +1,32 @@
 <template>
-  <section class="section" id="bug-sprint">
+  <section id="bug-sprint" class="section">
     <div class="section-header">
       <h2>{{ copy.sprintTitle }}</h2>
       <p>{{ copy.sprintIntro }}</p>
     </div>
     <div class="sprint">
-    <div class="sprint-panel">
-      <div class="sprint-stat">
-        <span>{{ copy.sprintScore }}</span>
-        <strong>{{ score }}</strong>
-      </div>
-      <div class="sprint-stat">
-        <span>{{ copy.sprintHighscore }}</span>
-        <strong>{{ highScore }}</strong>
-      </div>
-      <div class="sprint-stat">
-        <span>{{ copy.sprintCombo }}</span>
-        <strong>x{{ combo }}</strong>
-      </div>
-      <div class="sprint-stat">
-        <span>{{ copy.sprintTime }}</span>
-        <strong>{{ timeLeft }}s</strong>
-      </div>
-      <button class="primary" @click="start" :disabled="running">
+      <div class="sprint-panel">
+        <div class="sprint-stat">
+          <span>{{ copy.sprintScore }}</span>
+          <strong>{{ score }}</strong>
+        </div>
+        <div class="sprint-stat">
+          <span>{{ copy.sprintHighscore }}</span>
+          <strong>{{ highScore }}</strong>
+        </div>
+        <div class="sprint-stat">
+          <span>{{ copy.sprintCombo }}</span>
+          <strong>x{{ combo }}</strong>
+        </div>
+        <div class="sprint-stat">
+          <span>{{ copy.sprintTime }}</span>
+          <strong>{{ timeLeft }}s</strong>
+        </div>
+        <button class="primary" :disabled="running" @click="start">
           {{ running ? copy.sprintRunning : copy.sprintStart }}
         </button>
       </div>
-      <div class="sprint-field" ref="field">
+      <div ref="field" class="sprint-field">
         <button
           v-for="bug in bugs"
           :key="bug.id"
