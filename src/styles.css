@@ -198,7 +198,7 @@ main {
   border-radius: 999px;
   border: none;
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
@@ -230,6 +230,7 @@ main {
 .cv-download svg {
   position: relative;
   z-index: 1;
+  color: #fff;
 }
 
 .cv-download svg {
