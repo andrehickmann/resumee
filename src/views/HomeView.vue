@@ -253,18 +253,33 @@ async function submitContact() {
   contactSuccess.value = false;
 
   try {
-    const response = await fetch('/api/contact', {
+    // Web3Forms API
+    const formData = new FormData();
+    formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY'); // TODO: Replace with your key
+    formData.append('name', contactForm.value.name);
+    formData.append('email', contactForm.value.email);
+    formData.append('subject', `Kontaktanfrage von ${contactForm.value.name}`);
+    formData.append('message', `
+Name: ${contactForm.value.name}
+E-Mail: ${contactForm.value.email}
+${contactForm.value.role ? `Rolle/Position: ${contactForm.value.role}\n` : ''}
+Nachricht:
+${contactForm.value.message}
+    `.trim());
+    
+    if (contactForm.value.honeypot) {
+      formData.append('botcheck', contactForm.value.honeypot);
+    }
+
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactForm.value),
+      body: formData
     });
 
     const data = await response.json();
 
-    if (!response.ok) {
-      contactError.value = data.error || 'Ein Fehler ist aufgetreten.';
+    if (!response.ok || !data.success) {
+      contactError.value = data.message || 'Ein Fehler ist aufgetreten.';
       return;
     }
 
