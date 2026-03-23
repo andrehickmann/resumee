@@ -100,6 +100,8 @@ export const contentEn = {
   filterToggleLabel: 'Show filters',
   timelineTitle: 'Resume',
   timelineIntro: 'Career highlights — concise, relevant, current.',
+  githubStatsTitle: 'Open Source & GitHub',
+  githubStatsIntro: 'My GitHub activity - contributions, projects, and code.',
   contactTitle: 'Contact',
   contactIntro: 'Interested in working together? Let’s have a short call.',
   contactCardCopy: 'Please share role details, team context, and tech stack. Remote preferred.',

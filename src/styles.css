@@ -11,6 +11,18 @@
   --radius: 28px;
 }
 
+html.dark {
+  color-scheme: dark;
+  --bg: #1a1a1a;
+  --bg-alt: #242424;
+  --ink: #e8e8e8;
+  --muted: #9ca3af;
+  --accent: #ff7f50;
+  --accent-dark: #ff6b3d;
+  --card: #2a2a2a;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,15 +31,17 @@
 
 html {
   scroll-behavior: smooth;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  background: linear-gradient(135deg, #f6f4f0 0%, #f2ede3 45%, #efe7d8 100%);
+  background: var(--bg);
   color: var(--ink);
   line-height: 1.6;
   min-height: 100vh;
   padding: 7.5rem 6vw 4rem;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .skip-link {
@@ -136,6 +150,26 @@ main {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--card);
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .cv-download {
@@ -1696,5 +1730,55 @@ a:focus-visible {
 
   .portrait-frame {
     animation: none;
+  }
+}
+
+/* GitHub Stats Section */
+.github-stats-section {
+  margin: 6rem 0;
+  text-align: center;
+}
+
+.github-stats-section h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.stats-intro {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 40px 100px rgba(34, 34, 34, 0.18);
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }

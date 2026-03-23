@@ -8,6 +8,14 @@
     </nav>
     <div class="header-actions">
       <button
+        class="theme-toggle"
+        @click="toggle"
+        :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        {{ isDark ? '☀️' : '🌙' }}
+      </button>
+      <button
         class="cv-download"
         :title="currentLang === 'de' ? 'Lebenslauf herunterladen' : 'Download resume'"
         @click="handleDownload"
@@ -50,10 +58,14 @@
 </template>
 
 <script setup lang="ts">
+import { useDarkMode } from '../composables/useDarkMode';
+
 const props = defineProps<{
   copy: Record<string, unknown>;
   currentLang: string;
 }>();
+
+const { isDark, toggle } = useDarkMode();
 
 function handleDownload() {
   const pdfUrl =
