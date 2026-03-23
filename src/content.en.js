@@ -24,7 +24,7 @@ export const contentEn = {
     { key: 'industries', value: '', label: 'Industries' }
   ],
   heroImageAlt: 'Portrait photo',
-  availability: 'Available for full-time role',
+  availability: 'Open to new opportunities',
   construction: {
     title: 'Coming Soon',
     message: 'This site is currently being prepared and will be online shortly.',
