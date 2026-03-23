@@ -59,8 +59,6 @@
       @submit="submitContact"
     />
 
-    <ProjectModal :open="projectModalOpen" :project="activeProject" @close="closeProjectModal" />
-
     <CommandPalette
       :open="paletteOpen"
       :query="paletteQuery"
