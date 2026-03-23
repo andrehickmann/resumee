@@ -29,9 +29,9 @@ html.dark {
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
   --header-bg: rgba(20, 20, 20, 0.95);
   --button-bg: rgba(255, 255, 255, 0.15);
-  --button-text: #f5f5f5;
+  --button-text: #0f0f0f;
   --button-hover-bg: rgba(255, 255, 255, 0.25);
-  --button-hover-text: #f5f5f5;
+  --button-hover-text: #0f0f0f;
   --nav-text: #f5f5f5;
 }
 
