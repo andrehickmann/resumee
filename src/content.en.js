@@ -26,9 +26,9 @@ export const contentEn = {
   heroImageAlt: 'Portrait photo',
   availability: 'Available for full-time role',
   construction: {
-    title: 'Under Construction',
-    message: 'This portfolio site is being finalized and will be available shortly.',
-    contact: 'Feel free to reach out directly if interested.'
+    title: 'Coming Soon',
+    message: 'This site is currently being prepared and will be online shortly.',
+    contact: 'Interested? Contact me: andre@hickmann-kuschnereit.de'
   },
   servicesTitle: 'Services & Responsibilities',
   servicesIntro:
