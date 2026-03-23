@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Seite nicht gefunden</title>
+  <style>
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f6f4f0 0%, #f2ede3 45%, #efe7d8 100%);
+      color: #1f1f1f;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #5c5a54;
+    }
+    a {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: #1f1f1f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+    a:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+  <script>
+    // Redirect to home page for SPA routing
+    window.location.href = '/';
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p>Seite wird geladen...</p>
+    <a href="/">Zur Startseite</a>
+  </div>
+</body>
+</html>
