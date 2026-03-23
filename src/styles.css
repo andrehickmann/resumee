@@ -1099,7 +1099,8 @@ main {
   font-size: 1.1rem;
   font-weight: 700;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: #fff;
 }
 
 .cv a::after {
@@ -1109,6 +1110,7 @@ main {
   background: linear-gradient(135deg, var(--accent-dark), var(--accent));
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 1;
 }
 
 .cv a:hover::after {
@@ -1118,6 +1120,12 @@ main {
 .cv a:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 107, 61, 0.4);
+}
+
+.cv a > span {
+  position: relative;
+  z-index: 2;
+  color: #fff;
 }
 
 .timeline {
