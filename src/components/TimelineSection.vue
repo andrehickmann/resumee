@@ -5,7 +5,7 @@
       <p>{{ copy.timelineIntro }}</p>
     </div>
     <div class="cv">
-      <a href="/Lebenslauf.pdf" target="_blank" rel="noreferrer" download="Lebenslauf-Andre-Hickmann.pdf">
+      <a href="/Lebenslauf - André Hickmann Kuschnereit.pdf" target="_blank" rel="noreferrer">
         {{ copy.cvButton }}
       </a>
     </div>

@@ -43,26 +43,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { usePdfGenerator } from '../composables/usePdfGenerator';
-import { useI18n } from 'vue-i18n';
-
 const props = defineProps<{
   copy: Record<string, unknown>;
   currentLang: string;
 }>();
 
-const { tm } = useI18n({ useScope: 'global' });
-const { downloadPDF } = usePdfGenerator();
-
-const pdfFilename = computed(() => {
-  return props.currentLang === 'de'
-    ? 'Lebenslauf-Andre-Hickmann-Kuschnereit.pdf'
-    : 'Resume-Andre-Hickmann-Kuschnereit.pdf';
-});
-
 function handleDownload() {
-  const content = tm('app');
-  downloadPDF(content, props.currentLang as 'de' | 'en', pdfFilename.value);
+  const pdfUrl = props.currentLang === 'de'
+    ? '/Lebenslauf - André Hickmann Kuschnereit.pdf'
+    : '/Resume - André Hickmann Kuschnereit.pdf';
+  
+  window.open(pdfUrl, '_blank');
 }
+
+defineEmits<{
+  (e: 'set-lang', lang: string): void;
+}>();
 </script>
