@@ -11,6 +11,7 @@
   --radius: 28px;
   --header-bg: rgba(246, 244, 240, 0.9);
   --button-bg: rgba(31, 31, 31, 0.08);
+  --button-text: #1f1f1f;
   --button-hover-bg: #1f1f1f;
   --button-hover-text: #ffffff;
   --nav-text: #1f1f1f;
@@ -28,8 +29,9 @@ html.dark {
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
   --header-bg: rgba(20, 20, 20, 0.95);
   --button-bg: rgba(255, 255, 255, 0.15);
+  --button-text: #f5f5f5;
   --button-hover-bg: rgba(255, 255, 255, 0.25);
-  --button-hover-text: #ffffff;
+  --button-hover-text: #f5f5f5;
   --nav-text: #f5f5f5;
 }
 
@@ -196,7 +198,7 @@ main {
   border-radius: 999px;
   border: 1px solid var(--button-bg);
   text-decoration: none;
-  color: var(--nav-text);
+  color: var(--button-text);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
@@ -232,7 +234,7 @@ main {
   cursor: pointer;
   font-size: 0.85rem;
   transition: all 0.2s ease;
-  color: var(--nav-text);
+  color: var(--button-text);
   opacity: 0.7;
 }
 
@@ -245,6 +247,7 @@ main {
 .lang:hover:not(.active) {
   opacity: 1;
   background: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
 
 .cta,
