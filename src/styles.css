@@ -1880,6 +1880,10 @@ a:focus-visible {
     flex: 0 0 100%;
     scroll-snap-align: start;
   }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 }
 
