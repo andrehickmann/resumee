@@ -98,6 +98,7 @@ export const contentEn = {
   filterYearLabel: 'Years',
   filterResetLabel: 'Reset filters',
   filterToggleLabel: 'Show filters',
+  loadMoreLabel: 'Load more projects',
   timelineTitle: 'Resume',
   timelineIntro: 'Career highlights — concise, relevant, current.',
   contactTitle: 'Contact',

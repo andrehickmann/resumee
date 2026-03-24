@@ -42,10 +42,13 @@
     </details>
     <div class="project-grid">
       <article
-        v-for="project in filteredProjects"
+        v-for="(project, index) in displayedProjects"
         :key="project.title"
         class="project-card reveal tilt"
-        :class="{ 'project-cta': project.tags && project.tags.includes('Opportunity') }"
+        :class="{ 
+          'project-cta': project.tags && project.tags.includes('Opportunity'),
+          'visible': index >= MOBILE_LIMIT && showAll
+        }"
         role="button"
         tabindex="0"
         @click="$emit('open-project', project)"
@@ -60,13 +63,20 @@
         </div>
       </article>
     </div>
+    <div v-if="showLoadMore" class="load-more-wrapper">
+      <button class="load-more-btn" @click="showAllProjects">
+        {{ copy.loadMoreLabel || 'Mehr Projekte laden' }} ({{ remainingCount }})
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
+
 type Project = import('../composables/useProjectFilters').ProjectItem;
 
-defineProps<{
+const props = defineProps<{
   copy: Record<string, unknown>;
   filteredCount: number;
   activeFiltersCount: number;
@@ -83,4 +93,47 @@ defineEmits<{
   (e: 'reset-filters'): void;
   (e: 'open-project', project: Project): void;
 }>();
+
+const showAll = ref(false);
+const isMobile = ref(typeof window !== 'undefined' ? window.innerWidth <= 700 : false);
+const MOBILE_LIMIT = 9;
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 700;
+};
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile);
+});
+
+const displayedProjects = computed(() => {
+  if (!isMobile.value || showAll.value) {
+    return props.filteredProjects;
+  }
+  return props.filteredProjects.slice(0, MOBILE_LIMIT);
+});
+
+const showLoadMore = computed(() => {
+  return isMobile.value && !showAll.value && props.filteredProjects.length > MOBILE_LIMIT;
+});
+
+const remainingCount = computed(() => {
+  return props.filteredProjects.length - MOBILE_LIMIT;
+});
+
+const showAllProjects = () => {
+  showAll.value = true;
+};
+
+// Reset showAll when filters change
+watch(() => props.filteredProjects.length, () => {
+  if (showAll.value && props.filteredProjects.length <= MOBILE_LIMIT) {
+    showAll.value = false;
+  }
+});
 </script>

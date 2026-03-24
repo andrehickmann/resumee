@@ -167,6 +167,7 @@ export const contentDe = {
   filterYearLabel: 'Jahre',
   filterResetLabel: 'Filter zurücksetzen',
   filterToggleLabel: 'Filter anzeigen',
+  loadMoreLabel: 'Mehr Projekte laden',
   timelineTitle: 'Lebenslauf',
   timelineIntro: 'Highlights meiner Laufbahn – kompakt, relevant, aktuell.',
   contactTitle: 'Kontakt',

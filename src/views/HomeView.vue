@@ -25,6 +25,8 @@
 
       <IndustriesSection :copy="copy" :industry-count="industryCount" />
 
+      <TimelineSection :copy="copy" />
+
       <ProjectsSection
         :copy="copy"
         :filtered-count="filteredCount"
@@ -38,8 +40,6 @@
         @toggle-year="toggleYear"
         @reset-filters="resetFilters"
       />
-
-      <TimelineSection :copy="copy" />
 
       <ContactSection :copy="copy" @open-contact="openContactModal" />
     </main>
