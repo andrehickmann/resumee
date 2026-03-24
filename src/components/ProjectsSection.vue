@@ -95,7 +95,7 @@ defineEmits<{
 }>();
 
 const showAll = ref(false);
-const isMobile = ref(false);
+const isMobile = ref(typeof window !== 'undefined' ? window.innerWidth <= 700 : false);
 const MOBILE_LIMIT = 9;
 
 const checkMobile = () => {
