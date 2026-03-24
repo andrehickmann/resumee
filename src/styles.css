@@ -57,7 +57,7 @@ body {
   color: var(--ink);
   line-height: 1.6;
   min-height: 100vh;
-  padding: 7.5rem 6vw 4rem;
+  padding: 7.5rem 0 4rem;
   transition: background 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
@@ -81,6 +81,7 @@ body {
 
 main {
   scroll-snap-type: y proximity;
+  padding: 0 6vw;
 }
 
 .bg-blur {
@@ -1620,7 +1621,11 @@ a:focus-visible {
 
 @media (max-width: 900px) {
   body {
-    padding: 8.5rem 7vw 4rem;
+    padding: 8.5rem 0 4rem;
+  }
+
+  main {
+    padding: 0 7vw;
   }
 
   .site-header {
@@ -1740,7 +1745,11 @@ a:focus-visible {
 
 @media (max-width: 700px) {
   body {
-    padding: 8.5rem 4vw 4rem;
+    padding: 8.5rem 0 4rem;
+  }
+
+  main {
+    padding: 0 4vw;
   }
 
   .site-header {
