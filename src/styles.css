@@ -1721,19 +1721,26 @@ a:focus-visible {
   .site-footer {
     grid-template-columns: 1fr;
     text-align: left;
-    gap: 0.6rem;
+    gap: 1rem;
   }
 
   .footer-links {
     justify-self: start;
+    flex-wrap: wrap;
+    gap: 0.8rem;
   }
 
   .footer-note {
     justify-self: start;
+    order: -1;
   }
 }
 
 @media (max-width: 700px) {
+  body {
+    padding: 5.5rem 4vw 4rem;
+  }
+
   .site-header {
     padding: 0.7rem 4vw;
   }
@@ -1776,10 +1783,12 @@ a:focus-visible {
   .stats-row .hero-actions {
     flex-direction: column;
     width: 100%;
+    align-items: center;
   }
 
   .stats-row .hero-actions button {
     width: 100%;
+    max-width: 100%;
   }
 
   .hero-media {
@@ -1897,6 +1906,11 @@ a:focus-visible {
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .hero-actions button,
+  .hero-actions .cta {
+    width: 100%;
   }
 }
 
