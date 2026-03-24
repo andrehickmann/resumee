@@ -1728,6 +1728,10 @@ a:focus-visible {
 }
 
 @media (max-width: 700px) {
+  body {
+    padding: 8.5rem 4vw 4rem;
+  }
+
   .site-header {
     padding: 0.7rem 4vw;
   }
