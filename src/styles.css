@@ -7,7 +7,7 @@
   --accent: #ff6b3d;
   --accent-dark: #e0471d;
   --card: #ffffff;
-  --shadow: 0 30px 80px rgba(34, 34, 34, 0.12);
+  --shadow: 0 2px 8px rgba(34, 34, 34, 0.06);
   --radius: 28px;
   --header-bg: rgba(246, 244, 240, 0.9);
   --button-bg: rgba(31, 31, 31, 0.08);
@@ -26,7 +26,7 @@ html.dark {
   --accent: #ff6b3d;
   --accent-dark: #ff8c5d;
   --card: #1e1e1e;
-  --shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   --header-bg: rgba(20, 20, 20, 0.95);
   --button-bg: rgba(255, 255, 255, 0.15);
   --button-text: #0f0f0f;
@@ -43,6 +43,7 @@ html.dark {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -53,6 +54,9 @@ body {
   min-height: 100vh;
   padding: 7.5rem 6vw 4rem;
   transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .skip-link {
@@ -86,6 +90,7 @@ main {
   z-index: -1;
   opacity: 0.8;
   will-change: transform;
+  display: none;
 }
 
 .site-header {
@@ -103,6 +108,9 @@ main {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(31, 31, 31, 0.08);
   z-index: 10;
+  width: 100%;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Availability badge - currently not in use
@@ -169,23 +177,23 @@ main {
 }
 
 .theme-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--button-bg);
-  border: 1px solid var(--button-bg);
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
-  font-size: 1rem;
+  border: 1px solid rgba(255, 107, 61, 0.3);
+  background: rgba(255, 107, 61, 0.1);
+  color: var(--accent);
   cursor: pointer;
   transition: all 0.2s ease;
-  opacity: 0.8;
 }
 
 .theme-toggle:hover {
-  opacity: 1;
-  background: var(--button-hover-bg);
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
 
@@ -420,7 +428,7 @@ main {
   gap: 2rem;
   align-items: center;
   align-self: start;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .hero-text {
@@ -655,6 +663,17 @@ main {
   display: none;
 }
 
+.stack-slider-wrapper {
+  width: 100%;
+}
+
+.stack-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Legacy support - can be removed */
 .stack-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1059,6 +1078,31 @@ main {
   font-size: 0.8rem;
   font-family: 'JetBrains Mono', monospace;
   color: var(--muted);
+}
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.load-more-btn {
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 61, 0.3);
 }
 
 .cv {
@@ -1652,7 +1696,7 @@ a:focus-visible {
     padding: 0.7rem 4vw;
   }
 
-  .nav a:nth-child(n + 4) {
+  .nav {
     display: none;
   }
 
@@ -1678,6 +1722,8 @@ a:focus-visible {
       'text'
       'media'
       'stats';
+    padding: 0 0 2rem;
+    gap: 1rem;
   }
 
   .stats-row {
@@ -1697,10 +1743,26 @@ a:focus-visible {
   .hero-media {
     display: flex;
     justify-content: center;
+    margin-top: 0;
   }
 
   .portrait-wrap {
     max-width: 100%;
+    margin-top: 0;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .section {
+    padding: 2rem 0 1.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .filters-panel {
+    display: none;
   }
 
   .services-slider-wrapper {
@@ -1745,6 +1807,29 @@ a:focus-visible {
   .slider-dot.active {
     background: var(--accent);
     transform: scale(1.3);
+  }
+
+  .stack-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.8rem;
+    scrollbar-width: none;
+    cursor: grab;
+    scroll-behavior: smooth;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stack-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stack-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
   }
 }
 
