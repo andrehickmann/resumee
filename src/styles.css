@@ -296,6 +296,8 @@ html.dark .site-header {
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .cta,
@@ -368,6 +370,7 @@ html.dark .site-header {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .hero-text .hero-actions {
@@ -1914,6 +1917,8 @@ a:focus-visible {
   .hero-actions button,
   .hero-actions .cta {
     width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
   }
 }
 
