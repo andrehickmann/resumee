@@ -32,7 +32,7 @@ html.dark {
   --button-text: #0f0f0f;
   --button-hover-bg: rgba(255, 255, 255, 0.25);
   --button-hover-text: #0f0f0f;
-  --nav-text: #d0d0d0;
+  --nav-text: #f5f5f5;
 }
 
 * {
