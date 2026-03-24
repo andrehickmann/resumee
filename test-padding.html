@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padding Test</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { overflow-x: hidden; }
+        body {
+            padding: 7.5rem 6vw 4rem;
+            overflow-x: hidden;
+            background: #f0f0f0;
+        }
+        .content {
+            background: white;
+            padding: 20px;
+            border: 2px solid red;
+        }
+        @media (max-width: 900px) {
+            body { padding: 8.5rem 7vw 4rem; background: #ffeeee; }
+        }
+        @media (max-width: 700px) {
+            body { padding: 8.5rem 4vw 4rem; background: #eeffee; }
+        }
+        .info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: black;
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div>Width: <span id="w"></span>px</div>
+        <div>Padding: <span id="p"></span></div>
+    </div>
+    <div class="content">
+        <h1>Test Content</h1>
+        <p>Dieser Text sollte nicht abgeschnitten sein.</p>
+        <p>Links und rechts sollte Padding sichtbar sein.</p>
+    </div>
+    <script>
+        function update() {
+            const w = window.innerWidth;
+            document.getElementById('w').textContent = w;
+            const style = getComputedStyle(document.body);
+            document.getElementById('p').textContent = style.paddingLeft + ' / ' + style.paddingRight;
+        }
+        update();
+        window.addEventListener('resize', update);
+    </script>
+</body>
+</html>
