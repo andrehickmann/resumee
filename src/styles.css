@@ -862,6 +862,7 @@ html.dark .site-header {
   cursor: pointer;
   font-weight: 600;
   list-style: none;
+  user-select: none;
 }
 
 .filters-summary::-webkit-details-marker {
@@ -875,10 +876,11 @@ html.dark .site-header {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--accent);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .filter-label {
