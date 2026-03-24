@@ -27,12 +27,12 @@ html.dark {
   --accent-dark: #ff8c5d;
   --card: #1e1e1e;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  --header-bg: rgba(20, 20, 20, 0.95);
+  --header-bg: rgba(30, 30, 30, 0.95);
   --button-bg: rgba(255, 255, 255, 0.15);
   --button-text: #0f0f0f;
   --button-hover-bg: rgba(255, 255, 255, 0.25);
   --button-hover-text: #0f0f0f;
-  --nav-text: #1f1f1f;
+  --nav-text: #e0e0e0;
 }
 
 * {
