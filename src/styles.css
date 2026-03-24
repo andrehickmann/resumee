@@ -842,7 +842,7 @@ html.dark .site-header {
 .filters-block {
   display: grid;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .filters-panel {
@@ -883,6 +883,7 @@ html.dark .site-header {
   -webkit-tap-highlight-color: transparent;
   outline: none;
   position: relative;
+  padding: 0.2rem 0;
 }
 
 .filters-summary::after {
