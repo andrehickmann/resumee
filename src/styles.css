@@ -41,6 +41,11 @@ html.dark {
   padding: 0;
 }
 
+#app {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
