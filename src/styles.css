@@ -875,21 +875,22 @@ html.dark .site-header {
 .filters-summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
   cursor: pointer;
   font-weight: 600;
   list-style: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  position: relative;
 }
 
 .filters-summary::after {
   content: '▼';
   font-size: 0.7rem;
-  margin-left: 0.5rem;
   transition: transform 0.3s ease;
   color: var(--muted);
+  margin-left: auto;
 }
 
 .filters-panel[open] .filters-summary::after {
