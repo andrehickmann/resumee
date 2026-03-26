@@ -24,14 +24,14 @@
 
 ## Deployment
 
-**Produktions-Deployment erfolgt automatisch durch Cloudflare Pages:**
+**Produktions-Deployment erfolgt über GitHub Releases:**
 
-1. Push zu `master` Branch
-2. Cloudflare Pages erkennt Änderung automatisch
-3. Führt `npm run build` aus
-4. Deployed `dist/` nach Cloudflare Edge
+1. Release in GitHub veröffentlichen
+2. `release-deploy.yml` baut die App
+3. `npm run deploy` lädt zu Cloudflare hoch
+4. Live auf hickmann-kuschnereit.de
 
-**Kein GitHub Actions Workflow nötig!**
+**Wichtig:** Cloudflare Pages Auto-Deploy im Dashboard deaktivieren.
 
 ---
 
@@ -44,7 +44,9 @@ Push/PR → GitHub Actions CI (lint + build test)
     ↓
 Merge to master
     ↓
-Cloudflare Pages (automatic build + deploy)
+Release erstellen
+    ↓
+GitHub Actions Release Deploy
     ↓
 Live auf hickmann-kuschnereit.de
 ```
@@ -54,11 +56,11 @@ Live auf hickmann-kuschnereit.de
 ## Node.js Version
 
 - **CI Workflow:** Node.js 24 (neueste Version)
-- **Cloudflare Pages:** Node.js 18.x (kann im Dashboard geändert werden)
+- **Release Deploy:** Node.js 20.x (GitHub Actions)
 - **Local Dev:** Wie in package.json definiert
 
 **Warum unterschiedlich?**
 
 - CI sollte neueste Version nutzen für Tests
-- Cloudflare Pages ist konservativer (stabiler)
+- Release Deploy läuft in GitHub Actions
 - Beides funktioniert für dieses Projekt

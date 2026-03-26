@@ -32,7 +32,7 @@ export function useServicesSlider() {
     currentServiceIndex.value = closestIndex;
   }
 
-  function scrollServices(direction) {
+  function scrollServices(direction: -1 | 1) {
     const track = servicesTrack.value;
     if (!track) return;
     const step = Math.max(track.clientWidth * 0.7, 240);
@@ -85,24 +85,26 @@ export function useServicesSlider() {
     let startX = 0;
     let scrollLeft = 0;
 
-    const setDragging = (value) => {
-      servicesTrack.value.classList.toggle('dragging', value);
+    const setDragging = (value: boolean) => {
+      servicesTrack.value?.classList.toggle('dragging', value);
     };
 
-    servicesTrack.value.addEventListener('mousedown', (event) => {
+    servicesTrack.value.addEventListener('mousedown', (event: MouseEvent) => {
       isDown = true;
-      startX = event.pageX - servicesTrack.value.offsetLeft;
-      scrollLeft = servicesTrack.value.scrollLeft;
+      startX = event.pageX - (servicesTrack.value?.offsetLeft ?? 0);
+      scrollLeft = servicesTrack.value?.scrollLeft ?? 0;
       setDragging(true);
       stopAuto();
       event.preventDefault();
     });
 
-    servicesTrack.value.addEventListener('mousemove', (event) => {
+    servicesTrack.value.addEventListener('mousemove', (event: MouseEvent) => {
       if (!isDown) return;
-      const x = event.pageX - servicesTrack.value.offsetLeft;
+      const x = event.pageX - (servicesTrack.value?.offsetLeft ?? 0);
       const walk = (x - startX) * 1.2;
-      servicesTrack.value.scrollLeft = scrollLeft - walk;
+      if (servicesTrack.value) {
+        servicesTrack.value.scrollLeft = scrollLeft - walk;
+      }
     });
 
     const stopDrag = () => {

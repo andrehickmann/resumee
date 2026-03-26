@@ -123,7 +123,14 @@ Edit content in language-specific files:
 
 ### Cloudflare Pages
 
-The site automatically deploys on push to `master` branch.
+Deployments are triggered by **GitHub Releases** (published). A release build is pushed to Cloudflare.
+
+**Important:** Disable automatic Cloudflare Pages builds for this repo, otherwise pushes to `master` will still deploy.
+
+**Required GitHub Secrets:**
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
 
 **Environment Variables:**
 
@@ -178,6 +185,15 @@ npm run preview
 
 # Lint code
 npm run lint
+
+# Typecheck
+npm run typecheck
+
+# Run tests
+npm run test
+
+# Test coverage
+npm run test:coverage
 
 # Format code
 npm run format
