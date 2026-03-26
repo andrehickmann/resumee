@@ -78,13 +78,10 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue';
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import {
-  type ProjectItem,
-  type ContentShape,
-  useProjectFilters
-} from '../composables/useProjectFilters';
+import { type ContentShape, useProjectFilters } from '../composables/useProjectFilters';
 import { useServicesSlider } from '../composables/useServicesSlider';
 import { useUiEffects } from '../composables/useUiEffects';
 
@@ -118,6 +115,11 @@ const contactError = ref('');
 const contactSuccess = ref(false);
 const konamiOpen = ref(false);
 const konamiFacts = ref<string[]>([]);
+const baseUrl = 'https://hickmann-kuschnereit.de';
+const pageDescriptions = {
+  de: 'Senior Fullstack Engineer mit 23+ Jahren Erfahrung in Berlin. Spezialisiert auf moderne Technologien, Cloud-Architektur und End-to-End Produktentwicklung. Verfügbar für Festanstellung.',
+  en: 'Senior full-stack engineer with 23+ years of experience in Berlin. Focused on modern technologies, cloud architecture, and end-to-end product delivery. Open to permanent roles.'
+} as const;
 
 const copy = computed<ContentShape>(() => tm('app') as ContentShape);
 const industryCount = computed(() => copy.value.industries.length);
@@ -192,10 +194,31 @@ const paletteItems = computed(() => {
   return items.filter((item) => item.label.toLowerCase().includes(term));
 });
 
+useHead(() => ({
+  htmlAttrs: {
+    lang: locale.value
+  },
+  title: copy.value.pageTitle,
+  link: [{ rel: 'canonical', href: `${baseUrl}/` }],
+  meta: [
+    {
+      name: 'description',
+      content:
+        pageDescriptions[locale.value as keyof typeof pageDescriptions] ?? pageDescriptions.de
+    },
+    {
+      property: 'og:url',
+      content: `${baseUrl}/`
+    },
+    {
+      property: 'twitter:url',
+      content: `${baseUrl}/`
+    }
+  ]
+}));
+
 watch(locale, () => {
   resetOnLangChange();
-  document.documentElement.lang = locale.value;
-  document.title = copy.value.pageTitle;
   nextTick(() => {
     initReveal();
     initScrollEffects();
@@ -229,7 +252,6 @@ function openContactModal() {
 function closeContactModal() {
   contactModalOpen.value = false;
 }
-
 
 async function submitContact() {
   contactSubmitting.value = true;
@@ -368,8 +390,6 @@ function handleKonami(event: KeyboardEvent) {
 }
 
 onMounted(() => {
-  document.documentElement.lang = locale.value;
-  document.title = copy.value.pageTitle;
   initScroll();
   initNavHighlight();
   initReveal();

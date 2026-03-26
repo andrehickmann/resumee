@@ -120,6 +120,32 @@
   </main>
 </template>
 
+<script setup lang="ts">
+import { useHead } from '@unhead/vue';
+
+useHead({
+  htmlAttrs: {
+    lang: 'de'
+  },
+  title: 'Impressum & Datenschutz | André Hickmann Kuschnereit',
+  link: [{ rel: 'canonical', href: 'https://hickmann-kuschnereit.de/legal' }],
+  meta: [
+    {
+      name: 'description',
+      content: 'Impressum und Datenschutzhinweise von André Hickmann Kuschnereit.'
+    },
+    {
+      property: 'og:url',
+      content: 'https://hickmann-kuschnereit.de/legal'
+    },
+    {
+      property: 'twitter:url',
+      content: 'https://hickmann-kuschnereit.de/legal'
+    }
+  ]
+});
+</script>
+
 <style scoped>
 .legal-page {
   min-height: 100vh;
