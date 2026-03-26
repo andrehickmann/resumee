@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.hickmann-kuschnereit.de/sitemap.xml
+Sitemap: https://hickmann-kuschnereit.de/sitemap.xml

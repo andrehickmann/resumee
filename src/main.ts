@@ -1,7 +1,9 @@
-import { createApp } from 'vue';
+import { ViteSSG } from 'vite-ssg';
 import App from './App.vue';
-import { router } from './router';
-import { i18n } from './i18n';
+import { createI18nInstance } from './i18n';
+import { routes, scrollBehavior } from './router';
 import './styles.css';
 
-createApp(App).use(router).use(i18n).mount('#app');
+export const createApp = ViteSSG(App, { routes, scrollBehavior }, ({ app }) => {
+  app.use(createI18nInstance());
+});

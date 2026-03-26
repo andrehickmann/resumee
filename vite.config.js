@@ -15,7 +15,7 @@ export default defineConfig({
       'localhost',
       'resumee.localhost',
       'resumee-lu1n.onrender.com',
-      'www.hickmann-kuschnereit.de'
+      'hickmann-kuschnereit.de'
     ]
   },
   test: {
