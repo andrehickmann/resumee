@@ -132,6 +132,14 @@ Deployments are triggered by **GitHub Releases** (published). A release build is
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
+### Preview Deployments (Pull Requests)
+
+Every Pull Request creates a **preview deployment** on Cloudflare at:
+
+`https://resumee-pr-<PR_NUMBER>.workers.dev`
+
+The workflow comments the URL back on the PR.
+
 **Environment Variables:**
 
 - `VITE_UNDER_CONSTRUCTION` - Set to `false` in production (configured in `.env.production`)

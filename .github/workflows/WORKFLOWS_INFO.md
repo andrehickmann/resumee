@@ -35,6 +35,16 @@
 
 ---
 
+## Preview Deployments (Pull Requests)
+
+**Jeder Pull Request** erzeugt ein Preview-Deployment:
+
+`https://resumee-pr-<PR_NUMBER>.workers.dev`
+
+Der Workflow kommentiert die URL direkt im PR.
+
+---
+
 ## CI/CD Flow
 
 ```
