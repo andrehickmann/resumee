@@ -2,7 +2,9 @@ export function useUiEffects() {
   function initScroll() {
     document.querySelectorAll<HTMLElement>('[data-scroll]').forEach((button) => {
       button.addEventListener('click', () => {
-        const target = document.querySelector(button.dataset.scroll as string);
+        const selector = button.dataset.scroll;
+        if (!selector) return;
+        const target = document.querySelector(selector);
         if (target) {
           target.scrollIntoView({ behavior: 'smooth' });
         }
@@ -75,7 +77,7 @@ export function useUiEffects() {
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (prefersReduce.matches) {
       counters.forEach((item) => {
-        item.textContent = item.dataset.count;
+        item.textContent = item.dataset.count ?? '';
       });
       return;
     }
@@ -87,14 +89,14 @@ export function useUiEffects() {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const target = entry.target;
-          const value = target.dataset.count;
+          const target = entry.target as HTMLElement;
+          const value = target.dataset.count ?? '0';
           const number = parseValue(value);
           const hasPlus = value.includes('+');
           let current = 0;
           const duration = 1100;
           const start = performance.now();
-          const tick = (now) => {
+          const tick = (now: number) => {
             const progress = Math.min((now - start) / duration, 1);
             current = Math.floor(number * progress);
             target.textContent = `${current}${hasPlus ? '+' : ''}`;

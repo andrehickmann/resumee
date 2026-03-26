@@ -179,6 +179,15 @@ npm run preview
 # Lint code
 npm run lint
 
+# Typecheck
+npm run typecheck
+
+# Run tests
+npm run test
+
+# Test coverage
+npm run test:coverage
+
 # Format code
 npm run format
 

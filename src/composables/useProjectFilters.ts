@@ -24,7 +24,7 @@ export function useProjectFilters(copy: ComputedRef<ContentShape>) {
   });
 
   const projectYears = computed(() => {
-    const years = new Set();
+    const years = new Set<number>();
     copy.value.projects.forEach((project) => {
       const start = project.start ?? project.end;
       const end = project.end ?? project.start;
@@ -62,7 +62,7 @@ export function useProjectFilters(copy: ComputedRef<ContentShape>) {
 
   const filteredCount = computed(() => filteredProjects.value.length);
 
-  function toggleFilter(tag) {
+  function toggleFilter(tag: string) {
     if (tag === copy.value.filtersAll) {
       selectedTags.value = [];
       return;

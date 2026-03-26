@@ -9,7 +9,7 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   // Ignore patterns
   {
-    ignores: ['dist/**', 'node_modules/**', '.cloudflare/**', 'docker/**']
+    ignores: ['dist/**', 'node_modules/**', '.cloudflare/**', 'docker/**', '.lintstagedrc.cjs']
   },
 
   // Base configuration for all files
@@ -20,7 +20,7 @@ export default [
 
   // Configuration for Vue and TypeScript files
   {
-    files: ['**/*.vue', '**/*.ts', '**/*.js'],
+    files: ['**/*.vue', '**/*.ts', '**/*.js', '**/*.cjs'],
     languageOptions: {
       parser: vueParser,
       parserOptions: {
@@ -64,6 +64,19 @@ export default [
 
       // Prettier integration
       'prettier/prettier': 'warn'
+    }
+  },
+
+  // Test files (Vitest globals)
+  {
+    files: ['**/*.spec.*', '**/__tests__/**'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly'
+      }
     }
   },
 
