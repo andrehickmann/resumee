@@ -46,7 +46,7 @@ jobs:
         with:
           script: |
             const previewName = '${{ steps.deploy.outputs.preview_name }}';
-            const url = `https://${previewName}.workers.dev`;
+            const url = `https://${previewName}.andre-hickmann-ger.workers.dev`;
             const body = `✅ Preview deploy ready: ${url}`;
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
