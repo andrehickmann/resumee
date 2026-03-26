@@ -17,7 +17,8 @@
 3. **Component encapsulation** – components should do one thing well.
 4. **Move logic to composables** – keep components thin.
 5. **Write component tests** for new/changed UI behavior.
-6. **Before commit/push, run:**
+6. **Use the Docker container for installs and dependency changes** – do not run `npm install`, `npm ci`, lockfile regeneration, or dependency updates on the host machine. Use the app container from `docker compose`, which is the canonical Node/Linux environment for this repo.
+7. **Before commit/push, run:**
    - `npm run lint`
    - `npm run typecheck`
    - `npm run test` (if tests exist; otherwise add tests first)
@@ -29,6 +30,8 @@
 - Lint: `npm run lint`
 - Typecheck: `npm run typecheck`
 - Format: `npm run format`
+- Container install/update: `docker compose run --rm app npm install`
+- Container clean reinstall: `docker compose run --rm app sh -lc "rm -rf node_modules package-lock.json && npm install"`
 
 ## Code Structure Notes
 
