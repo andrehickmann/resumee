@@ -78,17 +78,29 @@ jobs:
 
       - name: Create release branch commit
         run: |
-          git checkout -b "${{ steps.version.outputs.branch }}"
+          git checkout -B "${{ steps.version.outputs.branch }}"
           git add package.json package-lock.json
           git commit -m "chore: release ${{ steps.version.outputs.tag }}"
 
       - name: Push release branch
-        run: git push origin "${{ steps.version.outputs.branch }}"
+        run: |
+          git fetch origin "${{ steps.version.outputs.branch }}" || true
+          git push --force-with-lease origin "${{ steps.version.outputs.branch }}"
 
       - name: Create release pull request
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          PR_URL="$(gh pr list \
+            --head "${{ steps.version.outputs.branch }}" \
+            --base master \
+            --state open \
+            --json url \
+            --jq '.[0].url')"
+          if [ -n "$PR_URL" ]; then
+            echo "Release pull request already exists: $PR_URL"
+            exit 0
+          fi
           gh pr create \
             --base master \
             --head "${{ steps.version.outputs.branch }}" \
