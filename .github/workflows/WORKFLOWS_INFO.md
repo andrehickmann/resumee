@@ -30,9 +30,11 @@
 
 1. Run `create-release.yml` from `master`
 2. Choose `patch`, `minor`, or `major`
-3. The workflow bumps `package.json` and `package-lock.json`, runs lint, typecheck, tests, and build, then creates a commit on `master`, tags it, pushes both, and publishes the GitHub release
-4. `release-deploy.yml` validates the tag against `package.json`, builds the app, and deploys it to Cloudflare
-5. The site goes live on hickmann-kuschnereit.de
+3. The workflow bumps `package.json` and `package-lock.json`, runs lint, typecheck, tests, and build, then opens a release PR against `master`
+4. Merge the release PR into `master`
+5. `publish-release.yml` creates the Git tag and publishes the GitHub release automatically
+6. `release-deploy.yml` validates the tag against `package.json`, builds the app, and deploys it to Cloudflare
+7. The site goes live on hickmann-kuschnereit.de
 
 **Important:** Keep Cloudflare Pages auto-deploy disabled in the dashboard.
 
@@ -59,6 +61,10 @@ Merge to `master`
     ↓
 Run `create-release.yml` (`patch` / `minor` / `major`)
     ↓
+Merge the generated release PR
+    ↓
+GitHub Actions Publish Release
+    ↓
 GitHub Actions Release Deploy
     ↓
 Live on hickmann-kuschnereit.de
@@ -70,6 +76,7 @@ Live on hickmann-kuschnereit.de
 
 - **CI Workflow:** Node.js 24
 - **Create Release:** Node.js 24
+- **Publish Release:** Node.js 24
 - **Release Deploy:** Node.js 24
 - **Preview Deploy:** Node.js 24
 - **Local Development:** As defined in `package.json`

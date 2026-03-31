@@ -15,13 +15,14 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: create-release-master
   cancel-in-progress: false
 
 jobs:
-  create-release:
+  create-release-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Ensure workflow runs from master
@@ -56,8 +57,10 @@ jobs:
           npm version "${{ inputs.release_type }}" --no-git-tag-version
           VERSION="$(node -p "require('./package.json').version")"
           TAG="v${VERSION}"
+          BRANCH="release/${TAG}"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "branch=${BRANCH}" >> "$GITHUB_OUTPUT"
 
       - name: Verify release candidate
         run: |
@@ -73,24 +76,21 @@ jobs:
             exit 1
           fi
 
-      - name: Commit version bump
+      - name: Create release branch commit
         run: |
+          git checkout -b "${{ steps.version.outputs.branch }}"
           git add package.json package-lock.json
           git commit -m "chore: release ${{ steps.version.outputs.tag }}"
 
-      - name: Create Git tag
-        run: git tag "${{ steps.version.outputs.tag }}"
+      - name: Push release branch
+        run: git push origin "${{ steps.version.outputs.branch }}"
 
-      - name: Push release commit and tag
-        run: |
-          git push origin HEAD:master
-          git push origin "${{ steps.version.outputs.tag }}"
-
-      - name: Publish GitHub release
+      - name: Create release pull request
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ steps.version.outputs.tag }}" \
-            --target master \
-            --title "${{ steps.version.outputs.tag }}" \
-            --generate-notes
+          gh pr create \
+            --base master \
+            --head "${{ steps.version.outputs.branch }}" \
+            --title "chore: release ${{ steps.version.outputs.tag }}" \
+            --body "Automated release PR for ${{ steps.version.outputs.tag }}. Merge this PR to publish the GitHub release and trigger deployment."

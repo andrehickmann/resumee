@@ -1,0 +1,70 @@
+name: Publish Release
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - package.json
+      - package-lock.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-release-master
+  cancel-in-progress: false
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Fetch tags
+        run: git fetch --force --tags origin
+
+      - name: Detect version bump
+        id: version
+        run: |
+          CURRENT_VERSION="$(node -p "require('./package.json').version")"
+          PREVIOUS_VERSION="$(git show "${{ github.event.before }}:package.json" | node -e "const fs = require('fs'); console.log(JSON.parse(fs.readFileSync(0, 'utf8')).version)")"
+          TAG="v${CURRENT_VERSION}"
+          echo "current=${CURRENT_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "previous=${PREVIOUS_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip when version did not change
+        if: steps.version.outputs.changed != 'true'
+        run: echo "package.json version did not change; skipping release publication."
+
+      - name: Ensure release tag does not already exist
+        if: steps.version.outputs.changed == 'true'
+        run: |
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.version.outputs.tag }} already exists."
+            exit 1
+          fi
+
+      - name: Publish GitHub release
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --target "${{ github.sha }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --generate-notes
