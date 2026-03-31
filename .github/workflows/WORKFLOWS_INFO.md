@@ -28,10 +28,11 @@
 
 **Production deployment is triggered by GitHub Releases:**
 
-1. Publish a release on GitHub
-2. `release-deploy.yml` builds the app
-3. `npm run deploy` deploys it to Cloudflare
-4. The site goes live on hickmann-kuschnereit.de
+1. Run `create-release.yml` from `master`
+2. Choose `patch`, `minor`, or `major`
+3. The workflow bumps `package.json` and `package-lock.json`, runs lint, typecheck, tests, and build, then creates a commit on `master`, tags it, pushes both, and publishes the GitHub release
+4. `release-deploy.yml` validates the tag against `package.json`, builds the app, and deploys it to Cloudflare
+5. The site goes live on hickmann-kuschnereit.de
 
 **Important:** Keep Cloudflare Pages auto-deploy disabled in the dashboard.
 
@@ -56,7 +57,7 @@ Push/PR → GitHub Actions CI (lint + typecheck + test + build)
     ↓
 Merge to `master`
     ↓
-Create a release
+Run `create-release.yml` (`patch` / `minor` / `major`)
     ↓
 GitHub Actions Release Deploy
     ↓
@@ -68,6 +69,7 @@ Live on hickmann-kuschnereit.de
 ## Node.js Versions
 
 - **CI Workflow:** Node.js 24
+- **Create Release:** Node.js 24
 - **Release Deploy:** Node.js 24
 - **Preview Deploy:** Node.js 24
 - **Local Development:** As defined in `package.json`

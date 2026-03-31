@@ -117,6 +117,7 @@ export const contentEn = {
   footer: '© 2026 · André Hickmann Kuschnereit · Senior Software Engineer based in Berlin',
   footerImprint: 'Imprint',
   footerPrivacy: 'Privacy',
+  footerVersionLabel: 'Version',
   footerReportBug: '🐛 Report Bug',
   footerGitHub: '⭐ GitHub',
   footerNote: 'Built with ❤ and 🤖 AI',

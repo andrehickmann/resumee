@@ -21,14 +21,37 @@
       >
         {{ copy.footerGitHub }}
       </a>
+      <a
+        :href="releaseUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        :title="`${copy.footerVersionLabel} ${appVersion} release`"
+      >
+        {{ copy.footerVersionLabel }} {{ appVersion }}
+      </a>
     </span>
   </footer>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { computed } from 'vue';
+import { useAppVersion } from '../composables/useAppVersion';
+
+const { appVersion } = useAppVersion();
+const releaseUrl = computed(
+  () => `https://github.com/andrehickmann/resumee/releases/tag/v${appVersion}`
+);
 
 defineProps<{
-  copy: Record<string, unknown>;
+  copy: {
+    footer: string;
+    footerNote: string;
+    footerVersionLabel: string;
+    footerImprint: string;
+    footerPrivacy: string;
+    footerReportBug: string;
+    footerGitHub: string;
+  };
 }>();
 </script>
