@@ -41,9 +41,9 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'close'): void;
-  (e: 'run', item: PaletteItem): void;
-  (e: 'update:query', value: string): void;
+  (_e: 'close'): void;
+  (_e: 'run', _item: PaletteItem): void;
+  (_e: 'update:query', _value: string): void;
 }>();
 
 const inputRef = ref<HTMLInputElement | null>(null);

@@ -45,6 +45,6 @@ defineProps<{
 }>();
 
 defineEmits<{
-  (e: 'open-contact'): void;
+  (_e: 'open-contact'): void;
 }>();
 </script>

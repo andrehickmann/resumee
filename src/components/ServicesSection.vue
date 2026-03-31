@@ -14,11 +14,7 @@
         ‹
       </button>
       <div ref="track" class="services-track" @scroll="$emit('update-controls')">
-        <article
-          v-for="(item, _index) in copy.services"
-          :key="item.title"
-          class="service-card reveal"
-        >
+        <article v-for="item in copy.services" :key="item.title" class="service-card reveal">
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
         </article>
@@ -55,10 +51,10 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'scroll', dir: number): void;
-  (e: 'update-controls'): void;
-  (e: 'track-ready', el: HTMLElement): void;
-  (e: 'goto', index: number): void;
+  (_e: 'scroll', _dir: number): void;
+  (_e: 'update-controls'): void;
+  (_e: 'track-ready', _el: HTMLElement): void;
+  (_e: 'goto', _index: number): void;
 }>();
 
 const track = ref<HTMLElement | null>(null);

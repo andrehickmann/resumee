@@ -16,16 +16,14 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   open: boolean;
   facts: string[];
   copy: { konamiTitle: string; konamiSubtitle: string; konamiRefresh: string };
 }>();
 
-props;
-
 defineEmits<{
-  (e: 'close'): void;
-  (e: 'refresh'): void;
+  (_e: 'close'): void;
+  (_e: 'refresh'): void;
 }>();
 </script>

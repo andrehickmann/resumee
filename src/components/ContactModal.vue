@@ -102,8 +102,8 @@ defineProps<{
 }>();
 
 defineEmits<{
-  (e: 'close'): void;
-  (e: 'submit'): void;
+  (_e: 'close'): void;
+  (_e: 'submit'): void;
 }>();
 
 // Auto detect theme based on system preference

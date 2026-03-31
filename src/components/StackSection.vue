@@ -6,9 +6,9 @@
     </div>
     <div class="stack-slider-wrapper">
       <div ref="stackTrack" class="stack-track" @scroll="updateCurrentIndex">
-        <article 
-          v-for="(item, index) in copy.stackItems" 
-          :key="item.title" 
+        <article
+          v-for="(item, index) in copy.stackItems"
+          :key="item.title"
           class="stack-card reveal"
           :data-index="index"
         >
@@ -64,11 +64,11 @@ const startAuto = () => {
   if (autoTimer) return;
   const track = stackTrack.value;
   if (!track) return;
-  
+
   autoTimer = setInterval(() => {
     const cards = track.querySelectorAll('.stack-card');
     if (cards.length === 0) return;
-    
+
     const maxIndex = cards.length - 1;
     const nextIndex = currentIndex.value >= maxIndex ? 0 : currentIndex.value + 1;
     scrollToIndex(nextIndex);
@@ -89,7 +89,7 @@ onMounted(() => {
     stackTrack.value.addEventListener('touchend', startAuto, { passive: true });
     stackTrack.value.addEventListener('mouseenter', stopAuto);
     stackTrack.value.addEventListener('mouseleave', startAuto);
-    
+
     // Start auto-rotation after mount
     setTimeout(startAuto, 500);
   }

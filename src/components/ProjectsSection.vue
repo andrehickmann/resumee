@@ -45,9 +45,9 @@
         v-for="(project, index) in displayedProjects"
         :key="project.title"
         class="project-card reveal tilt"
-        :class="{ 
+        :class="{
           'project-cta': project.tags && project.tags.includes('Opportunity'),
-          'visible': index >= MOBILE_LIMIT && showAll
+          visible: index >= MOBILE_LIMIT && showAll
         }"
         role="button"
         tabindex="0"
@@ -83,15 +83,15 @@ const props = defineProps<{
   projectTags: string[];
   projectYears: number[];
   filteredProjects: Project[];
-  isTagActive: (tag: string) => boolean;
-  isYearActive: (year: number) => boolean;
+  isTagActive: (_tag: string) => boolean;
+  isYearActive: (_year: number) => boolean;
 }>();
 
 defineEmits<{
-  (e: 'toggle-filter', tag: string): void;
-  (e: 'toggle-year', year: number): void;
-  (e: 'reset-filters'): void;
-  (e: 'open-project', project: Project): void;
+  (_e: 'toggle-filter', _tag: string): void;
+  (_e: 'toggle-year', _year: number): void;
+  (_e: 'reset-filters'): void;
+  (_e: 'open-project', _project: Project): void;
 }>();
 
 const showAll = ref(false);
@@ -131,9 +131,12 @@ const showAllProjects = () => {
 };
 
 // Reset showAll when filters change
-watch(() => props.filteredProjects.length, () => {
-  if (showAll.value && props.filteredProjects.length <= MOBILE_LIMIT) {
-    showAll.value = false;
+watch(
+  () => props.filteredProjects.length,
+  () => {
+    if (showAll.value && props.filteredProjects.length <= MOBILE_LIMIT) {
+      showAll.value = false;
+    }
   }
-});
+);
 </script>
