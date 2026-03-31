@@ -38,6 +38,7 @@ export default [
         process: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
+        __APP_VERSION__: 'readonly',
         module: 'readonly',
         require: 'readonly'
       }

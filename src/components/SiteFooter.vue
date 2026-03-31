@@ -2,6 +2,7 @@
   <footer class="site-footer">
     <span class="footer-left">{{ copy.footer }}</span>
     <span class="footer-note">{{ copy.footerNote }}</span>
+    <span class="footer-version">{{ copy.footerVersionLabel }} {{ appVersion }}</span>
     <span class="footer-links">
       <RouterLink to="/legal#impressum">{{ copy.footerImprint }}</RouterLink>
       <RouterLink to="/legal#datenschutz">{{ copy.footerPrivacy }}</RouterLink>
@@ -27,8 +28,19 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { useAppVersion } from '../composables/useAppVersion';
+
+const { appVersion } = useAppVersion();
 
 defineProps<{
-  copy: Record<string, unknown>;
+  copy: {
+    footer: string;
+    footerNote: string;
+    footerVersionLabel: string;
+    footerImprint: string;
+    footerPrivacy: string;
+    footerReportBug: string;
+    footerGitHub: string;
+  };
 }>();
 </script>
