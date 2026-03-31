@@ -83,11 +83,6 @@ const techs = techLabels.map((label) => ({
   color: stringToColor(label)
 }));
 
-const props = defineProps<{
-  avatarCenter?: { x: number; y: number };
-  avatarRadius?: number;
-}>();
-
 function initNodes() {
   if (!canvas.value) return;
   const w = canvas.value.width;
