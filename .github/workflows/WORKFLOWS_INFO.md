@@ -1,47 +1,49 @@
 # GitHub Actions Workflows
 
-## Aktuelle Workflows
+## Current Workflows
 
 ### ci.yml - Continuous Integration
 
-**Zweck:** Prüft Code-Qualität bei PRs und Feature-Branches
+**Purpose:** Checks code quality for pull requests and feature branches.
 
-**Wann läuft es:**
+**When it runs:**
 
-- Bei jedem Push auf Branches (außer master/main)
-- Bei jedem Pull Request
+- On every push to branches except `master` and `main`
+- On every pull request
 
-**Was macht es:**
+**What it does:**
 
 1. ✅ Node.js 24 Setup
-2. ✅ Dependencies installieren (`npm ci`)
-3. ✅ Linting (`npm run lint`)
-4. ✅ Build testen (`npm run build`)
+2. ✅ Installs dependencies with `npm ci`
+3. ✅ Runs linting with `npm run lint`
+4. ✅ Runs type checking with `npm run typecheck`
+5. ✅ Runs tests with `npm run test`
+6. ✅ Verifies the build with `npm run build`
 
-**Wichtig:** Läuft NICHT auf master/main, da Cloudflare Pages das übernimmt.
+**Important:** This workflow does not run on `master` or `main`; production deployment is handled separately.
 
 ---
 
 ## Deployment
 
-**Produktions-Deployment erfolgt über GitHub Releases:**
+**Production deployment is triggered by GitHub Releases:**
 
-1. Release in GitHub veröffentlichen
-2. `release-deploy.yml` baut die App
-3. `npm run deploy` lädt zu Cloudflare hoch
-4. Live auf hickmann-kuschnereit.de
+1. Publish a release on GitHub
+2. `release-deploy.yml` builds the app
+3. `npm run deploy` deploys it to Cloudflare
+4. The site goes live on hickmann-kuschnereit.de
 
-**Wichtig:** Cloudflare Pages Auto-Deploy im Dashboard deaktivieren.
+**Important:** Keep Cloudflare Pages auto-deploy disabled in the dashboard.
 
 ---
 
 ## Preview Deployments (Pull Requests)
 
-**Jeder Pull Request** erzeugt ein Preview-Deployment:
+**Every pull request** creates a preview deployment:
 
 `https://resumee-pr-<PR_NUMBER>.andre-hickmann-ger.workers.dev`
 
-Der Workflow kommentiert die URL direkt im PR.
+The workflow posts the preview URL directly to the pull request.
 
 ---
 
@@ -50,27 +52,27 @@ Der Workflow kommentiert die URL direkt im PR.
 ```
 Feature Branch
     ↓
-Push/PR → GitHub Actions CI (lint + build test)
+Push/PR → GitHub Actions CI (lint + typecheck + test + build)
     ↓
-Merge to master
+Merge to `master`
     ↓
-Release erstellen
+Create a release
     ↓
 GitHub Actions Release Deploy
     ↓
-Live auf hickmann-kuschnereit.de
+Live on hickmann-kuschnereit.de
 ```
 
 ---
 
-## Node.js Version
+## Node.js Versions
 
-- **CI Workflow:** Node.js 24 (neueste Version)
-- **Release Deploy:** Node.js 20.x (GitHub Actions)
-- **Local Dev:** Wie in package.json definiert
+- **CI Workflow:** Node.js 24
+- **Release Deploy:** Node.js 24
+- **Preview Deploy:** Node.js 24
+- **Local Development:** As defined in `package.json`
 
-**Warum unterschiedlich?**
+**GitHub Actions Runtime**
 
-- CI sollte neueste Version nutzen für Tests
-- Release Deploy läuft in GitHub Actions
-- Beides funktioniert für dieses Projekt
+- All repository workflows use current action majors that are compatible with the Node 24 runtime.
+- Warnings from `Analyze` or `Upload Results` may still come from GitHub Code Scanning or GitHub's default setup rather than from these workflow files.
