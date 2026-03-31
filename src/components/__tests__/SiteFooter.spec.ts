@@ -12,7 +12,7 @@ const copy = {
 };
 
 describe('SiteFooter', () => {
-  it('renders the app version in the footer', () => {
+  it('renders the app version as a release link in the footer', () => {
     const wrapper = mount(SiteFooter, {
       props: { copy },
       global: {
@@ -22,6 +22,10 @@ describe('SiteFooter', () => {
       }
     });
 
-    expect(wrapper.find('.footer-version').text()).toContain(`Version ${__APP_VERSION__}`);
+    const releaseLink = wrapper.find(
+      `a[href="https://github.com/andrehickmann/resumee/releases/tag/v${__APP_VERSION__}"]`
+    );
+    expect(releaseLink.exists()).toBe(true);
+    expect(releaseLink.text()).toBe(`Version ${__APP_VERSION__}`);
   });
 });

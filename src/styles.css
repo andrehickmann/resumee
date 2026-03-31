@@ -1524,7 +1524,7 @@ a:focus-visible {
 
 .site-footer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto 1fr;
   align-items: center;
   padding: 2rem 6vw 1rem;
   font-size: 0.85rem;
@@ -1539,12 +1539,6 @@ a:focus-visible {
 .footer-note {
   font-family: 'JetBrains Mono', monospace;
   justify-self: center;
-}
-
-.footer-version {
-  font-family: 'JetBrains Mono', monospace;
-  justify-self: center;
-  white-space: nowrap;
 }
 
 .palette {
@@ -1754,9 +1748,6 @@ a:focus-visible {
     order: -1;
   }
 
-  .footer-version {
-    justify-self: start;
-  }
 }
 
 @media (max-width: 700px) {
