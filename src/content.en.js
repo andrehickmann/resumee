@@ -258,7 +258,7 @@ export const contentEn = {
       period: '2024',
       start: 2024,
       end: 2024,
-      title: 'Somnofox sleep analysis',
+      title: 'Sleep analysis platform',
       description: 'App for snoring detection with analysis and diagnostic support.',
       tags: ['Health', 'Mobile', 'Analytics']
     },
