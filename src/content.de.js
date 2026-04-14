@@ -330,7 +330,7 @@ export const contentDe = {
       period: '2024',
       start: 2024,
       end: 2024,
-      title: 'Somnofox Schlafanalyse',
+      title: 'Schlafanalyse-Plattform',
       description: 'App zur Erkennung von Schnarchgeräuschen mit Analyse & Diagnosehilfe.',
       tags: ['Health', 'Mobile', 'Analytics']
     },
