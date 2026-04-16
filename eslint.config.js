@@ -68,6 +68,14 @@ export default [
     }
   },
 
+  // Vue templates consume <script setup> bindings that core ESLint cannot always see.
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'no-useless-assignment': 'off'
+    }
+  },
+
   // Test files (Vitest globals)
   {
     files: ['**/*.spec.*', '**/__tests__/**'],
