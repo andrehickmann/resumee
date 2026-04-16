@@ -22,7 +22,7 @@
     "lint:staged": "lint-staged"
   },
   "dependencies": {
-    "@unhead/vue": "^2.1.13",
+    "@unhead/vue": "^3.0.4",
     "vue": "^3.5.31",
     "vue-i18n": "^11.2.8",
     "vue-router": "^5.0.4"
@@ -50,8 +50,6 @@
     "wrangler": "^4.83.0"
   },
   "overrides": {
-    "@unhead/dom": "2.1.13",
-    "picomatch": "^4.0.4",
-    "unhead": "2.1.13"
+    "picomatch": "^4.0.4"
   }
 }
