@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: resumee-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGINS
+        value: https://hickmann-kuschnereit.de,https://www.hickmann-kuschnereit.de
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false

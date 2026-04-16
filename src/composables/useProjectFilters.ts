@@ -1,16 +1,24 @@
 import { computed, ref, type ComputedRef } from 'vue';
 
 export type ProjectItem = {
+  id?: string;
   period: string;
   start: number;
   end: number;
   title: string;
   description: string;
   tags: string[];
+  sortOrder?: number;
 };
 
 export type ContentShape = {
+  [key: string]: unknown;
+  pageTitle: string;
+  contactSuccessMessage?: string;
   filtersAll: string;
+  stats: { key: string; value: string; label: string }[];
+  nav: { id: string; label: string }[];
+  industries: string[];
   projects: ProjectItem[];
 };
 

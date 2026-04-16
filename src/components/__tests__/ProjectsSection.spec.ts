@@ -1,7 +1,15 @@
 import { mount } from '@vue/test-utils';
 import ProjectsSection from '../ProjectsSection.vue';
 
-type Project = { title: string; period: string; description: string; tags: string[] };
+type Project = {
+  id: string;
+  title: string;
+  period: string;
+  start: number;
+  end: number;
+  description: string;
+  tags: string[];
+};
 
 const copy = {
   projectsTitle: 'Projects',
@@ -14,8 +22,11 @@ const copy = {
 };
 
 const sampleProject: Project = {
+  id: 'test-project',
   title: 'Test',
   period: '2024',
+  start: 2024,
+  end: 2024,
   description: 'Desc',
   tags: ['Vue']
 };
