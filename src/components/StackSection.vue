@@ -8,7 +8,7 @@
       <div ref="stackTrack" class="stack-track" @scroll="updateCurrentIndex">
         <article
           v-for="(item, index) in copy.stackItems"
-          :key="item.title"
+          :key="item.id || item.title"
           class="stack-card reveal"
           :data-index="index"
         >

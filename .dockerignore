@@ -1,0 +1,12 @@
+node_modules
+server/node_modules
+server/.env
+server/.env.*
+!server/.env.example
+dist
+server/dist
+.git
+.wrangler
+.cloudflare
+coverage
+server/coverage

@@ -14,7 +14,11 @@
         ‹
       </button>
       <div ref="track" class="services-track" @scroll="$emit('update-controls')">
-        <article v-for="item in copy.services" :key="item.title" class="service-card reveal">
+        <article
+          v-for="item in copy.services"
+          :key="item.id || item.title"
+          class="service-card reveal"
+        >
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
         </article>
