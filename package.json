@@ -42,7 +42,7 @@
     "husky": "^9.1.6",
     "lint-staged": "^16.4.0",
     "happy-dom": "^20.9.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.8.3",
     "typescript": "^6.0.2",
     "vite": "^8.0.8",
     "vite-ssg": "^28.3.0",
