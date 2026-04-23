@@ -22,7 +22,7 @@
     "lint:staged": "lint-staged"
   },
   "dependencies": {
-    "@unhead/vue": "^3.0.4",
+    "@unhead/vue": "^3.0.5",
     "vue": "^3.5.31",
     "vue-i18n": "^11.2.8",
     "vue-router": "^5.0.4"
