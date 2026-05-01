@@ -50,7 +50,7 @@ jobs:
 
       - name: Comment preview URL
         if: env.HAS_CLOUDFLARE_SECRETS == 'true'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const previewName = '${{ steps.deploy.outputs.preview_name }}';
