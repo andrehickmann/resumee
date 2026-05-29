@@ -47,7 +47,7 @@
     "vite": "^8.0.12",
     "vite-ssg": "^28.3.0",
     "vitest": "^4.1.5",
-    "wrangler": "^4.90.1"
+    "wrangler": "^4.95.0"
   },
   "overrides": {
     "picomatch": "^4.0.4"
