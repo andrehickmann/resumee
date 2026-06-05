@@ -1,0 +1,72 @@
+name: Dependabot Auto-Merge
+
+# Mergt Dependabot-PRs automatisch – aber nur Patch/Minor und erst nachdem
+# der CI-Job 'lint-and-build' erfolgreich war. Major-Updates werden gelabelt
+# und für eine manuelle Prüfung offengelassen.
+#
+# Es ist bewusst KEINE Branch-Protection nötig: Der Job wartet selbst auf den
+# CI-Check, damit der bestehende Release-Flow (Bot-PRs ohne Checks) unberührt bleibt.
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: dependabot-auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Flag major updates for manual review
+        if: steps.meta.outputs.update-type == 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          DEP: ${{ steps.meta.outputs.dependency-names }}
+          FROM: ${{ steps.meta.outputs.previous-version }}
+          TO: ${{ steps.meta.outputs.new-version }}
+        run: |
+          echo "Major-Update ($DEP $FROM -> $TO) – kein Auto-Merge."
+          gh pr edit "$PR_URL" --add-label "needs-manual-review"
+          gh pr comment "$PR_URL" --body "🚨 **Major-Update** erkannt (\`$DEP\` $FROM → $TO). Auto-Merge übersprungen – bitte manuell prüfen und mergen."
+
+      - name: Wait for CI and squash-merge (patch & minor)
+        if: steps.meta.outputs.update-type == 'version-update:semver-patch' || steps.meta.outputs.update-type == 'version-update:semver-minor'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CHECK_NAME: lint-and-build
+        run: |
+          echo "Warte auf CI-Check '$CHECK_NAME' für $HEAD_SHA (max. 20 Min)…"
+          for i in $(seq 1 60); do
+            RESP=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${HEAD_SHA}/check-runs?check_name=${CHECK_NAME}&per_page=100")
+            TOTAL=$(echo "$RESP" | jq '.check_runs | length')
+            PENDING=$(echo "$RESP" | jq '[.check_runs[] | select(.status != "completed")] | length')
+            BAD=$(echo "$RESP" | jq '[.check_runs[] | select(.status == "completed" and (.conclusion | IN("success","neutral","skipped") | not))] | length')
+            echo "  [$i] total=$TOTAL pending=$PENDING bad=$BAD"
+            if [ "$BAD" -gt 0 ]; then
+              echo "❌ CI nicht erfolgreich – Auto-Merge abgebrochen."
+              exit 1
+            fi
+            if [ "$TOTAL" -gt 0 ] && [ "$PENDING" -eq 0 ]; then
+              echo "✅ CI grün – Squash-Merge wird ausgeführt."
+              gh pr merge "$PR_URL" --squash --delete-branch
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "⏱️ Timeout beim Warten auf CI – kein Merge."
+          exit 1
