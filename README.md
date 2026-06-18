@@ -41,9 +41,11 @@ Open [http://localhost:5173](http://localhost:5173)
 docker compose up --build
 ```
 
-Open [http://resumee.localhost](http://resumee.localhost)
+Open [http://resumee.localhost:81](http://resumee.localhost:81)
 
-Traefik dashboard: [http://localhost:8080](http://localhost:8080)
+API: [http://localhost:3000/health](http://localhost:3000/health)
+
+Traefik dashboard: [http://localhost:8081](http://localhost:8081)
 
 **Note:** If `resumee.localhost` doesn't resolve, add to `/etc/hosts`:
 
@@ -75,6 +77,10 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 │   ├── content.de.js                  # German content
 │   ├── content.en.js                  # English content
 │   └── router/index.ts                # Vue Router config
+├── server/
+│   ├── prisma/                        # PostgreSQL schema, migrations, seed
+│   ├── src/                           # Fastify API
+│   └── tests/                         # API tests
 ├── .env.production                    # Production env vars
 ├── wrangler.jsonc                     # Cloudflare config
 └── docker-compose.yml                 # Docker setup
@@ -99,17 +105,98 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 ### Deployment & Services
 
 - **Cloudflare Pages** - Edge deployment
+- **Fastify API** - Read-only resume data backend
+- **PostgreSQL + Prisma** - Dynamic resume data storage
 - **Web3Forms** - Contact form backend (free tier)
 - **hCaptcha** - Spam protection
 
 ## 📝 Content Management
 
-### Updating Content
+### Updating Frontend Copy
 
-Edit content in language-specific files:
+Edit UI labels, navigation and static page copy in language-specific files:
 
 - **German:** `src/content.de.js`
 - **English:** `src/content.en.js`
+
+Dynamic resume data (projects, skills, services, industries and timeline entries) is loaded from the API. The same content files remain the frontend fallback if the API is unavailable.
+
+### Resume API
+
+The backend lives in `server/` and exposes:
+
+- `GET /health`
+- `GET /v1/resume?locale=de|en`
+
+Local API setup:
+
+```bash
+# Start frontend, API and PostgreSQL
+docker compose up --build
+
+# Apply database migrations
+docker compose run --rm api npm run prisma:deploy
+
+# Seed initial DE/EN resume data from src/content.*.js
+docker compose run --rm api npm run prisma:seed
+```
+
+Backend environment variables:
+
+- `DATABASE_URL`
+- `PORT`
+- `CORS_ORIGINS`
+- `NODE_ENV`
+
+For Docker development, `CORS_ORIGINS` includes `http://resumee.localhost:81`.
+
+Frontend API configuration:
+
+```bash
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+Production default: `https://api.hickmann-kuschnereit.de`
+
+### Production API Deployment (Render + Neon)
+
+Recommended production split:
+
+- Frontend: Cloudflare
+- API: Render web service from `render.yaml`
+- Database: Neon Postgres
+
+Neon setup:
+
+1. Create a Neon project.
+2. Copy the pooled connection string as `DATABASE_URL`.
+3. Copy the direct connection string as `DIRECT_URL`.
+4. Use the `?sslmode=require` parameter from Neon if it is included in the connection string.
+
+Render setup:
+
+1. Create a new Blueprint from this repository.
+2. Select `render.yaml`.
+3. Set these environment variables on the `resumee-api` service:
+   - `DATABASE_URL`: Neon pooled connection string
+   - `DIRECT_URL`: Neon direct connection string
+   - `CORS_ORIGINS`: `https://hickmann-kuschnereit.de,https://www.hickmann-kuschnereit.de`
+4. Deploy the service.
+5. Add `api.hickmann-kuschnereit.de` as a custom domain in Render.
+6. Add the Render-provided DNS record in Cloudflare.
+
+The production container runs Prisma migrations on start via `npm run start:prod`. Initial seed data must be loaded manually once:
+
+```bash
+docker compose run --rm \
+  -e DATABASE_URL="<neon pooled connection string>" \
+  -e DIRECT_URL="<neon direct connection string>" \
+  -e NODE_ENV=production \
+  -e ALLOW_PRODUCTION_SEED=true \
+  api npm run prisma:seed
+```
+
+Do not run the production seed again after content is edited in the database; the seed clears and recreates dynamic resume data for each locale.
 
 ### Updating CV
 
@@ -208,6 +295,18 @@ npm run format
 
 # Deploy to Cloudflare (requires wrangler auth)
 npm run deploy
+```
+
+### Backend Commands
+
+Run backend commands through Docker:
+
+```bash
+docker compose run --rm api npm run lint
+docker compose run --rm api npm run typecheck
+docker compose run --rm api npm run test
+docker compose run --rm api npm run prisma:deploy
+docker compose run --rm api npm run prisma:seed
 ```
 
 ## 🐳 Docker Commands

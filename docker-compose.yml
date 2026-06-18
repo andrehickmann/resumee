@@ -7,7 +7,7 @@ services:
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
     ports:
-      - '80:80'
+      - '81:80'
       - '8081:8080'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -16,7 +16,7 @@ services:
     build:
       context: .
       target: development
-    command: npm run dev -- --host 0.0.0.0 --port 5173
+    command: npm run dev
     volumes:
       - .:/app
       - node_modules:/app/node_modules
@@ -29,5 +29,43 @@ services:
       - traefik.http.routers.resumee.entrypoints=web
       - traefik.http.services.resumee.loadbalancer.server.port=5173
 
+  api:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+      target: development
+    command: npm run dev
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - api_node_modules:/app/server/node_modules
+    environment:
+      - DATABASE_URL=postgresql://resumee:resumee@db:5432/resumee?schema=public
+      - DIRECT_URL=postgresql://resumee:resumee@db:5432/resumee?schema=public
+      - PORT=3000
+      - CORS_ORIGINS=http://localhost:5173,http://resumee.localhost,http://resumee.localhost:81,https://hickmann-kuschnereit.de
+      - NODE_ENV=development
+    ports:
+      - '3000:3000'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.resumee-api.rule=Host(`api.resumee.localhost`)
+      - traefik.http.routers.resumee-api.entrypoints=web
+      - traefik.http.services.resumee-api.loadbalancer.server.port=3000
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_DB=resumee
+      - POSTGRES_USER=resumee
+      - POSTGRES_PASSWORD=resumee
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
   node_modules:
+  api_node_modules:
+  postgres_data:

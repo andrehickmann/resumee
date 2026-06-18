@@ -8,7 +8,7 @@
       <HeroSection :copy="copy" :stats-display="statsDisplay" />
 
       <ServicesSection
-        :copy="copy"
+        :copy="dynamicCopy"
         :show-arrows="showServiceArrows"
         :current-index="currentServiceIndex"
         @scroll="scrollServices"
@@ -17,18 +17,18 @@
         @goto="gotoService"
       />
 
-      <StackSection :copy="copy" />
+      <StackSection :copy="dynamicCopy" />
 
       <!--<TerminalWidget :copy="copy" :project-count="projectCount" :industry-count="industryCount" />-->
 
       <!--<BugFixSprint :copy="copy" />-->
 
-      <IndustriesSection :copy="copy" :industry-count="industryCount" />
+      <IndustriesSection :copy="dynamicCopy" :industry-count="industryCount" />
 
-      <TimelineSection :copy="copy" />
+      <TimelineSection :copy="dynamicCopy" />
 
       <ProjectsSection
-        :copy="copy"
+        :copy="dynamicCopy"
         :filtered-count="filteredCount"
         :active-filters-count="activeFiltersCount"
         :project-tags="projectTags"
@@ -82,6 +82,7 @@ import { useHead } from '@unhead/vue';
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { type ContentShape, useProjectFilters } from '../composables/useProjectFilters';
+import { useResumeData } from '../composables/useResumeData';
 import { useServicesSlider } from '../composables/useServicesSlider';
 import { useUiEffects } from '../composables/useUiEffects';
 
@@ -122,10 +123,24 @@ const pageDescriptions = {
 } as const;
 
 const copy = computed<ContentShape>(() => tm('app') as ContentShape);
-const industryCount = computed(() => copy.value.industries.length);
-const projectCount = computed(() => copy.value.projects.length);
+const { resumeData } = useResumeData(locale);
+const dynamicCopy = computed<ContentShape>(() => {
+  const data = resumeData.value;
+  if (!data) return copy.value;
+
+  return {
+    ...copy.value,
+    services: data.services,
+    stackItems: data.skills,
+    industries: data.industries.map((industry) => industry.name),
+    projects: data.projects,
+    careerTimeline: data.timeline
+  };
+});
+const industryCount = computed(() => dynamicCopy.value.industries.length);
+const projectCount = computed(() => dynamicCopy.value.projects.length);
 const statsDisplay = computed(() =>
-  copy.value.stats.map((stat) => {
+  dynamicCopy.value.stats.map((stat) => {
     if (stat.key === 'industries') {
       return { ...stat, value: String(industryCount.value) };
     }
@@ -148,7 +163,7 @@ const {
   isTagActive,
   isYearActive,
   resetOnLangChange
-} = useProjectFilters(copy);
+} = useProjectFilters(dynamicCopy);
 
 const {
   showServiceArrows,
