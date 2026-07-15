@@ -9,7 +9,15 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   // Ignore patterns
   {
-    ignores: ['dist/**', 'node_modules/**', '.cloudflare/**', 'docker/**', '.lintstagedrc.cjs']
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'server/dist/**',
+      'server/node_modules/**',
+      '.cloudflare/**',
+      'docker/**',
+      '.lintstagedrc.cjs'
+    ]
   },
 
   // Base configuration for all files

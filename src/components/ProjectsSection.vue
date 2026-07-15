@@ -43,7 +43,7 @@
     <div class="project-grid">
       <article
         v-for="(project, index) in displayedProjects"
-        :key="project.title"
+        :key="project.id || project.title"
         class="project-card reveal tilt"
         :class="{
           'project-cta': project.tags && project.tags.includes('Opportunity'),

@@ -13,7 +13,7 @@
       <p class="education-note">{{ copy.educationNote }}</p>
       <div
         v-for="item in copy.careerTimeline"
-        :key="item.period"
+        :key="item.id || item.period"
         class="timeline-item reveal"
         :class="{ current: item.period.includes('heute') || item.period.includes('present') }"
       >
