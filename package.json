@@ -43,7 +43,7 @@
     "lint-staged": "^17.0.8",
     "happy-dom": "^20.11.1",
     "prettier": "^3.9.6",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vite": "^8.1.5",
     "vite-ssg": "^28.3.0",
     "vitest": "^4.1.10",
