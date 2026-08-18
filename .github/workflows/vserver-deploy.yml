@@ -82,23 +82,40 @@ jobs:
       - name: Erreichbarkeit pruefen
         env:
           URL: ${{ secrets.VSERVER_HEALTHCHECK_URL }}
+          HOST: ${{ secrets.VSERVER_HOST }}
         run: |
           if [ -z "$URL" ]; then
             echo "::warning::VSERVER_HEALTHCHECK_URL fehlt – Pruefung uebersprungen."
             exit 0
           fi
-          # Ein paar Versuche, weil der Tausch des Containers und der Cache von
-          # Cloudflare nicht auf die Sekunde zusammenfallen.
+
+          # Geprueft wird der Ursprung, nicht der Weg ueber Cloudflare.
+          #
+          # Zwei Gruende. Erstens misst ein Deploy nur, was auf dem Server liegt –
+          # ob der Proxy davor arbeitet, ist eine andere Frage und darf ein Deploy
+          # nicht rot machen. Zweitens antwortet Cloudflare einem GitHub-Runner mit
+          # 403: Anfragen aus Rechenzentren gelten als Bot. Am 18.08.2026 lief das
+          # Deploy deshalb durch und die Pruefung fiel trotzdem durch, obwohl die
+          # Seite fuer Besucher einwandfrei lief.
+          #
+          # --resolve biegt nur die Namensauflösung um; Zertifikatspruefung und
+          # Host-Header bleiben. Der Schritt prueft damit zugleich, dass am Ursprung
+          # ein gueltiges Zertifikat fuer diesen Namen liegt – die Bedingung, von
+          # der Cloudflares "Full (strict)" abhaengt.
+          HOST_NAME="$(printf '%s' "$URL" | sed -E 's#^https?://([^/]+).*#\1#')"
+          echo "Pruefe $URL am Ursprung ($HOST_NAME -> $HOST)"
+
           for i in 1 2 3 4 5; do
-            CODE="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 15 "$URL" || echo 000)"
+            CODE="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 15 \
+                    --resolve "${HOST_NAME}:443:${HOST}" "$URL" || echo 000)"
             echo "Versuch $i: HTTP $CODE"
             if [ "$CODE" = "200" ]; then
-              echo "Seite antwortet." >> "$GITHUB_STEP_SUMMARY"
+              echo "Ursprung antwortet mit 200." >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
             sleep 10
           done
-          echo "::error::$URL antwortet nicht mit 200."
+          echo "::error::Der Ursprung antwortet nicht mit 200."
           exit 1
 
       - name: Schluessel entfernen
