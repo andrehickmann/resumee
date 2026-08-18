@@ -151,9 +151,14 @@ container. Building happens on the server, so no image registry is involved.
 
 ```
 /opt/resumee/                 clone of this repository
-/opt/resumee/.env             see .env.vserver.example
 /opt/resumee/compose.prod.yaml
+/opt/resumee.env              server config – see .env.vserver.example
 ```
+
+The config file sits **next to** the clone, not inside it: the deploy script runs
+`git checkout --force` and `git clean -fd` in the clone, and `.env` is a tracked
+file in this repository — a config placed there is overwritten on the first
+deploy. Override the location with `RESUMEE_ENV_FILE` if needed.
 
 Deploy or roll back by hand:
 

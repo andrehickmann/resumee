@@ -19,6 +19,15 @@ REF="${1:-master}"
 PROJECT="resumee"
 COMPOSE_FILE="compose.prod.yaml"
 
+# Die Serverkonfiguration liegt ABSICHTLICH ausserhalb des Klons.
+#
+# Unten stehen "git checkout --force" und "git clean -fd" – beide fassen alles
+# unterhalb des Projektverzeichnisses an. Eine .env darin waere nach dem ersten
+# Deploy weg: `.env` ist im Repo eingecheckt, checkout ueberschreibt sie also mit
+# der Repo-Fassung, und die kennt RESUMEE_HOST_RULE nicht. Genau das ist am
+# 18.08.2026 beim ersten regulaeren Deploy passiert.
+ENV_FILE="${RESUMEE_ENV_FILE:-/opt/resumee.env}"
+
 # Immer im Projektverzeichnis arbeiten, egal von wo aufgerufen.
 cd "$(dirname "$(readlink -f "$0")")/.."
 ROOT="$(pwd)"
@@ -30,8 +39,9 @@ if [ ! -f "$COMPOSE_FILE" ]; then
   exit 1
 fi
 
-if [ ! -f .env ]; then
-  echo "FEHLER: .env fehlt. Vorlage: .env.vserver.example" >&2
+if [ ! -f "$ENV_FILE" ]; then
+  echo "FEHLER: $ENV_FILE fehlt. Vorlage: .env.vserver.example" >&2
+  echo "       (nicht ins Projektverzeichnis legen – siehe Kommentar oben)" >&2
   exit 1
 fi
 
@@ -59,15 +69,15 @@ git clean -fd
 echo "==> Jetzt auf: $(git rev-parse --short HEAD) ($REF)"
 
 echo "==> Abbild bauen"
-docker compose -p "$PROJECT" -f "$COMPOSE_FILE" build --pull
+docker compose -p "$PROJECT" --env-file "$ENV_FILE" -f "$COMPOSE_FILE" build --pull
 
 echo "==> Container austauschen"
-docker compose -p "$PROJECT" -f "$COMPOSE_FILE" up -d
+docker compose -p "$PROJECT" --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d
 
 # Erst melden, wenn nginx auch antwortet. Ohne diese Schleife gilt ein Deploy
 # als erfolgreich, sobald der Container gestartet ist – auch wenn er
 # unmittelbar danach wieder aussteigt.
-CONTAINER="$(docker compose -p "$PROJECT" -f "$COMPOSE_FILE" ps -q web)"
+CONTAINER="$(docker compose -p "$PROJECT" --env-file "$ENV_FILE" -f "$COMPOSE_FILE" ps -q web)"
 echo "==> Auf Gesundmeldung warten"
 for i in $(seq 1 30); do
   STATUS="$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER" 2>/dev/null || echo none)"
