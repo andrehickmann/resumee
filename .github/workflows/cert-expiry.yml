@@ -1,0 +1,97 @@
+name: Certificate Expiry Check
+
+# Waechter fuer das Zertifikat am Ursprung.
+#
+# Traefik erneuert selbst, ab 30 Tagen Restlaufzeit, und prueft das periodisch
+# ("Testing certificate renew..." im Log). Dieser Workflow ersetzt das nicht — er
+# faengt den Fall, dass die Erneuerung *scheitert*, und das tut sie lautlos:
+# Das alte Zertifikat bleibt gueltig, die Seite laeuft weiter, und der Fehler
+# steht nur in einem Log, das niemand liest. Auffallen wuerde es erst am
+# Ablauftag, und unter Cloudflares "Full (strict)" dann fuer alle Besucher.
+#
+# Bekannte Ursachen, die das ausloesen koennen:
+#   - Ein HTTP-zu-HTTPS-Redirect an der Cloudflare-Edge ("Always Use HTTPS" oder
+#     eine Redirect Rule). Dann erreicht die HTTP-01-Pruefung den Server nicht.
+#   - Ein DNS-Eintrag, der nicht mehr auf den Server zeigt.
+#
+# Schlaegt der Job fehl, verschickt GitHub eine Benachrichtigung an den
+# Repository-Besitzer — das ist der Alarm.
+
+on:
+  schedule:
+    # Montags frueh. Woechentlich genuegt: zwischen Erneuerungsversuch (30 Tage
+    # vor Ablauf) und Schwelle unten liegen neun Tage Puffer.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restlaufzeit am Ursprung pruefen
+        env:
+          URL: ${{ secrets.VSERVER_HEALTHCHECK_URL }}
+          HOST: ${{ secrets.VSERVER_HOST }}
+          # Traefik erneuert bei 30 Tagen. Ist bei 21 Tagen noch nichts passiert,
+          # sind drei Versuchsfenster verstrichen und etwas stimmt nicht. Bleiben
+          # immer noch drei Wochen, um es zu richten.
+          MIN_DAYS: '21'
+        run: |
+          if [ -z "$URL" ] || [ -z "$HOST" ]; then
+            echo "::error::VSERVER_HEALTHCHECK_URL oder VSERVER_HOST fehlt."
+            exit 1
+          fi
+
+          HOST_NAME="$(printf '%s' "$URL" | sed -E 's#^https?://([^/]+).*#\1#')"
+
+          # Gemessen wird am Ursprung, nicht an der Edge. Ueber Cloudflare bekaeme
+          # man dessen eigenes Zertifikat zu sehen — das sagt nichts darueber, ob
+          # Traefik seines erneuert hat.
+          END="$(echo \
+            | openssl s_client -connect "${HOST}:443" -servername "$HOST_NAME" 2>/dev/null \
+            | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)"
+
+          if [ -z "$END" ]; then
+            echo "::error::Kein Zertifikat vom Ursprung erhalten."
+            exit 1
+          fi
+
+          END_TS="$(date -u -d "$END" +%s)"
+          NOW_TS="$(date -u +%s)"
+          DAYS="$(( (END_TS - NOW_TS) / 86400 ))"
+
+          ISSUER="$(echo \
+            | openssl s_client -connect "${HOST}:443" -servername "$HOST_NAME" 2>/dev/null \
+            | openssl x509 -noout -issuer 2>/dev/null)"
+
+          {
+            echo "## Zertifikat $HOST_NAME"
+            echo
+            echo "| | |"
+            echo "| --- | --- |"
+            echo "| gueltig bis | $END |"
+            echo "| Tage verbleibend | $DAYS |"
+            echo "| Aussteller | ${ISSUER#issuer=} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          echo "Gueltig bis $END – $DAYS Tage verbleibend."
+          echo "Aussteller: $ISSUER"
+
+          # Ein Testzertifikat am Ursprung wird von "Full (strict)" abgelehnt; das
+          # ist genauso kaputt wie ein abgelaufenes, faellt aber sonst nicht auf.
+          case "$ISSUER" in
+            *STAGING*)
+              echo "::error::Am Ursprung liegt ein Let's-Encrypt-TESTzertifikat. Cloudflare lehnt das unter \"Full (strict)\" ab."
+              exit 1
+              ;;
+          esac
+
+          if [ "$DAYS" -lt "$MIN_DAYS" ]; then
+            echo "::error::Nur noch $DAYS Tage gueltig – die automatische Erneuerung greift offenbar nicht. Pruefen, ob an der Cloudflare-Edge wieder ein HTTP-zu-HTTPS-Redirect aktiv ist (Always Use HTTPS / Redirect Rules); der verhindert die HTTP-01-Pruefung."
+            exit 1
+          fi
+
+          echo "In Ordnung."

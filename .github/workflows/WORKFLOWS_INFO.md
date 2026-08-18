@@ -45,6 +45,7 @@ checks from the outside that the site answers with 200.
 | `codeql.yml`                | push, PR, weekly                         | Code scanning                                 |
 | `dependency-review.yml`     | pull request                             | Flags risky dependency changes                |
 | `dependabot-auto-merge.yml` | pull request                             | Merges Dependabot patch/minor after CI passes |
+| `cert-expiry.yml`           | weekly, manual                           | Warns before the origin certificate expires   |
 
 ---
 
@@ -65,6 +66,23 @@ with SSL mode **Full (strict)**.
 reacting to `release: published`: a release created with the `GITHUB_TOKEN` does
 not trigger further workflows. Reacting to that event would produce a release
 flow that never deploys — and looks green while doing so.
+
+### Certificate monitoring
+
+Traefik renews the origin certificate on its own, starting 30 days before expiry.
+`cert-expiry.yml` does not duplicate that — it catches a renewal that **fails**,
+which happens silently: the old certificate stays valid, the site keeps serving,
+and the error only lands in a log nobody reads. It would surface on the expiry
+date, and under Cloudflare's "Full (strict)" it would then hit every visitor.
+
+The job measures the remaining days **at the origin** (over the edge you would see
+Cloudflare's own certificate, which says nothing about Traefik's) and fails below
+21 days. It also fails if the origin serves a Let's Encrypt _staging_ certificate,
+which "Full (strict)" rejects just as hard as an expired one.
+
+The most likely cause of a stalled renewal is an HTTP-to-HTTPS redirect at the
+Cloudflare edge — either the "Always Use HTTPS" switch or a Redirect Rule. Both
+keep the HTTP-01 challenge from reaching the server and must stay disabled.
 
 ### Where to see whether a release deployed
 
