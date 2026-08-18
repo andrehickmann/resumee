@@ -4,11 +4,11 @@ permissions:
   contents: read
   packages: read
 
+# Nur bei Pull Requests. Vorher stand hier zusaetzlich ein push-Trigger, und beide
+# feuerten fuer denselben Commit: jeder Branch mit offenem PR lief zweimal durch
+# Lint, Typecheck, Tests und Build. Vor einem Merge laeuft die Pruefung ohnehin
+# ueber den PR, ein zweiter Lauf sagt nichts Neues.
 on:
-  push:
-    branches-ignore:
-      - master
-      - main
   pull_request:
 
 jobs:
