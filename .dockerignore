@@ -1,0 +1,13 @@
+# Der Build-Context geht komplett an den Docker-Daemon – auf dem vServer ueber
+# das Netz. Was der Build nicht braucht, bleibt draussen.
+node_modules
+dist
+.dist
+.git
+.github
+.idea
+.husky
+.wrangler
+coverage
+*.log
+.DS_Store

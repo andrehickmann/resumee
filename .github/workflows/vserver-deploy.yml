@@ -1,0 +1,106 @@
+name: Deploy (vServer)
+
+# Bringt einen Stand auf den vServer. Gebaut wird dort, nicht hier: der Server
+# holt den Stand aus dem Repo und baut das Abbild selbst (scripts/deploy.sh).
+# Dieser Workflow loest das nur aus und prueft danach, ob die Seite antwortet.
+#
+# Aufgerufen wird er aus publish-release.yml und release-deploy.yml sowie bei
+# Bedarf per Hand. Ein einziger Ort fuer das Deployen – sonst driften die Wege
+# auseinander und niemand weiss, welcher zuletzt gelaufen ist.
+#
+# Vorausgesetzte Secrets:
+#   VSERVER_HOST              Adresse des Servers (geheim, weil Cloudflare die
+#                             Ursprungsadresse sonst umsonst verbirgt)
+#   VSERVER_USER              Benutzer fuer das Deployen
+#   VSERVER_SSH_KEY           privater Schluessel dieses Benutzers
+#   VSERVER_SSH_KNOWN_HOSTS   Ausgabe von `ssh-keyscan -H <host>`
+#   VSERVER_HEALTHCHECK_URL   Adresse, die nach dem Deploy antworten muss
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: Tag, Zweig oder Commit, der ausgeliefert wird.
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Tag, Zweig oder Commit, der ausgeliefert wird.
+        required: false
+        default: master
+        type: string
+
+permissions:
+  contents: read
+
+# Zwei Deploys gleichzeitig wuerden sich im Arbeitsverzeichnis auf dem Server
+# in die Quere kommen. Nicht abbrechen: ein halb durchgelaufenes Deploy ist
+# schlimmer als ein wartendes.
+concurrency:
+  group: vserver-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: SSH einrichten
+        env:
+          SSH_KEY: ${{ secrets.VSERVER_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.VSERVER_SSH_KNOWN_HOSTS }}
+        run: |
+          if [ -z "$SSH_KEY" ] || [ -z "$KNOWN_HOSTS" ]; then
+            echo "::error::VSERVER_SSH_KEY oder VSERVER_SSH_KNOWN_HOSTS fehlt."
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # Der Wirtsschluessel kommt aus dem Secret und wird nicht beim ersten
+          # Verbinden blind uebernommen. Sonst laesst sich die Verbindung von
+          # jedem umbiegen, der zwischen Runner und Server sitzt.
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deployen
+        env:
+          HOST: ${{ secrets.VSERVER_HOST }}
+          USER_NAME: ${{ secrets.VSERVER_USER }}
+          REF: ${{ inputs.ref }}
+        run: |
+          # Uebergeben wird nur der Ref-Name. Der Schluessel auf dem Server ist
+          # an /usr/local/bin/resumee-deploy gebunden und nimmt kein Kommando
+          # an – was hier steht, ist dort das Argument und nicht der Befehl.
+          ssh -i ~/.ssh/deploy_key \
+              -o IdentitiesOnly=yes \
+              -o StrictHostKeyChecking=yes \
+              "${USER_NAME}@${HOST}" \
+              -- "$REF"
+
+      - name: Erreichbarkeit pruefen
+        env:
+          URL: ${{ secrets.VSERVER_HEALTHCHECK_URL }}
+        run: |
+          if [ -z "$URL" ]; then
+            echo "::warning::VSERVER_HEALTHCHECK_URL fehlt – Pruefung uebersprungen."
+            exit 0
+          fi
+          # Ein paar Versuche, weil der Tausch des Containers und der Cache von
+          # Cloudflare nicht auf die Sekunde zusammenfallen.
+          for i in 1 2 3 4 5; do
+            CODE="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 15 "$URL" || echo 000)"
+            echo "Versuch $i: HTTP $CODE"
+            if [ "$CODE" = "200" ]; then
+              echo "Seite antwortet." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::$URL antwortet nicht mit 200."
+          exit 1
+
+      - name: Schluessel entfernen
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

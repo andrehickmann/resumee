@@ -18,6 +18,9 @@ concurrency:
 jobs:
   publish-release:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      changed: ${{ steps.version.outputs.changed }}
     steps:
       - name: Checkout master
         uses: actions/checkout@v6
@@ -80,17 +83,13 @@ jobs:
             exit 1
           fi
 
-      - name: Install dependencies
-        if: steps.version.outputs.changed == 'true'
-        run: npm ci --include=optional
-
-      - name: Build
-        if: steps.version.outputs.changed == 'true'
-        run: npm run build
-
-      - name: Deploy to Cloudflare
-        if: steps.version.outputs.changed == 'true'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npm run deploy
+  # Das Deployen haengt als eigener Job an, weil `gh release create` mit dem
+  # GITHUB_TOKEN keine weiteren Workflows anstoesst – auf das Ereignis
+  # "release published" zu warten wuerde hier also nie etwas ausloesen.
+  deploy:
+    needs: publish-release
+    if: needs.publish-release.outputs.changed == 'true'
+    uses: ./.github/workflows/vserver-deploy.yml
+    with:
+      ref: ${{ needs.publish-release.outputs.tag }}
+    secrets: inherit
