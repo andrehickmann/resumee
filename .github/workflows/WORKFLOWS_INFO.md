@@ -72,9 +72,12 @@ flow that never deploys — and looks green while doing so.
 - **Release + deploy result:** Actions → _Publish Release_. The deploy is a job
   **inside** that run (expand it and look for `deploy`), not a separate entry,
   because it is called as a reusable workflow.
-- **Deployment history with timestamps:** the repository's Deployments page —
-  the deploy job declares `environment: production`, so every deployment is
-  recorded there.
+- **Deployment history with timestamps:** the repository's Deployments page.
+  Note that this page does not exist yet — GitHub creates the `production`
+  environment the first time the deploy job runs, and the page appears with the
+  first deployment entry. Until then `/deployments` answers 404. Deploys made by
+  running `scripts/deploy.sh` on the server directly do not show up there either;
+  only runs through the workflow are recorded.
 - **Manually triggered deploys** appear as their own runs under
   Actions → _Deploy (vServer)_.
 
