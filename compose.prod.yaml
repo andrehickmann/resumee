@@ -1,0 +1,66 @@
+# Betrieb auf dem vServer: die Seite haengt sich an das Traefik, das dort schon
+# fuer alle Projekte laeuft. Traefik beendet TLS und holt das Zertifikat; ein
+# eigener Reverse-Proxy gehoert nicht in dieses Projekt.
+#
+# Ausgeliefert wird das Ergebnis von `vite-ssg build` durch ein nginx im
+# Container (siehe Dockerfile, Ziel `production`, und docker/nginx.conf).
+#
+# Vorher in einer .env neben dieser Datei setzen:
+#   RESUMEE_HOST_RULE=Host(`hickmann-kuschnereit.de`) || Host(`www.hickmann-kuschnereit.de`)
+#
+# Die Regel steht bewusst als Ganzes in der .env und nicht als Domainname:
+# beim Umzug laeuft die Seite erst unter einem Testnamen, und dann ist genau
+# eine Zeile zu aendern statt drei Labels.
+#
+# Die Traefik-Werte darunter sind Vorgaben. Weicht die Installation ab, in
+# derselben .env ueberschreiben:
+#   RESUMEE_TRAEFIK_NETWORK=traefik
+#   RESUMEE_TRAEFIK_ENTRYPOINT=websecure
+#   RESUMEE_TRAEFIK_CERTRESOLVER=letsencrypt
+#
+# Beim ersten Start unter einem neuen Namen lohnt letsencrypt-staging: schlaegt
+# die Zustellung fehl, kostet das keinen der wenigen echten Versuche.
+
+services:
+  web:
+    build:
+      context: .
+      target: production
+      args:
+        VITE_UNDER_CONSTRUCTION: ${VITE_UNDER_CONSTRUCTION:-false}
+    restart: unless-stopped
+
+    # Kein ports: – von aussen ist nur Traefik erreichbar, und das kommt ueber
+    # das gemeinsame Netz an den Container.
+    expose:
+      - '80'
+
+    networks:
+      - traefik
+
+    labels:
+      traefik.enable: 'true'
+      # Das Netz muss ausdruecklich benannt werden: bei mehreren Netzen kann
+      # Traefik sonst nicht entscheiden, welche Adresse es nehmen soll.
+      traefik.docker.network: ${RESUMEE_TRAEFIK_NETWORK:-traefik}
+      traefik.http.services.resumee.loadbalancer.server.port: '80'
+
+      traefik.http.routers.resumee.rule: ${RESUMEE_HOST_RULE:?RESUMEE_HOST_RULE fehlt in .env}
+      traefik.http.routers.resumee.entrypoints: ${RESUMEE_TRAEFIK_ENTRYPOINT:-websecure}
+      traefik.http.routers.resumee.tls.certresolver: ${RESUMEE_TRAEFIK_CERTRESOLVER:-letsencrypt}
+      traefik.http.routers.resumee.service: resumee
+      traefik.http.routers.resumee.middlewares: resumee-www
+
+      # www dauerhaft auf die nackte Domain. Die Seite hat genau eine Adresse,
+      # unter der sie zaehlt – alles andere waere doppelter Inhalt fuer
+      # Suchmaschinen und ein zweiter Name in den Metadaten.
+      #
+      # Das $$ ist kein Tippfehler: compose ersetzt $ selbst, und $${1} kommt
+      # als ${1} bei Traefik an – dessen Rueckverweis auf die Klammer oben.
+      traefik.http.middlewares.resumee-www.redirectregex.regex: ^https?://www\.(.*)
+      traefik.http.middlewares.resumee-www.redirectregex.replacement: https://$${1}
+      traefik.http.middlewares.resumee-www.redirectregex.permanent: 'true'
+
+networks:
+  traefik:
+    external: true

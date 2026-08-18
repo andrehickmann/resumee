@@ -1,6 +1,6 @@
 # Portfolio Website - André Hickmann Kuschnereit
 
-> Modern, minimalist portfolio website for a Senior Software Engineer. Built with Vue 3, TypeScript, and deployed on Cloudflare Pages.
+> Modern, minimalist portfolio website for a Senior Software Engineer. Built with Vue 3, TypeScript, and self-hosted on a vServer behind Traefik.
 
 🌐 **Live:** [hickmann-kuschnereit.de](https://hickmann-kuschnereit.de)
 
@@ -12,7 +12,7 @@
 - 🎯 **Interactive Timeline** - Visual career journey with project highlights
 - 📧 **Contact Form** - Web3Forms integration with hCaptcha spam protection
 - 📄 **CV Download** - German & English PDF resumes
-- ⚡ **Lightning Fast** - Deployed on Cloudflare Pages
+- ⚡ **Lightning Fast** - Static SSG output served by nginx, cached at the Cloudflare edge
 - 🔒 **Privacy-Focused** - DSGVO-compliant with Impressum & Datenschutz
 
 ## 🚀 Quick Start
@@ -76,7 +76,8 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 │   ├── content.en.js                  # English content
 │   └── router/index.ts                # Vue Router config
 ├── .env.production                    # Production env vars
-├── wrangler.jsonc                     # Cloudflare config
+├── compose.prod.yaml                  # vServer deployment (Traefik labels)
+├── wrangler.jsonc                     # Cloudflare config (PR previews only)
 └── docker-compose.yml                 # Docker setup
 
 ```
@@ -98,7 +99,8 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 
 ### Deployment & Services
 
-- **Cloudflare Pages** - Edge deployment
+- **Own vServer** - Docker + nginx behind a shared Traefik reverse proxy
+- **Cloudflare** - DNS and CDN/proxy in front of the origin
 - **Web3Forms** - Contact form backend (free tier)
 - **hCaptcha** - Spam protection
 
@@ -121,24 +123,58 @@ Edit content in language-specific files:
 
 ## 🌐 Deployment
 
-### Cloudflare Pages
+### Production: own vServer
 
-Deployments are triggered by **GitHub Releases** (published). A release build is pushed to Cloudflare.
+The site runs on a vServer, behind the Traefik reverse proxy that serves all
+projects on that machine. Traefik terminates TLS and obtains the Let's Encrypt
+certificate; the project itself ships no reverse proxy. Inside the container an
+nginx serves the static output of `vite-ssg build` (see `Dockerfile`, target
+`production`, and `docker/nginx.conf`).
 
-**Important:** Disable automatic Cloudflare Pages builds for this repo, otherwise pushes to `master` will still deploy.
+Cloudflare stays in front as DNS and proxy. Its SSL mode must be
+**Full (strict)** — the origin presents a real Let's Encrypt certificate.
+
+Deployments are triggered by **GitHub Releases**. The workflow
+`vserver-deploy.yml` opens an SSH connection and runs `scripts/deploy.sh` on the
+server; the server checks out the tag, rebuilds the image and swaps the
+container. Building happens on the server, so no image registry is involved.
 
 **Required GitHub Secrets:**
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+- `VSERVER_HOST` — server address (secret, so the Cloudflare proxy keeps hiding it)
+- `VSERVER_USER` — deploy user (`deploy`)
+- `VSERVER_SSH_KEY` — private key of that user
+- `VSERVER_SSH_KNOWN_HOSTS` — output of `ssh-keyscan -H <host>`
+- `VSERVER_HEALTHCHECK_URL` — URL that must answer 200 after the deploy
+
+**On the server:**
+
+```
+/opt/resumee/                 clone of this repository
+/opt/resumee/.env             see .env.vserver.example
+/opt/resumee/compose.prod.yaml
+```
+
+Deploy or roll back by hand:
+
+```bash
+# a release, or any tag/branch/commit
+/opt/resumee/scripts/deploy.sh v1.1.10
+```
+
+The deploy key on the server is bound to a single command
+(`/usr/local/bin/resumee-deploy`) and only accepts a ref name, not an arbitrary
+command.
 
 ### Preview Deployments (Pull Requests)
 
-Every Pull Request creates a **preview deployment** on Cloudflare at:
+Preview deployments still run on **Cloudflare Workers** — they were deliberately
+left there when production moved to the vServer:
 
 `https://resumee-pr-<PR_NUMBER>.workers.dev`
 
-The workflow comments the URL back on the PR.
+The workflow comments the URL back on the PR. This is why `wrangler` and
+`wrangler.jsonc` are still part of the project.
 
 **Environment Variables:**
 
@@ -206,8 +242,9 @@ npm run test:coverage
 # Format code
 npm run format
 
-# Deploy to Cloudflare (requires wrangler auth)
-npm run deploy
+# Preview the production container locally on http://localhost:8080
+# (same image and nginx config the server runs)
+npm run preview
 ```
 
 ## 🐳 Docker Commands

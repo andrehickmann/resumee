@@ -10,10 +10,9 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "vite-ssg build",
-    "preview": "npm run build && wrangler dev",
+    "preview": "docker build --target production -t resumee-preview . && docker run --rm -p 8080:80 resumee-preview",
     "lint": "eslint . --ext .js,.ts,.vue",
     "format": "prettier . --write",
-    "deploy": "npm run build && wrangler deploy",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

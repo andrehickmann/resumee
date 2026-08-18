@@ -1,4 +1,8 @@
-name: Release Deploy (Cloudflare)
+name: Release Deploy (vServer)
+
+# Greift, wenn ein Release von Hand oder ueber einen persoenlichen Token
+# veroeffentlicht wird. Der uebliche Weg laeuft ueber publish-release.yml, das
+# selbst deployt – siehe die Begruendung dort.
 
 permissions:
   contents: read
@@ -8,7 +12,7 @@ on:
     types: [published]
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +24,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: npm
 
       - name: Validate release tag matches package version
         run: |
@@ -32,14 +35,9 @@ jobs:
             exit 1
           fi
 
-      - name: Install dependencies
-        run: npm ci --include=optional
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to Cloudflare
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npm run deploy
+  deploy:
+    needs: validate
+    uses: ./.github/workflows/vserver-deploy.yml
+    with:
+      ref: ${{ github.event.release.tag_name }}
+    secrets: inherit
