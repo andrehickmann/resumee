@@ -1,15 +1,16 @@
 # Portfolio Website - André Hickmann Kuschnereit
 
-> Modern, minimalist portfolio website for a Senior Software Engineer. Built with Vue 3, TypeScript, and self-hosted on a vServer behind Traefik.
+> Portfolio website for a Senior Software Engineer, styled as a code editor ("Terminal x Spatial"). Built with Vue 3, TypeScript, and self-hosted on a vServer behind Traefik.
 
 🌐 **Live:** [hickmann-kuschnereit.de](https://hickmann-kuschnereit.de)
 
 ## ✨ Features
 
-- 🎨 **Modern Design** - Clean, professional UI with smooth animations
+- 🎨 **Editor Design** - Title bar, file tabs, explorer and status bar around the content
 - 🌍 **Bilingual** - Full German/English support (Vue I18n)
-- 📱 **Responsive** - Works perfectly on all devices
-- 🎯 **Interactive Timeline** - Visual career journey with project highlights
+- 📱 **Responsive** - Explorer folds away below 1080px, single column below 640px
+- 🔍 **Command Palette** - Cmd/Ctrl+K jumps to a section, a tag filter or a side project
+- 🎯 **Project Log** - Client projects as a filterable `git log`, side projects with screenshots
 - 📧 **Contact Form** - Web3Forms integration with hCaptcha spam protection
 - 📄 **CV Download** - German & English PDF resumes
 - ⚡ **Lightning Fast** - Static SSG output served by nginx, cached at the Cloudflare edge
@@ -57,24 +58,34 @@ Traefik dashboard: [http://localhost:8080](http://localhost:8080)
 .
 ├── public/
 │   ├── portrait.jpg                    # Profile photo
+│   ├── projects/                       # Side project screenshots
 │   ├── Lebenslauf - *.pdf             # German CV
 │   ├── Resume - *.pdf                 # English CV
 │   ├── cv-generator.html              # German CV template
 │   ├── cv-generator-en.html           # English CV template
 │   └── sitemap.xml                    # SEO sitemap
 ├── src/
-│   ├── components/
-│   │   ├── SiteHeader.vue             # Navigation header
-│   │   ├── ContactModal.vue           # Contact form modal
-│   │   ├── TimelineSection.vue        # Career timeline
-│   │   └── ...
+│   ├── components/terminal/
+│   │   ├── TitleBar.vue               # Window chrome, path, Cmd+K, DE/EN
+│   │   ├── FileTabs.vue               # Section tabs
+│   │   ├── Explorer.vue               # Sidebar tree, outline, availability
+│   │   ├── ProjectsLog.vue            # Client projects as a git log
+│   │   ├── SideProjects.vue           # Side projects with screenshot tabs
+│   │   └── ...                        # One component per section
+│   ├── composables/
+│   │   ├── useScrollSpy.ts            # Active section and anchor scrolling
+│   │   ├── useTerminalProjects.ts     # Tag filters, visible rows, commit hashes
+│   │   ├── useContactForm.ts          # Web3Forms submission
+│   │   └── useKonami.ts               # Easter egg key sequence
 │   ├── views/
-│   │   ├── HomeView.vue               # Main portfolio page
+│   │   ├── TerminalView.vue           # Main portfolio page
 │   │   ├── UnderConstruction.vue      # Launch placeholder
 │   │   └── LegalView.vue              # Impressum & Datenschutz
+│   ├── base.css                       # Global reset, nothing visual
+│   ├── terminal.css                   # Design tokens and styles of the portfolio
 │   ├── content.de.js                  # German content
 │   ├── content.en.js                  # English content
-│   └── router/index.ts                # Vue Router config
+│   └── router.ts                      # Vue Router config
 ├── .env.production                    # Production env vars
 ├── compose.prod.yaml                  # vServer deployment (Traefik labels)
 ├── wrangler.jsonc                     # Cloudflare config (PR previews only)
@@ -112,6 +123,10 @@ Edit content in language-specific files:
 
 - **German:** `src/content.de.js`
 - **English:** `src/content.en.js`
+
+Both files carry the same keys. `rd` holds the copy of the portfolio page, `side`
+the side projects, `projects` the client projects. A project marked
+`placeholder: true` is left out of the project log.
 
 ### Updating CV
 

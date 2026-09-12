@@ -3,12 +3,23 @@
 ## Project Overview
 
 - Vue 3 + TypeScript + Vue Router + vue-i18n
-- UI split into `src/components/`
+- UI split into `src/components/`; the portfolio page lives in `src/components/terminal/`
 - Logic in `src/composables/`
 - Content in `src/content.de.js` and `src/content.en.js`
 - Routes:
-  - `/` → `src/views/HomeView.vue`
+  - `/` → `src/views/TerminalView.vue`
   - `/legal` → `src/views/LegalView.vue`
+
+## Styles
+
+- `src/base.css` is a global reset and nothing else. Keep it that way - in particular
+  do not add `overflow-x: hidden` there, it turns every ancestor into a scroll
+  container and silently breaks `position: sticky` for the title bar, the explorer
+  and the status bar.
+- `src/terminal.css` holds the design tokens and every rule of the portfolio page,
+  all below `.term`.
+- `LegalView.vue` and `UnderConstruction.vue` bring their own scoped styles and do
+  not depend on anything global.
 
 ## Required Workflow (Always)
 

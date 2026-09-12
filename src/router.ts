@@ -1,5 +1,5 @@
 import type { RouteRecordRaw, RouterScrollBehavior } from 'vue-router';
-import HomeView from './views/HomeView.vue';
+import TerminalView from './views/TerminalView.vue';
 import LegalView from './views/LegalView.vue';
 import UnderConstruction from './views/UnderConstruction.vue';
 
@@ -7,7 +7,7 @@ import UnderConstruction from './views/UnderConstruction.vue';
 const UNDER_CONSTRUCTION = import.meta.env.VITE_UNDER_CONSTRUCTION === 'true';
 
 export const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'home', component: UNDER_CONSTRUCTION ? UnderConstruction : HomeView },
+  { path: '/', name: 'home', component: UNDER_CONSTRUCTION ? UnderConstruction : TerminalView },
   { path: '/legal', name: 'legal', component: LegalView }
 ];
 
