@@ -32,7 +32,6 @@ export default [
         // Browser globals
         CanvasRenderingContext2D: 'readonly',
         cancelAnimationFrame: 'readonly',
-        clearInterval: 'readonly',
         document: 'readonly',
         fetch: 'readonly',
         FormData: 'readonly',
@@ -50,6 +49,7 @@ export default [
         navigator: 'readonly',
         performance: 'readonly',
         requestAnimationFrame: 'readonly',
+        clearInterval: 'readonly',
         setInterval: 'readonly',
         setTimeout: 'readonly',
         URL: 'readonly',
@@ -58,7 +58,6 @@ export default [
         process: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
-        __APP_VERSION__: 'readonly',
         module: 'readonly',
         require: 'readonly'
       }
@@ -104,7 +103,10 @@ export default [
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
-        vi: 'readonly'
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        DOMRect: 'readonly'
       }
     }
   },

@@ -1,0 +1,30 @@
+/*
+ * Global reset only. Everything visual belongs to the view that owns it:
+ * `terminal.css` for the portfolio, scoped styles for the legal and
+ * under-construction pages.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+ * No `overflow-x: hidden` here, however tempting: it turns every ancestor into a
+ * scroll container and silently kills `position: sticky` for the title bar, the
+ * explorer and the status bar. Sections clip their own overflow instead.
+ */
+body,
+#app {
+  min-height: 100vh;
+}
