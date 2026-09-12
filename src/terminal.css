@@ -1436,3 +1436,79 @@ body:has(.term) {
 .contact-field.is-captcha .h-captcha {
   min-width: 0;
 }
+
+/* ---------- legal.md ---------- */
+
+.term-body.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.term-tab-icon {
+  color: var(--term-violet);
+}
+
+.term-kbd:where(a) {
+  text-decoration: none;
+}
+
+.legal-prose {
+  font-family: var(--term-font-sans);
+  color: var(--term-muted);
+  max-width: 52rem;
+  margin-top: 1.2rem;
+  font-size: 1rem;
+}
+
+.legal-prose h3 {
+  font-family: var(--term-font-sans);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--term-heading);
+  margin: 2rem 0 0.8rem;
+}
+
+.legal-prose h3 .marker {
+  font-family: var(--term-font-mono);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--term-violet);
+  margin-right: 0.5rem;
+}
+
+.legal-prose p {
+  margin: 0 0 1rem;
+}
+
+.legal-prose ul {
+  margin: 0 0 1rem;
+  padding-left: 1.4rem;
+  list-style: none;
+}
+
+.legal-prose li {
+  position: relative;
+  margin-bottom: 0.35rem;
+}
+
+.legal-prose li::before {
+  content: '-';
+  position: absolute;
+  left: -1.4rem;
+  font-family: var(--term-font-mono);
+  color: var(--term-cyan);
+}
+
+.legal-prose strong {
+  color: var(--term-text);
+  font-weight: 600;
+}
+
+.legal-prose code {
+  font-family: var(--term-font-mono);
+  font-size: 0.85em;
+  color: var(--term-mint);
+  background: var(--term-bg-code);
+  border: 1px solid var(--term-line);
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+}
