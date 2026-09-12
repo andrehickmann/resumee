@@ -106,9 +106,21 @@
 
             <h3><span class="marker">##</span> 5. Hosting und Auslieferung</h3>
             <p>
-              Diese Website wird auf einem eigenen Server (vServer) betrieben. Ihr vorgeschaltet ist
-              Cloudflare als DNS-Anbieter sowie als Content Delivery Network und Proxy; Anfragen an
-              diese Website erreichen daher zunächst Cloudflare.
+              Diese Website wird auf einem eigenen Server (vServer) betrieben. Der Server wird
+              bereitgestellt von:
+            </p>
+            <p>
+              <strong>Anbieter:</strong> manitu GmbH, Welvertstraße 2, 66606 St. Wendel, Deutschland
+            </p>
+            <p>
+              <strong>Datenschutzerklärung:</strong>
+              <a href="https://www.manitu.de/datenschutz/" target="_blank" rel="noopener">
+                https://www.manitu.de/datenschutz/
+              </a>
+            </p>
+            <p>
+              Dem Server vorgeschaltet ist Cloudflare als DNS-Anbieter sowie als Content Delivery
+              Network und Proxy; Anfragen an diese Website erreichen daher zunächst Cloudflare.
             </p>
             <p>
               <strong>Anbieter:</strong> Cloudflare, Inc., 101 Townsend St., San Francisco, CA
