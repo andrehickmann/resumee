@@ -27,7 +27,10 @@ curl -sD- -o /dev/null https://hickmann-kuschnereit.de/<datei> | grep -i 'cf-cac
 ssh hk-server 'docker exec resumee-web-1 ls -l /usr/share/nginx/html/<datei>'
 ```
 
-PDFs are not affected - they fall outside the image rule and get no long cache.
+PDFs get no `expires` from nginx, but Cloudflare caches them on its own for four hours,
+so a replaced CV is stale for that long too - shorter than an image, not exempt. Different
+edge nodes can hold different generations at the same time, so one `curl` that looks
+current does not prove the rollout is done.
 
 ## Styles
 
