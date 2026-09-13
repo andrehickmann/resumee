@@ -555,7 +555,7 @@ export const contentDe = {
     },
     eyebrow: 'Berlin · seit 2003 im Code · offen für Festanstellung',
     heroTitle:
-      'Fullstack heißt: Ich fasse alles an. Anforderungen, Code, Deployment, Bugs, Support, KI.',
+      'Fullstack heißt: Ich kümmere mich um alles. Anforderungen, Code, Deployment, Bugs, Support, KI.',
     heroLead:
       'Senior Fullstack Engineer. 23 Jahre Frontend, Backend, Cloud – und alles davor: Konzeption, funktionale und technische Anforderungen, Architekturplanung. Ich suche eine Festanstellung in Berlin oder remote. Keine Freelance-Anfragen.',
     heroPrimary: '$ open ./projekte.log',
