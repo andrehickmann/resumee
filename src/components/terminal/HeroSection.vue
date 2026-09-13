@@ -42,9 +42,9 @@
 
       <figure class="hero-portrait">
         <div class="hero-portrait-head">
-          <span>portrait.jpg</span><span>{{ rd.portraitMeta }}</span>
+          <span>portrait-2026.jpg</span><span>{{ rd.portraitMeta }}</span>
         </div>
-        <img src="/portrait.jpg" :alt="portraitAlt" width="776" height="776" />
+        <img src="/portrait-2026.jpg" :alt="portraitAlt" width="776" height="776" />
         <figcaption>
           <span>{{ brand }}</span
           ><span class="online">● {{ rd.availability }}</span>
