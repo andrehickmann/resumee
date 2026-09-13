@@ -19,7 +19,7 @@ export const contentEn = {
   heroGhost: 'Explore stack',
   stats: [
     { key: 'experience', value: '23', label: 'Years in practice' },
-    { key: 'teams', value: '40', label: 'Teams supported' },
+    { key: 'teams', value: '15', label: 'Teams supported' },
     { key: 'projects', value: '', label: 'Projects' },
     { key: 'industries', value: '', label: 'Industries' }
   ],
