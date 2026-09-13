@@ -35,7 +35,7 @@
     <div class="term-explorer-foot">
       <div><span class="online">●</span> {{ eyebrow }}</div>
       <div style="margin-top: 0.4rem">
-        <a :href="cvHref" target="_blank" rel="noreferrer">↓ {{ cvLabel }}</a>
+        <a :href="cvHref" download>↓ {{ cvLabel }}</a>
       </div>
     </div>
   </aside>

@@ -20,7 +20,7 @@
         :side-projects="sideSlugs"
         :stats="stats"
         :eyebrow="rd.eyebrow"
-        :cv-href="copy.cvFile"
+        :cv-href="cvHref"
         :cv-label="rd.cvButton"
         @navigate="goTo"
       />
@@ -52,7 +52,7 @@
           :rd="rd"
           :timeline="copy.careerTimeline"
           :education-note="copy.educationNote"
-          :cv-href="copy.cvFile"
+          :cv-href="cvHref"
         />
         <ContactSection
           :rd="rd"
@@ -151,6 +151,10 @@ const files = computed(() =>
 );
 
 const activeFile = computed(() => terminalFiles[active.value]?.file ?? terminalFiles.profil.file);
+
+// The file names carry spaces and an accent; an unencoded href works in most
+// browsers but not in all of them.
+const cvHref = computed(() => encodeURI(copy.value.cvFile));
 
 const sideSlugs = computed(() =>
   copy.value.side.map((project: { name: string }) => ({

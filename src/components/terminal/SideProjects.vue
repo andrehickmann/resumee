@@ -48,19 +48,25 @@
         </div>
 
         <div v-if="project.shots.length" class="side-shot">
-          <div class="shot-frame">
+          <button
+            class="shot-frame"
+            type="button"
+            :aria-label="`${project.name} — ${project.current.label} vergrößern`"
+            @click="openLightbox(project.slug)"
+          >
             <div class="shot-chrome">
               <i></i><i></i><i></i>
               <span class="url">
                 {{ project.slug }}.hickmann-kuschnereit.de — {{ project.current.label }}
               </span>
+              <span class="shot-zoom">⤢</span>
             </div>
             <img
               :src="project.current.src"
               :alt="`${project.name} — ${project.current.label}`"
               loading="lazy"
             />
-          </div>
+          </button>
 
           <div v-if="project.shots.length > 1" class="shot-tabs">
             <button
@@ -77,11 +83,22 @@
         </div>
       </article>
     </div>
+
+    <ShotLightbox
+      :open="!!lightbox"
+      :shots="lightbox ? lightbox.shots : []"
+      :index="lightbox ? lightbox.index : 0"
+      :title="lightbox ? lightbox.name : ''"
+      :hint="rd.lightboxHint"
+      @close="lightboxSlug = null"
+      @select="selectLightboxShot"
+    />
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import ShotLightbox from './ShotLightbox.vue';
 
 type Shot = { src: string; label: string };
 
@@ -102,6 +119,7 @@ const props = defineProps<{
 }>();
 
 const activeShot = ref<Record<string, number>>({});
+const lightboxSlug = ref<string | null>(null);
 
 const cards = computed(() =>
   props.projects.map((project) => {
@@ -118,12 +136,19 @@ const cards = computed(() =>
   })
 );
 
+const lightbox = computed(() => {
+  if (!lightboxSlug.value) return null;
+  const card = cards.value.find((entry) => entry.slug === lightboxSlug.value);
+  return card ? { name: card.name, shots: card.shots, index: card.activeIndex } : null;
+});
+
 // Switching the language swaps the shot labels; keeping an index from the old list
 // would point at a screenshot the reader did not pick.
 watch(
   () => props.projects,
   () => {
     activeShot.value = {};
+    lightboxSlug.value = null;
   }
 );
 
@@ -133,5 +158,14 @@ function toSlug(name: string) {
 
 function selectShot(slug: string, index: number) {
   activeShot.value = { ...activeShot.value, [slug]: index };
+}
+
+function openLightbox(slug: string) {
+  lightboxSlug.value = slug;
+}
+
+function selectLightboxShot(index: number) {
+  if (!lightboxSlug.value) return;
+  selectShot(lightboxSlug.value, index);
 }
 </script>
