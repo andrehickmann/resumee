@@ -10,6 +10,25 @@
   - `/` → `src/views/TerminalView.vue`
   - `/legal` → `src/views/LegalView.vue`
 
+## Assets in `public/`
+
+Files under `public/` keep their name in the build - Vite hashes only what it bundles.
+`docker/nginx.conf` sends images with `max-age=604800`, and Cloudflare caches them, so
+**replacing an image in place does not reach visitors for up to a week**, even though the
+deploy is correct and the origin already serves the new file.
+
+Therefore: when the content of an image changes, **give it a new file name** and update
+every reference (the component, plus the `og:image`, `twitter:image` and JSON-LD entries
+in `index.html`). Diagnose a suspected stale asset at the origin rather than through the
+proxy:
+
+```bash
+curl -sD- -o /dev/null https://hickmann-kuschnereit.de/<datei> | grep -i 'cf-cache-status\|age\|content-length'
+ssh hk-server 'docker exec resumee-web-1 ls -l /usr/share/nginx/html/<datei>'
+```
+
+PDFs are not affected - they fall outside the image rule and get no long cache.
+
 ## Styles
 
 - `src/base.css` is a global reset and nothing else. Keep it that way - in particular
