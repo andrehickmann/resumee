@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import SideProjects from '../SideProjects.vue';
 
 const rd = {
+  files: { side: 'side-projects/' },
   sideTitle: 'Was ich nebenbei baue',
   sideIntro: 'Intro',
   sideCommand: '$ ls -la ~/side-projects',

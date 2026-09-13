@@ -85,7 +85,7 @@
 import { useHead } from '@unhead/vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { scrollSpyAlias, scrollSpyIds, terminalFiles } from '../data/terminalFiles';
+import { scrollSpyAlias, scrollSpyIds, terminalFileMeta } from '../data/terminalFiles';
 import { useContactForm } from '../composables/useContactForm';
 import { pickFacts, useKonami } from '../composables/useKonami';
 import { scrollToSection, useScrollSpy } from '../composables/useScrollSpy';
@@ -146,11 +146,12 @@ const { active } = useScrollSpy(scrollSpyIds, { bottom: 'kontakt', alias: scroll
 const files = computed(() =>
   rd.value.nav.map((entry: { id: string; label: string }) => ({
     id: entry.id,
-    ...terminalFiles[entry.id]
+    file: rd.value.files[entry.id],
+    ...terminalFileMeta[entry.id]
   }))
 );
 
-const activeFile = computed(() => terminalFiles[active.value]?.file ?? terminalFiles.profil.file);
+const activeFile = computed(() => rd.value.files[active.value] ?? rd.value.files.profil);
 
 // The file names carry spaces and an accent; an unencoded href works in most
 // browsers but not in all of them.

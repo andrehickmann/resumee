@@ -1,7 +1,7 @@
 <template>
   <section id="projekte" class="term-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / projekte.log</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.projekte }}</span>
     </div>
     <h2 class="term-h2">{{ rd.projectsTitle }}</h2>
     <p class="term-intro">{{ rd.projectsIntro }}</p>
@@ -52,8 +52,9 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   tagFilters: { label: string; active: boolean }[];
   projects: { title: string; period: string; description: string; hash: string; tagText: string }[];
   filteredCount: number;

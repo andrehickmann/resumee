@@ -1,7 +1,7 @@
 <template>
   <section id="lebenslauf" class="term-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / lebenslauf.yml</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.lebenslauf }}</span>
       <a :href="cvHref" download>$ curl -O {{ rd.cvButton }} ↓</a>
     </div>
     <h2 class="term-h2">{{ rd.timelineTitle }}</h2>
@@ -33,8 +33,9 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   timeline: { period: string; role: string; summary: string }[];
   educationNote: string;
   cvHref: string;

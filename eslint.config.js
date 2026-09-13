@@ -33,6 +33,7 @@ export default [
         CanvasRenderingContext2D: 'readonly',
         cancelAnimationFrame: 'readonly',
         document: 'readonly',
+        Element: 'readonly',
         fetch: 'readonly',
         FormData: 'readonly',
         getComputedStyle: 'readonly',

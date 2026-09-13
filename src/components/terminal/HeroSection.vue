@@ -1,7 +1,7 @@
 <template>
   <section id="profil" class="term-section">
     <div class="term-crumb hero-crumb">
-      <span><span class="path">~/portfolio</span> / profil.md</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.profil }}</span>
       <span>{{ rd.eyebrow }}</span>
     </div>
 
@@ -55,8 +55,9 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   stats: { label: string; value: number }[];
   brand: string;
   portraitAlt: string;

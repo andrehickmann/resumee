@@ -1,7 +1,7 @@
 <template>
   <section id="kontakt" class="term-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / kontakt.sh</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.kontakt }}</span>
     </div>
 
     <div class="contact-grid">
@@ -98,6 +98,7 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const captchaSiteKey = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
@@ -109,7 +110,7 @@ const linkedInUrl = 'https://www.linkedin.com/in/andr%C3%A9-hickmann-425b97182/'
 const githubUrl = 'https://github.com/andrehickmann';
 
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   model: { name: string; email: string; role: string; message: string; honeypot: string };
   submitting: boolean;
   error: string;

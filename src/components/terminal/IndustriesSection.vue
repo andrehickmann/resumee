@@ -1,7 +1,7 @@
 <template>
   <section id="branchen" class="term-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / branchen.txt</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.branchen }}</span>
     </div>
     <h2 class="term-h2">{{ rd.industriesTitle }}</h2>
     <p class="term-intro">{{ rd.industriesIntro }}</p>
@@ -16,8 +16,9 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   industries: string[];
 }>();
 </script>
