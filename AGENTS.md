@@ -10,6 +10,26 @@
   - `/` → `src/views/TerminalView.vue`
   - `/legal` → `src/views/LegalView.vue`
 
+## `useHead` does not reach the prerendered HTML
+
+`npm ls unhead` shows two instances: the app resolves `@unhead/vue` to the root copy,
+while `vite-ssg` installs the head plugin from its own nested `@unhead/vue@2.x`. Entries
+registered by `useHead` therefore land on a different instance than the one vite-ssg
+renders from, and **none of them appear in `dist/*.html`** - no title, no canonical, no
+meta. They only apply after hydration.
+
+Consequences until this is fixed:
+
+- crawlers and social scrapers see only the static tags in `index.html`
+- `dist/legal.html` carries the title and description of the home page
+- anything that must be in the served HTML belongs in `index.html`, not in `useHead`
+
+Verify with a probe rather than by reading the code - add a marker to `useHead`, build,
+and grep `dist/index.html` for it.
+
+Fixing it means aligning the versions so a single instance is installed, which is a
+dependency change and belongs in the container.
+
 ## Assets in `public/`
 
 Files under `public/` keep their name in the build - Vite hashes only what it bundles.

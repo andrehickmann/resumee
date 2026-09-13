@@ -1,3 +1,5 @@
+// `?raw` keeps this free of node typings - the repo has no @types/node.
+import indexHtml from '../../index.html?raw';
 import { contentDe } from '../content.de.js';
 import { contentEn } from '../content.en.js';
 
@@ -79,6 +81,27 @@ describe('content parity', () => {
     expect(contentEn.services).toHaveLength(contentDe.services.length);
     expect(contentEn.industries).toHaveLength(contentDe.industries.length);
     expect(contentEn.careerTimeline).toHaveLength(contentDe.careerTimeline.length);
+  });
+
+  /**
+   * index.html repeats the German description for the social preview, because crawlers
+   * do not run JavaScript and useHead never reaches the prerendered HTML. That
+   * duplication already drifted once - the hero slogan was reworded in the content
+   * files while index.html kept the old wording - so it is pinned here.
+   */
+  it('keeps the social preview text in step with the content files', () => {
+    const html = indexHtml;
+    const tag = (property: string) =>
+      html.match(new RegExp(`property="${property}"\\s+content="([^"]*)"`))?.[1];
+
+    expect(tag('og:description')).toBe(contentDe.rd.pageDescription);
+    expect(tag('twitter:description')).toBe(contentDe.rd.pageDescription);
+  });
+
+  it('describes the page in both languages', () => {
+    expect(contentDe.rd.pageDescription).toBeTruthy();
+    expect(contentEn.rd.pageDescription).toBeTruthy();
+    expect(contentEn.rd.pageDescription).not.toBe(contentDe.rd.pageDescription);
   });
 
   it('points each language at its own CV file', () => {

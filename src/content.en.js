@@ -471,6 +471,8 @@ export const contentEn = {
       lebenslauf: 'resume.yml',
       kontakt: 'contact.sh'
     },
+    pageDescription:
+      'Senior full-stack engineer based in Berlin, 23 years of practice: requirements, code, cloud and operations. Open to a permanent role in Berlin or remote.',
     eyebrow: 'Berlin · writing code since 2003 · open to permanent roles',
     heroTitle:
       'Fullstack means: I touch everything. Requirements, code, deployment, bugs, support, AI.',

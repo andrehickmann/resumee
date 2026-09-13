@@ -110,11 +110,6 @@ import '../terminal.css';
 
 const BASE_URL = 'https://hickmann-kuschnereit.de';
 
-const pageDescriptions = {
-  de: 'Senior Fullstack Engineer aus Berlin, 23 Jahre Praxis: Anforderungen, Code, Cloud und Betrieb. Offen für eine Festanstellung in Berlin oder remote.',
-  en: 'Senior full-stack engineer based in Berlin, 23 years of practice: requirements, code, cloud and operations. Open to a permanent role in Berlin or remote.'
-} as const;
-
 const { locale, tm } = useI18n({ useScope: 'global' });
 
 // vue-i18n returns the whole message tree untyped; the shape lives in content.de.js.
@@ -213,16 +208,19 @@ useKonami(() => {
   konamiOpen.value = true;
 });
 
+const description = computed(() => rd.value.pageDescription);
+
 useHead(() => ({
   htmlAttrs: { lang: locale.value },
   title: copy.value.pageTitle,
   link: [{ rel: 'canonical', href: `${BASE_URL}/` }],
   meta: [
-    {
-      name: 'description',
-      content:
-        pageDescriptions[locale.value as keyof typeof pageDescriptions] ?? pageDescriptions.de
-    },
+    // One description, three tags. They used to be maintained separately - index.html
+    // carried the hero slogan for the social previews and kept the old wording when the
+    // slogan was reworded.
+    { name: 'description', content: description.value },
+    { property: 'og:description', content: description.value },
+    { property: 'twitter:description', content: description.value },
     { property: 'og:url', content: `${BASE_URL}/` },
     { property: 'twitter:url', content: `${BASE_URL}/` }
   ]

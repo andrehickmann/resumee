@@ -553,6 +553,8 @@ export const contentDe = {
       lebenslauf: 'lebenslauf.yml',
       kontakt: 'kontakt.sh'
     },
+    pageDescription:
+      'Senior Fullstack Engineer aus Berlin, 23 Jahre Praxis: Anforderungen, Code, Cloud und Betrieb. Offen für eine Festanstellung in Berlin oder remote.',
     eyebrow: 'Berlin · seit 2003 im Code · offen für Festanstellung',
     heroTitle:
       'Fullstack heißt: Ich kümmere mich um alles. Anforderungen, Code, Deployment, Bugs, Support, KI.',
