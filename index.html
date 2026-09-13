@@ -22,9 +22,19 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hickmann-kuschnereit.de/" />
     <meta property="og:title" content="André Hickmann Kuschnereit - Senior Software Engineer" />
+    <!--
+      Social previews are read by crawlers that do not run JavaScript, and useHead
+      currently never reaches the prerendered HTML (two unhead instances, see
+      AGENTS.md). These therefore stay static and are pinned to content.de.js by
+      src/__tests__/content.spec.ts.
+    -->
     <meta
       property="og:description"
-      content="Fullstack heißt: Ich fasse alles an. Anforderungen, Code, Deployment, Bugs, Support, KI."
+      content="Senior Fullstack Engineer aus Berlin, 23 Jahre Praxis: Anforderungen, Code, Cloud und Betrieb. Offen für eine Festanstellung in Berlin oder remote."
+    />
+    <meta
+      property="twitter:description"
+      content="Senior Fullstack Engineer aus Berlin, 23 Jahre Praxis: Anforderungen, Code, Cloud und Betrieb. Offen für eine Festanstellung in Berlin oder remote."
     />
     <meta property="og:image" content="https://hickmann-kuschnereit.de/portrait-2026.jpg" />
     <meta property="og:locale" content="de_DE" />
@@ -35,10 +45,6 @@
     <meta
       property="twitter:title"
       content="André Hickmann Kuschnereit - Senior Software Engineer"
-    />
-    <meta
-      property="twitter:description"
-      content="Fullstack heißt: Ich fasse alles an. Anforderungen, Code, Deployment, Bugs, Support, KI."
     />
     <meta property="twitter:image" content="https://hickmann-kuschnereit.de/portrait-2026.jpg" />
 
