@@ -12,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 import { RouterLink } from 'vue-router';
 
 defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
 }>();
 </script>

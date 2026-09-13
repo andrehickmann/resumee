@@ -1,7 +1,7 @@
 <template>
   <section id="side" class="term-section side-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / side-projects/</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.side }}</span>
     </div>
     <h2 class="term-h2">{{ rd.sideTitle }}</h2>
     <p class="term-intro">{{ rd.sideIntro }}</p>
@@ -97,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 import { computed, ref, watch } from 'vue';
 import ShotLightbox from './ShotLightbox.vue';
 
@@ -114,7 +115,7 @@ export type SideProject = {
 };
 
 const props = defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   projects: SideProject[];
 }>();
 

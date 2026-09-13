@@ -539,6 +539,16 @@ export const contentDe = {
       { id: 'lebenslauf', label: 'Werdegang' },
       { id: 'kontakt', label: 'Kontakt' }
     ],
+    files: {
+      profil: 'profil.md',
+      leistungen: 'leistungen.ts',
+      stack: 'stack.json',
+      branchen: 'branchen.txt',
+      projekte: 'projekte.log',
+      side: 'side-projects/',
+      lebenslauf: 'lebenslauf.yml',
+      kontakt: 'kontakt.sh'
+    },
     eyebrow: 'Berlin · seit 2003 im Code · offen für Festanstellung',
     heroTitle:
       'Fullstack heißt: Ich fasse alles an. Anforderungen, Code, Deployment, Bugs, Support, KI.',

@@ -1,7 +1,7 @@
 <template>
   <section id="stack" class="term-section">
     <div class="term-crumb">
-      <span><span class="path">~/portfolio</span> / stack.json</span>
+      <span><span class="path">~/portfolio</span> / {{ rd.files.stack }}</span>
     </div>
     <h2 class="term-h2">{{ rd.stackTitle }}</h2>
     <p class="term-intro">{{ rd.stackIntro }}</p>
@@ -23,10 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  rd: Record<string, string>;
+  rd: TerminalCopy;
   stackItems: { title: string; tools: string }[];
 }>();
 

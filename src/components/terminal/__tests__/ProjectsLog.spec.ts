@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import ProjectsLog from '../ProjectsLog.vue';
 
 const rd = {
+  files: { projekte: 'projekte.log' },
   projectsTitle: 'Kundenprojekte',
   projectsIntro: 'Intro',
   projectsCommand: '$ git log --oneline',
@@ -40,6 +41,12 @@ function factory(overrides = {}) {
 }
 
 describe('ProjectsLog', () => {
+  it('takes the file name in the breadcrumb from the copy, so it follows the language', () => {
+    expect(factory().find('.term-crumb').text()).toContain('projekte.log');
+    const english = factory({ rd: { ...rd, files: { projekte: 'projects.log' } } });
+    expect(english.find('.term-crumb').text()).toContain('projects.log');
+  });
+
   it('renders a commit line per project', () => {
     const wrapper = factory();
     expect(wrapper.findAll('.log-row')).toHaveLength(1);

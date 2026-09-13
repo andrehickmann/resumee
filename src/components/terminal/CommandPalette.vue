@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 import { nextTick, ref, watch } from 'vue';
 
 export type PaletteItem = {
@@ -43,7 +44,7 @@ const props = defineProps<{
   open: boolean;
   query: string;
   items: PaletteItem[];
-  rd: Record<string, string>;
+  rd: TerminalCopy;
 }>();
 
 defineEmits<{

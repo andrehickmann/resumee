@@ -9,10 +9,11 @@
 </template>
 
 <script setup lang="ts">
+import type { TerminalCopy } from '../../data/terminalFiles';
 defineProps<{
   open: boolean;
   facts: string[];
-  rd: Record<string, string>;
+  rd: TerminalCopy;
 }>();
 
 defineEmits<{

@@ -457,12 +457,22 @@ export const contentEn = {
       { id: 'lebenslauf', label: 'Career' },
       { id: 'kontakt', label: 'Contact' }
     ],
+    files: {
+      profil: 'profile.md',
+      leistungen: 'services.ts',
+      stack: 'stack.json',
+      branchen: 'industries.txt',
+      projekte: 'projects.log',
+      side: 'side-projects/',
+      lebenslauf: 'resume.yml',
+      kontakt: 'contact.sh'
+    },
     eyebrow: 'Berlin · writing code since 2003 · open to permanent roles',
     heroTitle:
       'Fullstack means: I touch everything. Requirements, code, deployment, bugs, support, AI.',
     heroLead:
       'Senior full-stack engineer. 23 years of frontend, backend, cloud – and everything before that: concept work, functional and technical requirements, architecture planning. Looking for a permanent role in Berlin or remote. No freelance requests.',
-    heroPrimary: '$ open ./projekte.log',
+    heroPrimary: '$ open ./projects.log',
     heroGhost: '$ ls side-projects/',
     heroPrompt: 'whoami',
     heroPromptFlag: '--verbose',

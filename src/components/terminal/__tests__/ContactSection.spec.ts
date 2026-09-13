@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import ContactSection from '../ContactSection.vue';
 
 const rd = {
+  files: { kontakt: 'kontakt.sh' },
   contactTitle: 'Lass uns reden',
   contactIntro: 'Intro',
   contactCommand: '$ ./contact.sh \\',
