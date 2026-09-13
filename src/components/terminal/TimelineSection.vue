@@ -2,7 +2,7 @@
   <section id="lebenslauf" class="term-section">
     <div class="term-crumb">
       <span><span class="path">~/portfolio</span> / lebenslauf.yml</span>
-      <a :href="cvHref" target="_blank" rel="noreferrer">$ curl -O {{ rd.cvButton }} ↗</a>
+      <a :href="cvHref" download>$ curl -O {{ rd.cvButton }} ↓</a>
     </div>
     <h2 class="term-h2">{{ rd.timelineTitle }}</h2>
     <p class="term-intro">{{ rd.timelineIntro }}</p>

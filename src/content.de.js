@@ -64,6 +64,7 @@
   footerVersionLabel: string,
   cvLabel: string,
   cvButton: string,
+  cvFile: string,
   filtersAll: string,
   stackItems: StackItem[],
   industries: string[],
@@ -201,6 +202,7 @@ export const contentDe = {
   konamiRefresh: 'Neue Fakten',
   cvLabel: 'Lebenslauf als PDF',
   cvButton: 'PDF herunterladen',
+  cvFile: '/Lebenslauf - André Hickmann Kuschnereit.pdf',
   nextUpLabel: 'Next up',
   nextUpText:
     'Offen für neue Herausforderungen in einem innovativen Team. Schwerpunkt: Fullstack-Entwicklung (Frontend, Backend, Cloud), Requirements Engineering, Testing & Qualitätssicherung, Produktarchitektur, End-to-End Delivery.',
@@ -548,7 +550,7 @@ export const contentDe = {
     heroPromptFlag: '--verbose',
     statsCommand: '$ portfolio --stats',
     statsLabels: ['Jahre Praxis', 'Teams begleitet', 'Projekte', 'Branchen'],
-    portraitMeta: '640×640 · preview',
+    portraitMeta: '800×800 · preview',
     availability: 'available',
     servicesTitle: 'Was du von mir bekommst',
     servicesIntro:
@@ -568,6 +570,7 @@ export const contentDe = {
     sideCommand: '$ ls -la ~/side-projects',
     sideCodeLabel: 'Code',
     sideLiveLabel: 'Live',
+    lightboxHint: '← seitlich ziehen, ESC schließt',
     timelineTitle: 'Werdegang',
     timelineIntro: 'Drei Stationen, ein roter Faden: eigene Verantwortung von Anfang an.',
     cvButton: 'Lebenslauf als PDF',

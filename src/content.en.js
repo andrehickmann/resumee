@@ -126,6 +126,7 @@ export const contentEn = {
   konamiRefresh: 'New facts',
   cvLabel: 'Resume as PDF',
   cvButton: 'Download PDF',
+  cvFile: '/Resume - André Hickmann Kuschnereit.pdf',
   nextUpLabel: 'Next up',
   nextUpText:
     'Open to new challenges in an innovative team. Focus: fullstack development (frontend, backend, cloud), requirements engineering, testing & quality assurance, product architecture, end-to-end delivery.',
@@ -467,7 +468,7 @@ export const contentEn = {
     heroPromptFlag: '--verbose',
     statsCommand: '$ portfolio --stats',
     statsLabels: ['years of practice', 'teams supported', 'projects', 'industries'],
-    portraitMeta: '640×640 · preview',
+    portraitMeta: '800×800 · preview',
     availability: 'available',
     servicesTitle: 'What you get from me',
     servicesIntro:
@@ -487,6 +488,7 @@ export const contentEn = {
     sideCommand: '$ ls -la ~/side-projects',
     sideCodeLabel: 'Code',
     sideLiveLabel: 'Live',
+    lightboxHint: '← drag sideways, ESC closes',
     timelineTitle: 'Career',
     timelineIntro: 'Three chapters, one thread: owning the outcome from day one.',
     cvButton: 'Resume as PDF',

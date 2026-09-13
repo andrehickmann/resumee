@@ -44,7 +44,7 @@
         <div class="hero-portrait-head">
           <span>portrait.jpg</span><span>{{ rd.portraitMeta }}</span>
         </div>
-        <img src="/portrait.jpg" :alt="portraitAlt" width="640" height="640" />
+        <img src="/portrait.jpg" :alt="portraitAlt" width="800" height="800" />
         <figcaption>
           <span>{{ brand }}</span
           ><span class="online">● {{ rd.availability }}</span>

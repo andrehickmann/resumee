@@ -536,7 +536,7 @@ body:has(.term) {
 .hero-portrait {
   margin: 0;
   justify-self: end;
-  width: min(100%, 360px);
+  width: min(100%, 300px);
   border: 1px solid var(--term-line);
   border-radius: 6px;
   overflow: hidden;
@@ -564,6 +564,13 @@ body:has(.term) {
 .hero-portrait img {
   display: block;
   width: 100%;
+  /*
+   * `height: auto` is not cosmetic here. The tag carries width/height attributes for
+   * layout stability, and those act as a presentational hint: without this line the
+   * attribute height wins, `aspect-ratio` is ignored, and the portrait renders as a
+   * 320x640 column instead of a square.
+   */
+  height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   filter: grayscale(1) contrast(1.15);
@@ -943,6 +950,13 @@ body:has(.term) {
 }
 
 .shot-frame {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: zoom-in;
   transform: rotateY(-8deg) rotateX(3deg);
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -980,6 +994,18 @@ body:has(.term) {
   flex: none;
 }
 
+.shot-zoom {
+  margin-left: auto;
+  flex: none;
+  color: var(--term-meta);
+  transition: color 0.2s;
+}
+
+.shot-frame:hover .shot-zoom,
+.shot-frame:focus-visible .shot-zoom {
+  color: var(--term-cyan);
+}
+
 .shot-chrome .url {
   margin-left: 0.6rem;
   white-space: nowrap;
@@ -991,9 +1017,11 @@ body:has(.term) {
 .shot-frame img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8;
+  /* The sources are roughly 16/9.5. At 16/8 the bottom fifth of every screenshot
+     was cut off; this keeps nearly all of it. The full frame is in the lightbox. */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: top left;
+  object-position: top center;
 }
 
 .shot-tabs {
@@ -1511,4 +1539,115 @@ body:has(.term) {
   border: 1px solid var(--term-line);
   border-radius: 3px;
   padding: 0.05rem 0.3rem;
+}
+
+/* ---------- Screenshot lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(6, 7, 12, 0.93);
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+  cursor: zoom-out;
+}
+
+.lightbox-frame {
+  cursor: default;
+  display: grid;
+  gap: 0.7rem;
+  max-width: min(1600px, 96vw);
+}
+
+.lightbox-frame .shot-chrome {
+  border: 1px solid var(--term-line-frame);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--term-bg-panel);
+  height: 28px;
+  font-size: 11px;
+}
+
+.lightbox-canvas {
+  overflow: auto;
+  max-width: min(1600px, 96vw);
+  border: 1px solid var(--term-line-frame);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: var(--term-bg-code);
+}
+
+.lightbox-canvas img {
+  display: block;
+  /*
+   * Height first, width free. On a wide screen the max-width below makes the shot
+   * fit; on a phone it deliberately does not - the canvas scrolls sideways instead,
+   * because a 1500px screenshot squeezed into 360px is unreadable either way.
+   */
+  height: auto;
+  max-height: 76vh;
+  max-width: min(1600px, 96vw);
+}
+
+.lightbox-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--term-meta);
+}
+
+.lightbox-close {
+  margin-left: auto;
+  flex: none;
+  background: transparent;
+  border: 1px solid var(--term-line-input);
+  border-radius: 3px;
+  color: var(--term-meta);
+  font-size: 10.5px;
+  padding: 0.1rem 0.4rem;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+  color: var(--term-cyan);
+  border-color: var(--term-cyan);
+}
+
+.lightbox-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 11px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot-zoom,
+  .lightbox-close {
+    transition: none;
+  }
+}
+
+@media (min-width: 640px) {
+  /* Wide enough to read a fitted screenshot, so no panning hint is needed. */
+  .lightbox-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  /*
+   * Has to sit after the base rules above, not up with the other responsive
+   * blocks: same specificity, so the later rule is the one that counts.
+   */
+  .lightbox-canvas img {
+    max-width: none;
+    max-height: 68vh;
+  }
 }

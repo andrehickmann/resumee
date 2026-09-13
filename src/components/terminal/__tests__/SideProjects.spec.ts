@@ -62,6 +62,26 @@ describe('SideProjects', () => {
     expect(wrapper.find('.side-links a').text()).toContain('gh repo view resumee');
   });
 
+  it('opens the lightbox on the screenshot and hands it the whole series', async () => {
+    const wrapper = mount(SideProjects, { props: { rd, projects: [withShots] } });
+    expect(wrapper.find('.lightbox').exists()).toBe(false);
+
+    await wrapper.find('.shot-frame').trigger('click');
+    const lightbox = wrapper.find('.lightbox');
+    expect(lightbox.exists()).toBe(true);
+    expect(lightbox.find('img').attributes('src')).toBe('/projects/a.png');
+    expect(lightbox.findAll('.lightbox-tabs .shot-tab')).toHaveLength(2);
+  });
+
+  it('keeps card and lightbox on the same screenshot', async () => {
+    const wrapper = mount(SideProjects, { props: { rd, projects: [withShots] } });
+    await wrapper.find('.shot-frame').trigger('click');
+    await wrapper.findAll('.lightbox-tabs .shot-tab')[1].trigger('click');
+
+    expect(wrapper.find('.lightbox img').attributes('src')).toBe('/projects/b.png');
+    expect(wrapper.find('.shot-frame img').attributes('src')).toBe('/projects/b.png');
+  });
+
   it('resets the chosen screenshot when the project list is swapped', async () => {
     const wrapper = mount(SideProjects, { props: { rd, projects: [withShots] } });
     await wrapper.findAll('.shot-tab')[1].trigger('click');
