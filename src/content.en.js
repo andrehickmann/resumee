@@ -141,6 +141,10 @@ export const contentEn = {
       tools: 'Vue.js, React, TypeScript, Angular, design systems, micro-frontends'
     },
     {
+      title: 'Mobile & App Development',
+      tools: 'Swift (native), iOS, Android, Flutter, Ionic, App Store & Play Store releases'
+    },
+    {
       title: 'Cloud & Infrastructure',
       tools: 'AWS, Docker, Kubernetes, Helm, ArgoCD'
     },
@@ -478,7 +482,7 @@ export const contentEn = {
     heroPromptFlag: '--verbose',
     statsCommand: '$ portfolio --stats',
     statsLabels: ['years of practice', 'teams supported', 'projects', 'industries'],
-    portraitMeta: '800×800 · preview',
+    portraitMeta: '776×776 · preview',
     availability: 'available',
     servicesTitle: 'What you get from me',
     servicesIntro:
