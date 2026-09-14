@@ -5,16 +5,16 @@
       <span>{{ rd.eyebrow }}</span>
     </div>
 
-    <div class="hero-prompt">
-      $ <span class="cmd">{{ rd.heroPrompt }}</span> {{ rd.heroPromptFlag }}
-    </div>
-
-    <h1 class="hero-title">
-      <span class="hash">#</span> {{ rd.heroTitle }}<span class="hero-cursor"></span>
-    </h1>
-
     <div class="hero-grid">
-      <div>
+      <div class="hero-main">
+        <div class="hero-prompt">
+          $ <span class="cmd">{{ rd.heroPrompt }}</span> {{ rd.heroPromptFlag }}
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hash">#</span> {{ rd.heroTitle }}<span class="hero-cursor"></span>
+        </h1>
+
         <p class="hero-lead">{{ rd.heroLead }}</p>
 
         <div class="hero-actions">
