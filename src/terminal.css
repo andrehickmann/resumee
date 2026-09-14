@@ -331,6 +331,13 @@ body:has(.term) {
 .term-main {
   min-width: 0;
   padding-bottom: 4rem;
+  /*
+   * The hero decides between one and two columns by how much room it actually has,
+   * not by the window width - with the explorer taking 240px, a 1100px window leaves
+   * the headline far less space than a 1000px one without it.
+   */
+  container-type: inline-size;
+  container-name: main;
 }
 
 /* ---------- Section shell ---------- */
@@ -396,10 +403,14 @@ body:has(.term) {
 }
 
 .hero-title {
-  margin: 0.6rem 0 0;
+  margin: 0.6rem 0 1.6rem;
   font-family: var(--term-font-mono);
   font-weight: 700;
-  font-size: clamp(1.9rem, 4.6vw, 4rem);
+  /*
+   * Scales with the content column, not the window: beside the portrait the headline
+   * has far less room than the viewport suggests, and vw-based type overflowed it.
+   */
+  font-size: clamp(1.9rem, 6cqw, 4rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--term-heading);
@@ -433,9 +444,13 @@ body:has(.term) {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  /*
+   * The portrait sits beside the headline, not below it. The headline used to span
+   * the full width, which pushed the portrait down past the fold on wide screens.
+   */
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 1.5rem;
   align-items: start;
 }
 
@@ -536,6 +551,8 @@ body:has(.term) {
 .hero-portrait {
   margin: 0;
   justify-self: end;
+  /* Aligns the frame with the prompt line rather than the top of the section. */
+  margin-top: 1.6rem;
   width: min(100%, 300px);
   border: 1px solid var(--term-line);
   border-radius: 6px;
@@ -1649,5 +1666,17 @@ body:has(.term) {
   .lightbox-canvas img {
     max-width: none;
     max-height: 68vh;
+  }
+}
+
+@container main (max-width: 900px) {
+  /* Not enough room beside the headline - portrait moves below it. */
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-portrait {
+    justify-self: start;
+    margin-top: 0;
   }
 }
