@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Cloudflare's email obfuscation rewrites every mailto link into
+# /cdn-cgi/l/email-protection#<token>. Crawlers drop the fragment, and the
+# endpoint answers 404 without it - Search Console reports that as a crawl
+# error. Nothing below /cdn-cgi/ is ours or worth indexing.
+Disallow: /cdn-cgi/
+
 Sitemap: https://hickmann-kuschnereit.de/sitemap.xml
