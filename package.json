@@ -27,7 +27,7 @@
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.61.0",
+    "@cloudflare/vite-plugin": "^1.62.5",
     "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.70.1",
     "@typescript-eslint/parser": "^8.71.0",
