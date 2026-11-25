@@ -27,7 +27,6 @@
     "vue-router": "^5.5.1"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.69.1",
     "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.72.0",
@@ -45,8 +44,7 @@
     "typescript": "^6.0.3",
     "vite": "^8.3.8",
     "vite-ssg": "^28.3.0",
-    "vitest": "^4.1.11",
-    "wrangler": "^4.162.0"
+    "vitest": "^4.1.11"
   },
   "overrides": {
     "picomatch": "^4.0.4"
