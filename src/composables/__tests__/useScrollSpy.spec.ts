@@ -12,6 +12,13 @@ function setScrollHeight(value: number) {
 }
 
 /**
+ * vitest 5 exposes happy-dom's GlobalWindow directly, where scrollY is getter-only.
+ */
+function setScrollY(value: number) {
+  Object.defineProperty(window, 'scrollY', { value, configurable: true });
+}
+
+/**
  * Places every section at a fixed offset from the viewport top. happy-dom reports
  * zero-sized rects, so the geometry has to be supplied by hand.
  */
@@ -42,7 +49,7 @@ describe('useScrollSpy', () => {
     document.body.innerHTML = '';
     window.innerWidth = 1280;
     window.innerHeight = 1000;
-    window.scrollY = 0;
+    setScrollY(0);
     setScrollHeight(5000);
   });
 
@@ -69,7 +76,7 @@ describe('useScrollSpy', () => {
 
   it('hands the last section the highlight at the very bottom of the page', () => {
     placeSections({ profil: -4000, stack: -3000, branchen: -2000, kontakt: -100 });
-    window.scrollY = 4000;
+    setScrollY(4000);
     const { api, wrapper } = mountSpy();
     expect(api.active.value).toBe('kontakt');
     wrapper.unmount();
