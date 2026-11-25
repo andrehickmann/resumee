@@ -39,6 +39,7 @@ services:
       - traefik
 
     labels:
+      dev.dozzle.group: apps
       traefik.enable: 'true'
       # Das Netz muss ausdruecklich benannt werden: bei mehreren Netzen kann
       # Traefik sonst nicht entscheiden, welche Adresse es nehmen soll.
