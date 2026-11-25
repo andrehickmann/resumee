@@ -41,7 +41,7 @@ checks from the outside that the site answers with 200.
 | --------------------------- | ---------------------------------------- | --------------------------------------------- |
 | `create-release.yml`        | manual                                   | Bumps the version and opens a release PR      |
 | `publish-release.yml`       | push to `master` touching `package.json` | Publishes the release and deploys             |
-| `preview-deploy.yml`        | pull request                             | Preview deployment on Cloudflare Workers      |
+| `preview-deploy.yml`        | pull request                             | Preview deployment on Cloudflare Workers, removed again when the PR closes |
 | `codeql.yml`                | push, PR, weekly                         | Code scanning                                 |
 | `dependency-review.yml`     | pull request                             | Flags risky dependency changes                |
 | `dependabot-auto-merge.yml` | pull request                             | Merges Dependabot patch/minor after CI passes |
@@ -116,7 +116,9 @@ ssh <server> '/opt/resumee/scripts/deploy.sh v1.1.10'
 
 `https://resumee-pr-<PR_NUMBER>.andre-hickmann-ger.workers.dev`
 
-The workflow posts the preview URL directly to the pull request. Previews stayed
+The workflow posts the preview URL directly to the pull request and deletes
+the Worker again when the pull request is closed — Cloudflare's free plan allows
+100 Workers per account, and without the teardown previews fill that quota. Previews stayed
 on Cloudflare when production moved to the vServer: hosting them on the server
 would need a wildcard subdomain with a DNS-01 certificate, and therefore a
 Cloudflare API token inside the shared Traefik. That is also why `wrangler` and
