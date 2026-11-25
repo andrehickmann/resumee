@@ -23,7 +23,7 @@ jobs:
       changed: ${{ steps.version.outputs.changed }}
     steps:
       - name: Checkout master
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
