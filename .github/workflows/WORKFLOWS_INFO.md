@@ -45,7 +45,6 @@ checks from the outside that the site answers with 200.
 | `dependency-review.yml`     | pull request                             | Flags risky dependency changes                |
 | `dependabot-auto-merge.yml` | pull request                             | Merges Dependabot patch/minor after CI passes |
 | `cert-expiry.yml`           | weekly, manual                           | Warns before the origin certificate expires   |
-| `preview-cleanup.yml`       | manual                                   | Removes leftover preview Workers              |
 
 ---
 
