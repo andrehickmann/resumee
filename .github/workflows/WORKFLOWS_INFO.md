@@ -41,7 +41,6 @@ checks from the outside that the site answers with 200.
 | --------------------------- | ---------------------------------------- | --------------------------------------------- |
 | `create-release.yml`        | manual                                   | Bumps the version and opens a release PR      |
 | `publish-release.yml`       | push to `master` touching `package.json` | Publishes the release and deploys             |
-| `preview-deploy.yml`        | pull request                             | Preview deployment on Cloudflare Workers      |
 | `codeql.yml`                | push, PR, weekly                         | Code scanning                                 |
 | `dependency-review.yml`     | pull request                             | Flags risky dependency changes                |
 | `dependabot-auto-merge.yml` | pull request                             | Merges Dependabot patch/minor after CI passes |
@@ -110,26 +109,12 @@ ssh <server> '/opt/resumee/scripts/deploy.sh v1.1.10'
 
 ---
 
-## Preview Deployments (Pull Requests)
-
-**Every pull request** creates a preview deployment on Cloudflare Workers:
-
-`https://resumee-pr-<PR_NUMBER>.andre-hickmann-ger.workers.dev`
-
-The workflow posts the preview URL directly to the pull request. Previews stayed
-on Cloudflare when production moved to the vServer: hosting them on the server
-would need a wildcard subdomain with a DNS-01 certificate, and therefore a
-Cloudflare API token inside the shared Traefik. That is also why `wrangler` and
-`wrangler.jsonc` are still part of the project.
-
----
-
 ## CI/CD Flow
 
 ```
 Feature Branch
     ↓
-Pull Request → CI (lint + typecheck + test + build) + preview deploy
+Pull Request → CI (lint + typecheck + test + build)
     ↓
 Merge to `master`
     ↓
@@ -149,7 +134,6 @@ Live on hickmann-kuschnereit.de
 - **CI Workflow:** Node.js 24
 - **Create Release:** Node.js 24
 - **Publish Release:** Node.js 24
-- **Preview Deploy:** Node.js 24
 - **Local Development:** As defined in `package.json`
 
 The deploy workflow needs no Node.js: it only opens an SSH connection, and the
